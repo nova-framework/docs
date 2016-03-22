@@ -1,4 +1,6 @@
-The framework is now on packagist <https://packagist.org/packages/simple-mvc-framework/v2>
+# Install
+
+The framework is now on packagist [https://packagist.org/packages/simple-mvc-framework/v2](https://packagist.org/packages/simple-mvc-framework/v2)
 
 Install from terminal now by using:
 

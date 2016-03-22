@@ -1,5 +1,4 @@
-Nginx configuration kindly provided by [ARIS S RIPANDI]
-
+# Install Nginx
 No special configuration, you only need to configure Nginx and PHP-FPM.
 
 ```
@@ -28,4 +27,4 @@ server {
 }
 ```
 
-  [ARIS S RIPANDI]: https://irsa.me/
+  

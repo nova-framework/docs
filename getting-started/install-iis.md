@@ -1,6 +1,6 @@
-#IIS with URL Rewrite module installed
+# Install IIS
 
-[http://www.iis.net/downloads/microsoft/url-rewrite](http://www.iis.net/downloads/microsoft/url-rewrite)
+IIS with URL Rewrite module installed - [http://www.iis.net/downloads/microsoft/url-rewrite](http://www.iis.net/downloads/microsoft/url-rewrite)
 
 For IIS the htaccess needs to be converted to web.config:
 
