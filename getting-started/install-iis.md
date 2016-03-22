@@ -1,9 +1,10 @@
-<p>IIS with URL Rewrite module installed - <a href='http://www.iis.net/downloads/microsoft/url-rewrite'>http://www.iis.net/downloads/microsoft/url-rewrite</a></p>
+#IIS with URL Rewrite module installed
 
-<div class='alert alert-warning'>
-<p>For IIS the htaccess needs to be converted to web.config:</p>
+[http://www.iis.net/downloads/microsoft/url-rewrite](http://www.iis.net/downloads/microsoft/url-rewrite)
 
-<pre lang="php">
+For IIS the htaccess needs to be converted to web.config:
+
+````
 <configuration>
     <system.webserver>
         <directorybrowse enabled="true"/>
@@ -21,5 +22,4 @@
 		</rewrite>
 	</system.webserver>
 </configuration>
-</pre>
-</div>
+````
