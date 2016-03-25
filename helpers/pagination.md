@@ -1,12 +1,10 @@
-# Pagination 
-
-Break recordset into a series of pages.
+ Break recordset into a series of pages.
 
 First create a new instance of the class pass in the number of items per page and the instance identifier, this is used for the GET parameter such as ?p=2
 
-The set_total method expects the total number of records, either set this or pass in a call to a model that will return records then count them on return.
+The setTotal method expects the total number of records, either set this or pass in a call to a model that will return records then count them on return.
 
-The method used to get the records will need a get_limit passed to it, this will then return the set number of records for that page.
+The method used to get the records will need a getLimit passed to it, this will then return the set number of records for that page.
 
 Lastly a method called page_links will return the page links.
 
