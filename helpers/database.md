@@ -1,6 +1,4 @@
-# Database
-
-The database class is used to connect to a MySQL database using the connection details set in the app/Core/Config.php.
+The database class is used to connect to a MySQL database using the connection details set in the app/Config.php.
 
 The constants (DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS) are used to connect to the database, the class extends PDO, it can pass the connection details to its parent construct.
 
@@ -14,7 +12,7 @@ try {
 }
 ````
 
-The error mode is set to use exceptions rather than failing silently in the event of an error. If there is an error they are recorded into the custom log file located in errorlog.html
+The error mode is set to use exceptions rather than failing silently in the event of an error. If there is an error they are recorded in app/logs/error.log
 
 This class has the following methods:
 
