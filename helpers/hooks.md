@@ -1,5 +1,3 @@
-# Hooks 
-
 **Add modules with hooks**
 
 The hooks helper allows modules to be created within the module folder. Hooks allow code to be injected into various parts of the framework as well as creating new routes for modules to use.
@@ -94,7 +92,3 @@ In the above example a route is defined, it's called when the example.com/democa
 To create a module create a folder inside the Modules folder, the convention is to use StudyCase for example a module called demo should name named Demo. Inside the module folder create a Controllers, Models and views folder, those folders should hold the classes for controllers and models. The views is for the output of the module pages.
 
 index.php should also be created in the route of the module folder, this file defined all hooks the module will be attached to.
-
-**Video Demo**
-
-<iframe width="853" height="480" src="https://www.youtube.com/embed/6MvQCtm2pL8" frameborder="0" allowfullscreen></iframe>
