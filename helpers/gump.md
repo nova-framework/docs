@@ -1,5 +1,3 @@
-#GUMP
-
 GUMP is a fast, extensible & stand-alone PHP input validation class that allows you to validate any data.
 
 To use the class call it by using the namespace Helpers\Gump
