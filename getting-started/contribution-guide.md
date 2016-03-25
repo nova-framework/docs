@@ -1,6 +1,6 @@
 ## Issue Tracker
 
-You can find outstanding issues on the [GitHub Issue Tracker](https://github.com/simple-mvc-framework/framework/issues).
+You can find outstanding issues on the [GitHub Issue Tracker](https://github.com/nova-framework/framework/issues).
 
 ## Pull Requests
 
