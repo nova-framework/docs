@@ -1,5 +1,3 @@
-# Url
-
 The URL class is used for having handy methods or redirecting the page and returning the path to the current template.
 
 Redirect - To redirect to another page instead of using a header call the static method redirect:
