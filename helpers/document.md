@@ -1,5 +1,3 @@
-#Document 
-
 The document class is a collection of useful methods for working with files.
 
 To get the extension of a file call the getExtension method and pass the file name, the extension will then be returned.
