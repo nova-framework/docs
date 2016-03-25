@@ -1,6 +1,4 @@
-# Views
-
-Views are the visual side of the framework, they are the html output of the pages. All views are located in the views folder. The actual views can be located directly inside the views folder or in a sub folder, this helps with organising your views.
+Views are the visual side of the Nova, they are the html output of the pages. All views are located in the views folder. The actual views can be located directly inside the views folder or in a sub folder, this helps with organising your views.
 
 Views are called from controllers once called they act as included files outputting anything inside of them. They have access to any data passed to them from a data array.
 
@@ -16,27 +14,30 @@ class View
 {
     public static function render($path, $data = false, $error = false)
     {
-        if (!headers_sent()) {
-            foreach (self::$headers as $header) {
-                header($header, true);
-            }
+        self::sendHeaders();
+
+        //pass data to check and store it
+        $data = self::dataLoadandConvert($data);
+
+        foreach ($data as $name => $value) {
+            ${$name} = $value;
         }
-        require "app/views/$path.php";
+
+        require APPDIR."Views/$path.php";
     }
 
-    public static function renderTemplate($path, $data = false, $custom = false)
+   public static function renderTemplate($path, $data = false, $custom = TEMPLATE)
     {
-        if (!headers_sent()) {
-            foreach (self::$headers as $header) {
-                header($header, true);
-            }
+        self::sendHeaders();
+
+        //pass data to check and store it
+        $data = self::dataLoadandConvert($data);
+
+        foreach ($data as $name => $value) {
+            ${$name} = $value;
         }
 
-        if ($custom == false) {
-            require "app/templates/".TEMPLATE."/$path.php";
-        } else {
-            require "app/templates/$custom/$path.php";
-        }
+        require APPDIR."Templates/$custom/$path.php";
     }
     
 }
@@ -52,9 +53,9 @@ For example, calling an email template can be done like this:
 View::renderTemplate('header', $data, 'email');
 ````
 
-The template folder used is dictated by the template set in the app/Core/Config file via a constant.
+The template folder used is dictated by the template set in the app/Config file via a constant.
 
-**Using a view from a controller**
+## Using a view from a controller
 
 A view can be set inside a method, an array can optionally be created and passed to both the render and renderTemplate methods, this is useful for setting the page title and letting a header template use it. 
 
@@ -66,20 +67,19 @@ A view can be set inside a method, an array can optionally be created and passed
  View::renderTemplate('footer', $data);
 ````
 
-**Inside a view**
+## Inside a view
 
 Views are normal php files they can contain php and html, as such any php logic can be used inside a view though it's recommended to use only simple logic inside a view anything more complex is better suited inside a controller.
 
 An example of a view; looping through an array and outputting its contents:
 
- Contacts List
-
 ````
+ <p>Contacts List</p>
  <?php 
- if ($data['contacts']) {
-    foreach ($data['contacts'] as $row) {
+ if ($contacts) {
+    foreach ($contacts as $row) {
         echo $row.'<br />';
     }
  }
  ?>
-````
+ ````
