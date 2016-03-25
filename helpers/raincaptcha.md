@@ -1,5 +1,3 @@
-# RainCaptcha
-
 This class can validate CAPTCHA images with RainCaptcha.
 
 It can generate an URL to display a CAPTCHA validation image served by the RainCaptcha service.
