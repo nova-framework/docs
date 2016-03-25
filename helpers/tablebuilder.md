@@ -1,5 +1,3 @@
-# Table builder
-
 Table builder helper is a class that would help you to create tables in MySQL (primarily) 
 without really going into details of SQL query.
 
