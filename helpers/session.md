@@ -1,5 +1,3 @@
-# Session
-
 The session is a static class, this means it can be used in any controller without needing to be instantiated, the class has an init method if session_start() has not been set then it starts it. This call is in place in (Core/Config.php) so it can already be used with no setup required.
 
 The advantages of using a session class is all sessions are prefixed using the constant setup in the root index.php file, this avoid sessions clashing with other applications on the same domain.
