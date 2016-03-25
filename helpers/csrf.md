@@ -27,10 +27,8 @@ In your add or edit method create the token. If you use separate methods to open
 ````  
 function edit() 
 {
-    $id = $_GET['id'];
-    // or 
     $id = filter_input(INPUT_GET, 'id'); //suggested way....
-    $data['csrf_token'] = Csrf::makeToken();
+    $data['csrfToken'] = Csrf::makeToken('edit');
     $data['row'] = $this->model->getPet($id);
 
     View::renderTemplate('header', $data);
@@ -42,7 +40,7 @@ function edit()
 Before the submit button in same view, place this hidden field:
     
 ````
-<input type="hidden" name="token" value="<?php echo $data['csrf_token']; ?>" />
+<input type="hidden" name="token" value="<?php echo $data['csrfToken']; ?>" />
 ````
 
 In the controller and at the top of the method that processes the form, update here is only an example, place:
@@ -51,7 +49,7 @@ In the controller and at the top of the method that processes the form, update h
 function update() 
 {
     if (isset($_POST['submit'])) { // or the name/value you assign to button.
-       if (!Csrf::isTokenValid()) {
+       if (!Csrf::isTokenValid('edit')) {
             Url::redirect('admin/login'); // Or to a url you choose.......
         }
         
