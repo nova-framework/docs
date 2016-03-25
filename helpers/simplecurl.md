@@ -1,5 +1,3 @@
-# SimpleCurl
-
 The SimpleCurl class is there to curl data from RESTful services. A lot of companies use it nowadays for example twitter, google and facebook.
 
 There are four methods available these are get, post and put.
@@ -7,7 +5,7 @@ There are four methods available these are get, post and put.
  **You will need to declare the SimpleCurl helper first to use these examples below. You can do it by adding a use statement at the top of the controller.**
 
 ````
-use Helpers\\SimpleCurl as Curl
+use Helpers\SimpleCurl as Curl
 ````
 
 **How to do a get request**
@@ -58,7 +56,7 @@ This example will show you how to do a put request to httpbin a test service for
 ````   
 $response = Curl::put('http://httpbin.org/put', array(
   'id' => 1,
-  'first_name' => 'Simple',
-  'last_name' => 'MVC'
+  'first_name' => 'Nova',
+  'last_name' => 'Framework'
 )); 
 ````
