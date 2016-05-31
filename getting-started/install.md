@@ -34,7 +34,7 @@ define('ROOTDIR', realpath(__DIR__).'/');
 ````
 
 * edit .htaccess set the rewritebase if running on a sub folder otherwise a single / will do.
-* edit system/Core/Config.example.php change the SITEURL and DIR constants. the DIR path this is relative to the project url for example / for on the root or /foldername/ when in a folder. Also change other options as desired. Rename file as Config.php
+* edit app/Config.example.php change the SITEURL and DIR constants. the DIR path this is relative to the project url for example / for on the root or /foldername/ when in a folder. Also change other options as desired. Rename file as Config.php
 
 ---
 <br>
