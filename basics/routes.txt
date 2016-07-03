@@ -1,0 +1,199 @@
+# Routes
+
+Routing lets you create your own URL paths, based on the path you can load a closure or a controller.
+
+## Routing Set-up
+Namespaces are included in all classes now. A namespace is like a layer, adding a namespace to a class means there can be multiple classes with the same name as long as each class is in a different namespace.
+
+With routes the namespace is **Routing\\Router::** followed by the method call, typing out the namespace every time is long winded, thankfully short cuts can be created by creating an alias:
+
+{line-numbers=off}
+~~~~~~~~
+use Routing\Router;
+~~~~~~~~
+
+By using the use keyword **Routing\\Router**, it can be referenced as **Router**.
+
+To define a route, call the static name **Router::** followed by either a post or a get (**'any'** can also be used to match both **post** and **get** requests) to match the HTTP action. Next, set the path to match and call a closure or a controller.
+
+{line-numbers=off}
+~~~~~~~~
+Router::any('', 'closure or controller');
+~~~~~~~~
+
+## Closures
+
+A closure is a function without a name, they are useful when you only need simple logic for a route, to use a closure first call **Router::** then set the URL pattern you want to match against, followed by a function.
+
+{line-numbers=off}
+~~~~~~~~
+Router::get('simple', function() {
+  //do something simple
+});
+~~~~~~~~
+
+Controllers and Models can also be used in a closure by instantiating the root controller.
+
+{line-numbers=off}
+~~~~~~~~
+$c = new \App\Core\Controller();
+$m = new \App\Models\Users();
+
+$m->getUsers();
+~~~~~~~~
+
+Having said that it's best to use a controller, if you need access to a model.
+
+Closures are convenient but can soon become messy.
+
+## Controllers
+
+To call a route to a controller, instead of typing a function you can enter a string. In the string type the namespace of the controller (**App/Controllers** if located in the root of the controllers folder) then the controller name. Finally, specify what method of that class you wish to load. They are dictated by an **'@'** symbol.
+
+For example, to have a controller called **Users** (in the root of the controllers folder) and to load a **usersList method**, you would use the following:
+
+{line-numbers=off}
+~~~~~~~~
+Router::get('users', 'App\Controllers\Users@usersList');
+~~~~~~~~
+
+The above would call the Users controller and the userList method when **/users** is located in the URL, via a get request.
+
+Routes can respond to both GET and POST requests.
+
+To use a post route:
+
+{line-numbers=off}
+~~~~~~~~
+Router::post('blogsave', 'App\Controllers\Blog@savePost');
+~~~~~~~~
+
+To respond to either a post or get request, use any:
+
+{line-numbers=off}
+~~~~~~~~
+Router::any('blogsave', 'App\Controllers\Blog@savePost');
+~~~~~~~~
+
+## Groups
+Group routes are new to 3.0. Routes can now be placed in a group, which allows all routes within the group to inherit the group name.
+
+{line-numbers=off}
+~~~~~~~~
+Router::group('admin', function() {
+    Router::any('add', 'App\Controllers\Demo@cool');
+    Router::any('settings', 'App\Controllers\Demo@nice');
+});
+~~~~~~~~
+
+Is the equivalent to
+
+{line-numbers=off}
+~~~~~~~~
+Router::any('admin/add', 'App\Controllers\Admin@add');
+Router::any('admin/settings', 'App\Controllers\Admin@settings');
+~~~~~~~~
+
+### Group Prefixes and Namespaces
+
+The **Router::group()** can also accept an array as the first parameter and permit commands like:
+
+{line-numbers=off}
+~~~~~~~~
+Router::group(['prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'], function() {
+    Router::match('get',            'users',             'Users@index');
+    Router::match('get',            'users/create',      'Users@create');
+    Router::match('post',           'users',             'Users@store');
+    Router::match('get',            'users/(:any)',      'Users@show');
+    Router::match('get',            'users/(:any)/edit', 'Users@edit');
+    Router::match(['put', 'patch'], 'users/(:any)',      'Users@update');
+    Router::match('delete',         'users/(:any)',      'Users@destroy');
+});
+~~~~~~~~
+
+Where the prefix **admin** will turn the route **users/create** into **admin/users/create** and the namespace **App\\Controllers\Admin** will prepend onto **Users@create**, turning into **App\\Controllers\\Admin\\Users@create**
+
+### Router::resource()
+
+The **Router::resource()** method introduces the ability to write the group of resourceful routes, with the following specifications:
+
+|HTTP Method|Route|Controller Method|
+|---|---|---|
+|GET|/photo|index|
+|GET|/photo/create|create|
+|POST|/photo|store|
+|GET|/photo/(:any)|show|
+|GET|/photo/(:any)/edit|edit|
+|PUT/PATCH|/photo/(:any)|update|
+|DELETE|/photo/(:any)|destroy|
+
+The previous code snippet can now be written as:
+
+{line-numbers=off}
+~~~~~~~~
+Router::group(['prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'], function() {
+    Router::resource('users', 'Users');
+    Router::resource('categories', 'Categories');
+    Router::resource('articles', 'Articles');
+});
+~~~~~~~~
+
+OR
+
+{line-numbers=off}
+~~~~~~~~
+Router::resource('admin/users', 'App\Controllers\Admin\Users');
+Router::resource('admin/categories', 'App\Controllers\Admin\Categories');
+Router::resource('admin/articles', 'App\Controllers\Admin\Articles');
+~~~~~~~~
+
+## Routing Filters
+
+Routes can also use filters to dynamically pass values to the controller / closure, there are 3 filters:
+
+1. **(:any) any** - can use characters or numbers
+2. **(:num) num** - can only use numbers
+3. **(:all) all** - will accept everything including any slash paths
+
+To use a filter place the filter inside parenthesis and use a colon inside route path.
+
+{line-numbers=off}
+~~~~~~~~
+Router::get('blog/(:any)', 'App\Controllers\Blog@post');
+~~~~~~~~
+
+Would get past to **app/Controllers/Blog.php** anything after **blog/** will be passed to post method.
+
+{line-numbers=off}
+~~~~~~~~
+public function post($slug)
+{
+    // Some code ...
+}
+~~~~~~~~
+
+### Optional Parameters
+
+New to 3.0 is allowing filters to be optional
+
+Filters which are written like **(:any)** are required to match the route but writing a filter as **(/(:any))** makes it optional.
+
+This route supplied with Nova has one filter that is required then a further 3 optional filters. Multiple filters should be inside the first parenthesis.
+
+{line-numbers=off}
+~~~~~~~~
+Router::any('admin/(:any)(/(:any)(/(:any)(/(:any))))', 'App\Controllers\Demo@test');
+~~~~~~~~
+
+### Full Example
+
+{line-numbers=off}
+~~~~~~~~
+use Routing\Router;
+
+//define routes
+Router::get('', 'App\Controllers\Welcome@index');
+
+//call a controller in called users inside a admin folder inside the controllers folder
+Router::('admin/users', 'App\Controllers\Admin\Users@list');
+~~~~~~~~

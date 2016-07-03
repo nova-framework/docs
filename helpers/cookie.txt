@@ -1,0 +1,41 @@
+# Cookie
+
+The Cookie helper has the following methods:
+
+{line-numbers=off}
+~~~~~~~~
+Cookie::exists($key);
+~~~~~~~~
+Returns true or false
+
+{line-numbers=off}
+~~~~~~~~
+Cookie::set($key, $value, $expiry = self::FOURYEARS, $path = "/", $domain = false);
+~~~~~~~~
+**$key** - the name of the cookie
+
+**$value** - the value the cookie holds
+
+** $expiry** - time to hold the cookie
+
+**$path** - the path the cookie accepts
+
+**domain** - the domain to be used defaults to false
+
+{line-numbers=off}
+~~~~~~~~
+Cookie::get($key, $default = '')
+~~~~~~~~
+Get the key from a cookie
+
+{line-numbers=off}
+~~~~~~~~
+Cookie::display()
+~~~~~~~~
+Returns the $_COOKIE
+
+{line-numbers=off}
+~~~~~~~~
+Cookie::destroy($key, $path = "/", $domain = "")
+~~~~~~~~
+Remove/Delete cookie match the id of **$key**

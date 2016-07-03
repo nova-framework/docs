@@ -1,0 +1,138 @@
+# Languages
+
+A language class exists inside the system/Core folder, this class have 2 methods:
+
+* **load** - Loads the language file, can return the data and set the language to use
+* **get** - return a language string if it exists, else it will return the value passed
+
+Inside the system/Core/Controller.php file the class is instantiated, resulting in **$this->language** being available to all controllers.
+
+To use a language inside a controller, you may use the following method, passing the filename to be loaded **language/code/filename.php** by default the language code will be 'En' for english translation.
+
+{line-numbers=off}
+~~~~~~~~
+$this->language->load('file/to/load');
+~~~~~~~~
+
+The load method can also be passed if the data is to be returned with a true or false and the language code, useful to set a new language on the call:
+
+{line-numbers=off}
+~~~~~~~~
+$this->language->load('file/to/load', 'Nl');
+~~~~~~~~
+
+The default language can be set in the Config.php file:
+
+{line-numbers=off}
+~~~~~~~~
+//set a default language
+define('LANGUAGE_CODE', 'En');
+~~~~~~~~
+
+Inside the language file set the text, each language should contain the same text in their own language for instance:
+
+{line-numbers=off}
+~~~~~~~~
+//En
+$lang['welcomeMessage'] = 'Hello, welcome from the welcome controller!';
+
+//Nl
+$lang['welcomeMessage'] = 'Hallo, welkom van de welcome controller!';
+~~~~~~~~
+
+To use the language strings inside a controller, set a data array and call the get method passing the desired string to return:
+
+{line-numbers=off}
+~~~~~~~~
+$data['welcomeMessage'] = $this->language->get('welcomeMessage');
+~~~~~~~~
+
+Then in the view echo $data['welcomeMessage'] to print the chosen language.
+
+Welcome example
+
+{line-numbers=off}
+~~~~~~~~
+namespace App\Controllers;
+
+use Core\View;
+use Core\Controller;
+
+class Welcome extends Controller
+{
+    /**
+     * call the parent construct
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->language->load('Welcome');
+    }
+
+    /**
+     * define page title and load template files
+     */
+    public function index()
+    {
+        $data['title'] = 'Welcome';
+        $data['welcomeMessage'] = $this->language->get('welcomeMessage');
+
+        View::rendertemplate('header', $data);
+        View::render('Welcome/Welcome', $data);
+        View::rendertemplate('footer', $data);
+    }
+
+}
+~~~~~~~~
+
+### Language Changer
+
+Languages can be changed by settings the language code in app/Config.php that's a system-wide change, to enable a language change for a user a language changer can be used. A new route exists as of 3.3.0:
+
+{line-numbers=off}
+~~~~~~~~
+Router::any('language/(:any)', 'App\Controllers\Language@change');
+~~~~~~~~
+
+This allows for routes like these:
+
+{line-numbers=off}
+~~~~~~~~
+<a href='<?=DIR;?>language/cs'>Czech</a>
+<a href='<?=DIR;?>language/en'>English</a>
+<a href='<?=DIR;?>language/de'>German</a>
+<a href='<?=DIR;?>language/fr'>French</a>
+<a href='<?=DIR;?>language/it'>Italian</a>
+<a href='<?=DIR;?>language/nl'>Dutch</a>
+<a href='<?=DIR;?>language/pl'>Polish</a>
+<a href='<?=DIR;?>language/ro'>Romanian</a>
+<a href='<?=DIR;?>language/ru'>Russian</a>
+~~~~~~~~
+
+Then each link when clicked will change the language for that user, the language code is stored in a session which falls back to a cookie.
+
+## Alternative Language System
+
+PR #833 introduced a new Language System. The new Language System uses two framework-wide functions for string translation, the first one being **__()**, which is designed to be used in the App folder and the second being **__d()**, designed to be used on Language Domains; those Language Domains are the Modules, the Templates or the System.
+
+**IMPORTANT:** When a specified domain matches both a Module and Template name, the Module will take precedence. In other words, there should not be a Module and a Template with the same name, for the Language System to work properly.
+
+The usage of both translation functions is very simple, they contain the string to be translated and optional parameters. For example
+
+{line-numbers=off}
+~~~~~~~~
+// Get a translation for App Domain (default)
+$translated = __('Hello, {0}', $username);
+
+// Get a translation for Users Module Domain
+$translated = __d('users', 'Welcome back, {0}!', $username);
+
+// Get a translation for System Domain
+$translated = __d('system', 'File not found: {0}', $filename);
+~~~~~~~~
+
+Please note that the Domains are specified in **snake_case** transformation and that the translation string's parameters are using the ICU notation, which is used also by the PHP's INTL extension.
+
+There is also a utility script that has been introduced, called **scripts/makelangs.php**, and it should be used to update the Framework's Language files, after introducing new translation strings in your application.
+
+The Language files used by this new Language System are called **messages.php** and will be found in the usual locations, i.e. **app/Language/En/messages.php** or **app/Modules/Users/Language/En/messages.php**

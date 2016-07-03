@@ -1,0 +1,42 @@
+# Validation
+
+## Introduction
+A simple but powerful Validation Engine, in a Laravel-esque style.
+
+Its **Validation Rules** and the basic usage are similar with **Illuminate\\Validation v4.x**, but no Files Validation support.
+
+To note that it use the new Database API for verification of data presence into Database. Then, if you use this Validation, is a must to use also the new **Database API** in the entire application, and NOT the variant given by **Helpers\\Database**.
+
+Also to note that for the translation of error messages, it use the new Language API.
+
+## Example Usage
+The Validation usage is simple, as in the following example:
+
+{line-numbers=off}
+~~~~~~~~
+use Validator;
+
+$data = array(
+    'username' => 'michael',
+    'password' => 'password',
+    'email'    => 'michael@novaframework.dev'
+);
+
+$rules = array(
+    'username' => 'required|min:3|max:50|alpha_dash|unique:users',
+    'password' => 'required|between:4,30',
+    'email'    => 'required|email|max:100|unique:users',
+);
+
+$validator = Validator::make($data, $rules);
+
+if ($validator->passes()) {
+    echo '<h3>Data validated with success!</h3>';
+
+    echo '<pre>' .var_export($data, true) .'</pre>';
+} else {
+    $errors = $validator->errors()->all();
+
+    echo '<pre>' .var_export($errors, true) .'</pre>';
+}
+~~~~~~~~

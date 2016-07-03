@@ -1,0 +1,114 @@
+# Request
+
+The Request class provides many methods for examining the HTTP request for your application and extends the `Symfony\\Component\\HttpFoundation\\Request` class.
+
+**Please note that both Input and Request do NOT sanitize your data, it is up to you to do that.**
+
+#### Retrieving The Request URI
+
+{line-numbers=off}
+~~~~~~~~
+$uri = Request::path();
+~~~~~~~~
+
+#### Retrieving The Request Method
+
+{line-numbers=off}
+~~~~~~~~
+$method = Request::method();
+
+if (Request::isMethod('post'))
+{
+    //
+}
+~~~~~~~~
+
+#### Determine If The Request Path Matches A Pattern
+
+{line-numbers=off}
+~~~~~~~~
+if (Request::is('admin/*'))
+{
+    //
+}
+~~~~~~~~
+
+#### Get The Request URL
+
+{line-numbers=off}
+~~~~~~~~
+$url = Request::url();
+~~~~~~~~
+
+#### Retrieve A Request URI Segment
+
+{line-numbers=off}
+~~~~~~~~
+$segment = Request::segment(1);
+~~~~~~~~
+
+#### Retrieving A Request Header
+
+{line-numbers=off}
+~~~~~~~~
+$value = Request::header('Content-Type');
+~~~~~~~~
+
+#### Retrieving Values From $_SERVER
+
+{line-numbers=off}
+~~~~~~~~
+$value = Request::server('PATH_INFO');
+~~~~~~~~
+
+#### Determine If The Request Is Over HTTPS
+
+{line-numbers=off}
+~~~~~~~~
+if (Request::secure())
+{
+    //
+}
+~~~~~~~~
+
+#### Determine If The Request Is Using AJAX
+
+{line-numbers=off}
+~~~~~~~~
+if (Request::ajax())
+{
+    //
+}
+~~~~~~~~
+
+#### Determine If The Request Has JSON Content Type
+
+{line-numbers=off}
+~~~~~~~~
+if (Request::isJson())
+{
+    //
+}
+~~~~~~~~
+
+#### Determine If The Request Is Asking For JSON
+
+{line-numbers=off}
+~~~~~~~~
+if (Request::wantsJson())
+{
+    //
+}
+~~~~~~~~
+
+#### Checking The Requested Response Format
+
+The `Request::format` method will return the requested response format based on the HTTP Accept header:
+
+{line-numbers=off}
+~~~~~~~~
+if (Request::format() == 'json')
+{
+    //
+}
+~~~~~~~~

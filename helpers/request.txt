@@ -1,0 +1,48 @@
+# Request
+
+The request helper is used to detecting the type of request and getting the request.
+
+{line-numbers=off}
+~~~~~~~~
+Request::getMethod()
+~~~~~~~~
+Returns either GET or POST, depending if a $_GET request or a $_POST request has happended.
+
+{line-numbers=off}
+~~~~~~~~
+Request::post($key)
+~~~~~~~~
+Returns the post key
+
+{line-numbers=off}
+~~~~~~~~
+Request::get($key)
+~~~~~~~~
+Returns the get key
+
+{line-numbers=off}
+~~~~~~~~
+Request::files($key)
+~~~~~~~~
+Returns the file key
+
+{line-numbers=off}
+~~~~~~~~
+Request::isAjax()
+~~~~~~~~
+
+Detect if the request is a ajax request.
+
+{line-numbers=off}
+~~~~~~~~
+Request::isPost()
+~~~~~~~~
+
+Detect if the request is a post request.
+
+{line-numbers=off}
+~~~~~~~~
+Request::isGet()
+~~~~~~~~
+
+Detect if the request is a get request.

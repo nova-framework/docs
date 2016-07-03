@@ -1,0 +1,45 @@
+# Data
+
+Data helper contains a bunch of useful methods for looking at and altering your data.
+
+{line-numbers=off}
+~~~~~~~~
+Data::pr($data)
+~~~~~~~~
+Returns the data inside a print_r wrapped around pre tags.
+
+{line-numbers=off}
+~~~~~~~~
+Data::vd($data)
+~~~~~~~~
+Returns var_dump
+
+{line-numbers=off}
+~~~~~~~~
+Data::sl($data)
+~~~~~~~~
+Returns the length of the string
+
+{line-numbers=off}
+~~~~~~~~
+Data::stu($data)
+~~~~~~~~
+Convert to uppercase
+
+{line-numbers=off}
+~~~~~~~~
+Data::stl($data)
+~~~~~~~~
+Convert to lower
+
+{line-numbers=off}
+~~~~~~~~
+Data::ucw($data)
+~~~~~~~~
+Returns the string with the first letter of each word in uppercase using ucwords
+
+{line-numbers=off}
+~~~~~~~~
+Data::createKey($length = 32)
+~~~~~~~~
+Create a key and set the length.

@@ -1,0 +1,75 @@
+# Tags
+
+The tags helper is a collection of useful methods:
+
+{line-numbers=off}
+~~~~~~~~
+Tags::clean($data)
+~~~~~~~~
+Clean function to convert data into an array.
+
+{line-numbers=off}
+~~~~~~~~
+Tags::get($string)
+~~~~~~~~
+This method converts the **$string** depending on the condition:
+
+{line-numbers=off}
+~~~~~~~~
+Tags::get('[year]')
+~~~~~~~~
+Returns the year
+
+{line-numbers=off}
+~~~~~~~~
+Tags::get('[sitetitle]')
+~~~~~~~~
+Returns the site title constant (SITETITLE)
+
+{line-numbers=off}
+~~~~~~~~
+Tags::get('[siteemail]')
+~~~~~~~~
+Returns the site email constant (SITEEMAIL)
+
+{line-numbers=off}
+~~~~~~~~
+echo Tags::get('[feedburner username]');
+~~~~~~~~
+Generates a Feedburner subscriber form
+
+{line-numbers=off}
+~~~~~~~~
+echo Tags::get('[googleplusbox username]');
+~~~~~~~~
+Generates a Google+ box
+
+{line-numbers=off}
+~~~~~~~~
+echo Tags::get('[twitterfollowbutton username]');
+~~~~~~~~
+Generates a Twitter follow button for the given username
+
+{line-numbers=off}
+~~~~~~~~
+echo Tags::get('[twittersharebutton username]');
+~~~~~~~~
+Generates a Twitter share button for the given username
+
+{line-numbers=off}
+~~~~~~~~
+echo Tags::get('[youtube id]');
+~~~~~~~~
+Generates an embed iframe for youtube, pass the video id only
+
+{line-numbers=off}
+~~~~~~~~
+echo Tags::get('[youtubesub username]');
+~~~~~~~~
+Generates a youtube subscribe widget
+
+{line-numbers=off}
+~~~~~~~~
+echo Tags::get('[vimeo id]');
+~~~~~~~~
+Generates an embed iframe for vimeo, pass the video id only
