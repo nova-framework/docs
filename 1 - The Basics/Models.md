@@ -1,50 +1,40 @@
-Models control the data source, they are used for collecting and issuing data, this could be a remote service, as XML, JSON or using a database to get and fetch records.
+Models control the data source, they are used for collecting and issuing data, this could be from a remote service as XML,JSON or using a database to get and fetch records.
 
-A Model is a class. The model needs to extend the parent Model, either the Core\Model or Database\Model (new Database API covered in the New Api's section).
+A Model is structured like a controller; it's a class. The model needs to extend the parent Model. Like a controller the constuctor needs to call the parent contstruct in order to gain access to its properties and methods.
 
-The model should have a namespace of App\Models when located in the root of the app/Models directory.
+```php
+class Contacts_Model extends Model {
 
-````php 
-namespace App\Models;
+    function __construct(){
+        parent::__construct();
+    }
 
-use Core\Model;
-
-class Contacts extends Model 
-{    
- 
 }
 ```
 
-The parent model is very simple, it's the only role is to create an instance of the database class located in (**system/Helpers/Database.php**) once set the instance is available to all child models that extend the parent model.
+The parent model is very simple it's only role is to create an instance of the database class located in (app/helpers/database.php) once set the instance is available to all child models that extend the parent model.
 
-````php 
-namespace Core;
+```php
+class Model {
 
-use Helpers\Database;
+    protected $_db;
 
-class Model  
-{
-    protected $db;
-
-    public function __construct()
-    {
-        //connect to PDO here.
-        $this->db = Database::get();
-
+    function __construct(){
+        $this->_db = new Database();
     }
 }
 ```
-Models can be placed in the root of the models folder. The namespace used in the model should reflect its file path. Classes directly in the models folder will have a namespace of models or if in a folder: namespace **App\Models\Classname**;
+
+> Models can be placed in the root of the models folder it in sub-folders, the convention for the filenames are name of the model plus _model for a welcome model becomes welcome_model.php
 
 Methods inside a model are used for getting data and returning data back to the controller, a method should never echo data only return it, it's the controller that decides what is done with the data once it's returned.
 
-The most common use of a model is for performing database actions, here is a quick example:
+The most common us of a model is for performing database actions, here is a quick example:
 
-````php
-public function getContacts()
-{
-    return $this->db->select('SELECT firstName, lastName FROM '.PREFIX.'contacts');
+```php
+public function getContacts(){
+    return $this->_db->select('SELECT firstName,lastName FROM '.PREFIX.'contacts');
 }
 ```
 
-This is a very simple database query **$this->db** is available from the parent model inside the **$db** class holds methods for selecting, inserting, updating and deleting records from a MySQL database using PDO more on this topic in the section [[Database]].
+This is a very simple database query $this->_db is available from the parent model inside the $_db class holds methods for selecting,inserting,updating and deleting records from a MySQL database using PDO more on this topic in the **Database** section.
