@@ -5,6 +5,12 @@ There are several ways to paginate items. The simplest is by using the paginate 
 $users = DB::table('users')->paginate(15);
 ```
 
+by default the url parameter used to track pages is called offset so use something else such as page add this line to app/Boot/Global.php:
+
+````php
+Paginator::setPageName('page');
+````
+
 The argument passed to the `paginate` method is the number of items you wish to display per page. Once you have retrieved the results, you may display them on your view, and create the pagination links using the `links` method:
 
 ```php
@@ -26,6 +32,7 @@ You may also access additional pagination information via the following methods:
 * getFrom
 * getTo
 * count
+* isEmpty()
 
 ### "Simple Pagination"
 
