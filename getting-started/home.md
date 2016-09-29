@@ -18,7 +18,11 @@ template_url() is used to load resources from the template. It accepts two param
 1 - path to the css file relative to the theme's root.
 2 - the theme name to be used
 
+<<<<<<< HEAD
 ```php
+=======
+````php
+>>>>>>> origin/3.0
 Assets::css([
     //load from vendor
     site_url('vendor/twbs/bootstrap/dist/css/bootstrap.min.css'),
