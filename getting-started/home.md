@@ -18,7 +18,7 @@ template_url() is used to load resources from the template. It accepts two param
 1 - path to the css file relative to the theme's root.
 2 - the theme name to be used
 
-````
+````php
 Assets::css([
     //load from vendor
     site_url('vendor/twbs/bootstrap/dist/css/bootstrap.min.css'),
@@ -32,7 +32,7 @@ Assets::css([
 
 To load JS is the same process only this time its Assets::js
 
-```
+```php
 Assets::js([
     //external
     'https://code.jquery.com/jquery-1.12.4.min.js',
@@ -47,7 +47,7 @@ template_url() accepts two params:
 1 - path to the image file relative to the theme's root.
 2 - the theme name to be used
 
-```
+```php
 <img src='<?= template_url('images/nova.png', 'Default'); ?>' alt='logo'>
 ```
 
@@ -56,7 +56,7 @@ resource_url() accepts two params:
 1 - path to the resource
 2 - optionally the name of the module
 
-```
+```php
 <img src='<?= resource_url('images/nova.png', 'Default'); ?>' alt='logo'>
 ```
 
@@ -66,7 +66,7 @@ resource_url() accepts two params:
 
 by default routes use named params instead of (:any) use {paramname} the value in the route should match ie $paramname
 
-```
+```php
 Route::get('user/{id}', function($id){
 	echo $id;
 })
@@ -77,7 +77,7 @@ New to 3 is allowing params to be optional.
 
 For a param to be optional add ? to the end of the param followed by a where clause:
 
-```
+```php
 Route::get('user/{id?}', function($id = null){
 	echo $id;
 })->where('slug', '(.*)');
