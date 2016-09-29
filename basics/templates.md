@@ -1,43 +1,161 @@
-Templates are the site's markup, where images and js, css files are located as well as the site html structure. The default template is called Default.
+Templates are the site's markup, where images, js, and css files are located as well as the site html structure. The default template is called Default.
 
 A regular site would have multiple css files and a javascript folder containing js files, an image folder. The rest of the sites pages come from the views.
 
-The typical elements of a page include the following. The title comes from an array with a key of the title followed by the constant SITETITLE, this lets the controllers set the page titles in an array that is passed to the template.
+The typical elements of a page includes the following. The title comes View::shares set in controllers, this lets the controllers set the page titles in an array that is passed to the template. The site title **Config::get('app.name', SITETITLE)** comes from app/Config/App.php 
 
-The template_url function is being used to get the full path to the CSS file.
+# Routing images / js / css files
+From within Templates your css, js and images must be in a Assets folder to be routed correctly. This applies to Modules as well, to have a css file from a Module the css file would be placed inside **app/Modules/ModuleName/Assets/css/file.css.** Additionally there is an Assets folder in the root of nova this is for storing resources outside of templates that can still be routed from above the document root.
 
-## Routing Images / CSS / JS files
-When files are above the document root resources must be placed inside the **Templates/Default/Assets** folder otherwise they won't be loaded correctly.
+Routing CSS:
 
-To load images the template_url function can be used, it accepts 2 params
-1. The relative path of the asset
-2. the theme to be used.
+CSS files can be loaded by using Assets::css() and passing in an array of css paths.
+site_url() is used to determine the website url. Place paths to the files relative to the root.
+template_url() is used to load resources from the template. It accepts two params:
+1 - path to the css file relative to the theme's root.
+2 - the theme name to be used
 
-````php
-<img src='<?php echo template_url('images/logo.jpg', 'Default');?>' alt=''>
+```php
+Assets::css([
+    //load from vendor
+    site_url('vendor/twbs/bootstrap/dist/css/bootstrap.min.css'),
+    site_url('vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css'),
+    //external
+    'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
+    //load from template
+    template_url('css/style.css', 'Default'),
+]);
 ```
+
+To load JS is the same process only this time its Assets::js
+
+```php
+Assets::js([
+    //external
+    'https://code.jquery.com/jquery-1.12.4.min.js',
+    //vendor
+    site_url('vendor/twbs/bootstrap/dist/js/bootstrap.min.js'),
+]);
+```
+
+Loading images, since the images are above the document root they have to be served from Nova, this is done by either using template_url() for images in the theme or resource_url() for resources in the global assets folder or from a module.
+
+template_url() accepts two params:
+1 - path to the image file relative to the theme's root.
+2 - the theme name to be used
+
+```php
+<img src='<?= template_url('images/nova.png', 'Default'); ?>' alt='logo'>
+```
+
+For images, js and css files located in /assets
+resource_url() accepts two params:
+1 - path to the resource
+2 - optionally the name of the module
+
+```php
+<img src='<?= resource_url('images/nova.png', 'Default'); ?>' alt='logo'>
+```
+
 
 Page example:
 
-````php
+```php
+<?php
+/**
+ * Default Layout - a Layout similar with the classic Header and Footer files.
+ */
+
+// Generate the Language Changer menu.
+$language = Language::code();
+
+$languages = Config::get('languages');
+
+//
+ob_start();
+
+foreach ($languages as $code => $info) {
+?>
+<li <?php if($language == $code) echo 'class="active"'; ?>>
+    <a href='<?= site_url('language/' .$code); ?>' title='<?= $info['info']; ?>'><?= $info['name']; ?></a>
+</li>
+<?php
+}
+
+$langMenuLinks = ob_get_clean();
+?>
 <!DOCTYPE html>
-<html lang="<?php echo LANGUAGE_CODE; ?>">
+<html lang="<?= $language; ?>">
 <head>
     <meta charset="utf-8">
-    <title><?php echo $title.' - '.SITETITLE;?></title>
-    <?php
-    echo $meta;//place to pass data / plugable hook zone
-    Assets::css([
-        'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-        template_url('css/style.css', 'Default')',
-    ]);
-    echo $css; //place to pass data / plugable hook zone
-    ?>
+    <title><?= $title .' - ' .Config::get('app.name', SITETITLE); ?></title>
+<?php
+echo isset($meta) ? $meta : ''; // Place to pass data / plugable hook zone
+
+Assets::css([
+    site_url('vendor/twbs/bootstrap/dist/css/bootstrap.min.css'),
+    site_url('vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css'),
+    'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
+    template_url('css/style.css', 'Default'),
+]);
+
+echo isset($css) ? $css : ''; // Place to pass data / plugable hook zone
+?>
 </head>
-<body>
-<?php echo $afterBody; //place to pass data / plugable hook zone?>
+<body style='padding-top: 28px;'>
+
+<nav class="navbar navbar-default navbar-xs navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <?= $langMenuLinks; ?>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<?= isset($afterBody) ? $afterBody : ''; // Place to pass data / plugable hook zone ?>
 
 <div class="container">
+    <p>
+        <img src='<?= template_url('images/nova.png', 'Default'); ?>' alt='<?= Config::get('app.name', SITETITLE); ?>'>
+    </p>
+
+    <?= $content; ?>
+</div>
+
+<footer class="footer">
+    <div class="container-fluid">
+        <div class="row" style="margin: 15px 0 0;">
+            <div class="col-lg-4">
+                <p class="text-muted">Copyright &copy; <?php echo date('Y'); ?> <a href="http://www.novaframework.com/" target="_blank"><b>Nova Framework <?= VERSION; ?></b></a></p>
+            </div>
+            <div class="col-lg-8">
+                <p class="text-muted pull-right">
+                    <?php if(Config::get('app.debug')) { ?>
+                    <small><!-- DO NOT DELETE! - Profiler --></small>
+                    <?php } ?>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<?php
+Assets::js([
+    'https://code.jquery.com/jquery-1.12.4.min.js',
+    site_url('vendor/twbs/bootstrap/dist/js/bootstrap.min.js'),
+]);
+
+echo isset($js) ? $js : ''; // Place to pass data / plugable hook zone
+
+echo isset($footer) ? $footer : ''; // Place to pass data / plugable hook zone
+?>
+
+<!-- DO NOT DELETE! - Forensics Profiler -->
+
+</body>
+</html>
 ```
 
 The default template comes with multiple files to demonstrate different use cases. 

@@ -4,19 +4,19 @@ All classes within the app directory have a new namespace of App, controllers an
 
 ## Controllers
 
-````php
+```php
 namespace App\Controllers;
 ```
 
 ## Models
 
-````php
+```php
 namespace App\Models;
 ```
 
 ## Modules
 
-````php
+```php
 namespace App\Controllers\ModuleName;
 ```
 
@@ -24,7 +24,7 @@ namespace App\Controllers\ModuleName;
 
 Models are instantiated typically within a construct method, use the full namespace to call the class:
 
-````php
+```php
 public function __construct()
 {
     parent::__construct();
@@ -36,7 +36,7 @@ public function __construct()
 
 Views like classes should have filenames starting with a capital letter for both the directory and the file, for instance, welcome/index.php becomes Welcome/Index.php.
 
-````php
+```php
 View::render('Welcome/Index', $data);
 ```
 
@@ -48,7 +48,7 @@ By default, this will return the path to the assets folder, place general assets
 
 Make use of the Assets helper to load the CSS files:
 
-````php
+```php
 Assets::css([
     'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
     template_path('css/style.css', 'Default')
@@ -56,6 +56,6 @@ Assets::css([
 ```
 
 An example of loading an image from Default/Assets/images.
-````php
+```php
 <img src='<?=template_path('images/nova.png', 'Default');?>'>
 ```

@@ -1,12 +1,12 @@
 ## Language System
 
-PR #833 introduced a new Language System. The new Language System uses two framework-wide functions for string translation, the first one being **__()**, which is designed to be used in the App folder and the second being **__d()**, designed to be used on Language Domains; those Language Domains are the Modules, the Templates or the System.
+The new Language System uses two framework-wide functions for string translation, the first one being **__()**, which is designed to be used in the App folder and the second being **__d()**, designed to be used on Language Domains; those Language Domains are the Modules, the Templates or the System.
 
 **IMPORTANT:** When a specified domain matches both a Module and Template name, the Module will take precedence. In other words, there should not be a Module and a Template with the same name, for the Language System to work properly.
 
 The usage of both translation functions is very simple, they contain the string to be translated and optional parameters. For example 
 
-````php
+```php
 // Get a translation for App Domain (default)
 $translated = __('Hello, {0}', $username);
 

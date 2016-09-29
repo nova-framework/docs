@@ -1,11 +1,7 @@
-In the event of an error or an exception, a custom error message is displayed:
+In the event of an error or an exception, when in production mode a custom error message is displayed:
 
-> An error occurred, The error has been reported.
+> Whoops! An error has occurred.
 
-This comes from the logger class in (**system/Core/Logger.php**) the actual error is recorded in **app/Storage/Logs/error.log**. Any errors will be recorded in that file, ensuring no sensitive information it displayed on a page.
+When in development mode a feature rich error page is show with a full stack trace of the route of the error.
 
-To loop through and display errors without doing it yourself call the display method of the error class:
-
-````php
-echo Errors::display($error);
-```
+The actual error is recorded in **app/Storage/Logs/error.log**. Any errors will be recorded in that file.

@@ -1,10 +1,10 @@
-New to 3.0 is a command line utility aptly named **Nova** located in the root. It currently supports creating controllers and models from the command line.
+New to 3 is a command line utility aptly named **Nova** located in the root. It currently supports creating controllers and models from the command line.
 
 To use it navigate to the project in your command line/terminal then type **php nova** followed by the command.
 
 Typing just **'php nova'** will give this output:
 
-````
+```php
 Nova Framework Command Line Interface for v3.0 version 1.3.0
 
 Usage:
@@ -35,7 +35,7 @@ Available commands:
 ## Creating a controller
 To create a controller type make:controller followed by the names of the methods to be created:
 
-````
+```php
 php nova make:controller lists index add edit view delete
 ```
 
@@ -44,16 +44,16 @@ This will create a controller called Lists with 5 methods, additionally a Lists 
 ## Creating a model
 To create a model type model followed by the names of the methods to be created:
 
-````
+```php
 php nova make:model lists getAll add edit delete
 ```
 
 This will create a controller called Lists with 4 methods.
 
 ## Generate an Encryption Key
-To genereate an encryption key for **app/Config.php**, type in the following:
+To generate an encryption key for **app/Config/App.php**, type in the following:
 
-````
+```php
 php nova make:key
 ```
 

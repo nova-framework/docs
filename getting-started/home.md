@@ -18,7 +18,7 @@ template_url() is used to load resources from the template. It accepts two param
 1 - path to the css file relative to the theme's root.
 2 - the theme name to be used
 
-````
+```php
 Assets::css([
     //load from vendor
     site_url('vendor/twbs/bootstrap/dist/css/bootstrap.min.css'),
@@ -28,11 +28,11 @@ Assets::css([
     //load from template
     template_url('css/style.css', 'Default'),
 ]);
-````
+```
 
 To load JS is the same process only this time its Assets::js
 
-```
+```php
 Assets::js([
     //external
     'https://code.jquery.com/jquery-1.12.4.min.js',
@@ -47,7 +47,7 @@ template_url() accepts two params:
 1 - path to the image file relative to the theme's root.
 2 - the theme name to be used
 
-```
+```php
 <img src='<?= template_url('images/nova.png', 'Default'); ?>' alt='logo'>
 ```
 
@@ -56,7 +56,7 @@ resource_url() accepts two params:
 1 - path to the resource
 2 - optionally the name of the module
 
-```
+```php
 <img src='<?= resource_url('images/nova.png', 'Default'); ?>' alt='logo'>
 ```
 
@@ -66,9 +66,9 @@ resource_url() accepts two params:
 
 by default routes use named params instead of (:any) use {paramname} the value in the route should match ie $paramname
 
-```
+```php
 Route::get('user/{id}', function($id){
-	echo $id;
+  echo $id;
 })
 ```
 
@@ -77,9 +77,9 @@ New to 3 is allowing params to be optional.
 
 For a param to be optional add ? to the end of the param followed by a where clause:
 
-```
+```php
 Route::get('user/{id?}', function($id = null){
-	echo $id;
+  echo $id;
 })->where('slug', '(.*)');
 ```
 
@@ -87,7 +87,7 @@ Route::get('user/{id?}', function($id = null){
 ### Groups
 Routes can now be placed in a group, this allows all routes within the group to inherit the group name.
 
-````php
+```php
 Router::group('admin', function() {
     Router::any('index', 'App\Controllers\Pages@index');
     Router::any('add', 'App\Controllers\Pages@add');
@@ -95,7 +95,7 @@ Router::group('admin', function() {
 ```
 Is the equivalent to
 
-````php
+```php
 Router::any('admin/index', 'App\Controllers\Admin@index');
 Router::any('admin/add', 'App\Controllers\Admin@add');
 ```
@@ -118,7 +118,7 @@ Helpers can now be used without using a use statement, app/Config/App.php contai
 
 Instead of doing:
 
-````php
+```php
 use Helpers\Session;
 
 Session::set('item', 'value');
@@ -126,7 +126,7 @@ Session::set('item', 'value');
 ```
 it can become:
 
-````php
+```php
 Session::set('item', 'value');
 ```
 
@@ -138,17 +138,17 @@ Session::set('item', 'value');
 
 Returns the path the global assets folder or the assets folder of modules when passing the module name as a second param.
 
-````php
+```php
 $path = resource_url('somefile', 'FileManager');
 ```
 will result into:
 
-````php
+```php
 /modules/file_manager/assets/
 ```
 With no parameters will return:
 
-````php
+```php
 /assets/somefile
 ```
 Which correspond with the generic Assets directory.
