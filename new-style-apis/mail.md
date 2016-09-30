@@ -13,6 +13,7 @@ The new **Mailing API** provides a clean, simple API over the popular [SwiftMail
 ## Basic Usage
 
 The `Mailer::send` method may be used to send an e-mail message:
+
 ```php
     Mailer::send('Emails/Welcome', $data, function($message)
     {
@@ -24,14 +25,17 @@ The first argument passed to the `send` method is the name of the view that shou
 > **Note:** A `$message` variable is always passed to e-mail views, and allows the inline embedding of attachments. So, it is best to avoid passing a `message` variable in your view payload.
 
 You may also specify a plain text view to use in addition to an HTML view:
+
 ```php
     Mailer::send(array('html.view', 'text.view'), $data, $callback);
 ```
 Or, you may specify only one type of view using the `html` or `text` keys:
+
 ```php
     Mailer::send(array('text' => 'view'), $data, $callback);
 ```
 You may specify other options on the e-mail message such as any carbon copies or attachments as well:
+
 ```php
     Mailer::send('Emails/Welcome', $data, function($message)
     {
@@ -43,6 +47,7 @@ You may specify other options on the e-mail message such as any carbon copies or
     });
 ```
 When attaching files to a message, you may also specify a MIME type and / or a display name:
+
 ```php
     $message->attach($pathToFile, array('as' => $display, 'mime' => $mime));
 ```

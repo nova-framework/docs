@@ -2,7 +2,7 @@
 - [Old Input](#old-input)
 - [Files](#files)
 
-**Please note that both Input and [[Request]] do NOT sanitize your data, it is up to you to do that.**
+**Please note that both Input and Request do NOT sanitise your data, it is up to you to do that.**
 
 ## Basic Input
 

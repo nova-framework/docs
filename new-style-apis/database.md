@@ -19,7 +19,7 @@ Then new API is structured on three levels.
 
 First, one of the levels, being a Database Connection, built on top of PDO, which is available both via getting an instance:
 
-````php
+```php
 use Database\Connection;
 
 $db = Connnection::getInstance();
@@ -31,7 +31,7 @@ $data = $db->select("SELECT * FROM {$prefix}users");
 
 and via a Facade which permit commands like:
 
-````php
+```php
 use DB;
 
 $prefix = DB::getTablePrefix();
@@ -43,9 +43,9 @@ $data = DB::select("SELECT * FROM {$prefix}users");
 
 Connect to a different database by passing the connection name to connection() the connections are setup in **app/Config/Database.php**
 
-````php
+```php
 DB::connection('mysql')->table('users')->get();
-````
+```
 
 Commands for **insert/update/delete** are available.
 
@@ -53,7 +53,7 @@ To note that the **Database\Connection** fetches the data into objects or an arr
 
 The second level is represented by a very simple but powerful **QueryBuilder**, which permits commands like:
 
-````php
+```php
 use DB;
 
 $users = DB::table('users')->get();
@@ -63,7 +63,7 @@ $users = DB::table('users')->where('role', '=', 'admin')->get();
 
 The third level is represented by a simple, yet powerful, Model, which uses the Database\Connection, instead of 
 
-````php
+```php
 Helpers\Database.
 
 namespace App\Models;
@@ -82,20 +82,22 @@ class Users extends Model
     }
 }
 ```
-To note the two protected variables, which specify the Table name and Primary Key, which are mandatory to be configured, especially the Table name, the second one defaulting to 'id'.
+
+To note the two protected variables, which specify the table name and Primary Key, which are mandatory to be configured, especially the Table name, the second one defaulting to 'id'.
 
 A **Database\Model** is similar as usage with the **Core\Model**, but have the ability to transparently use the QueryBuilder methods, then permitting command like this:
 
-````php
+```php
 use App\Models\Users;
 
 $model = new Users();
 
 $users = $model->where('role', '=', 'admin')->get();
 ```
+
 Also, the **Database\Model** offer associated **QueryBuilder** instances, as following:
 
-````php
+```php
 use App\Models\Users;
 
 $model = new Users();
@@ -108,7 +110,7 @@ $users = $query->where('role', '=', 'admin')->get();
 ## Selects
 
 #### Retrieving All Rows From A Table
-````php
+```php
 $users = DB::table('users')->get();
 
 foreach ($users as $user)
@@ -118,28 +120,29 @@ foreach ($users as $user)
 ```
 
 #### Retrieving A Single Row From A Table
-````php
+```php
 $user = DB::table('users')->where('name', 'John')->first();
 
 var_dump($user->name);
 ```
 
 #### Retrieving A Single Column From A Row
-````php
+```php
 $name = DB::table('users')->where('name', 'John')->pluck('name');
 ```
 
 #### Retrieving A List Of Column Values
-````php
+```php
 $roles = DB::table('roles')->lists('title');
 ```
 This method will return an array of role titles. You may also specify a custom key column for the returned array:
-````php
+
+```php
 $roles = DB::table('roles')->lists('title', 'name');
 ```
 
 #### Specifying A Select Clause
-````php
+```php
 $users = DB::table('users')->select('name', 'email')->get();
 
 $users = DB::table('users')->distinct()->get();
@@ -148,12 +151,12 @@ $users = DB::table('users')->select('name as user_name')->get();
 ```
 
 #### Using Where Operators
-````php
+```php
 $users = DB::table('users')->where('votes', '>', 100)->get();
 ```
 
 #### Or Statements
-````php
+```php
 $users = DB::table('users')
     ->where('votes', '>', 100)
     ->orWhere('name', 'John')
@@ -161,19 +164,19 @@ $users = DB::table('users')
 ```
 
 #### Using Where Between
-````php
+```php
 $users = DB::table('users')
     ->whereBetween('votes', array(1, 100))->get();
 ```
 
 #### Using Where Not Between
-````php
+```php
 $users = DB::table('users')
     ->whereNotBetween('votes', array(1, 100))->get();
 ```
 
 #### Using Where In With An Array
-````php
+```php
 $users = DB::table('users')
     ->whereIn('id', array(1, 2, 3))->get();
 
@@ -182,13 +185,13 @@ $users = DB::table('users')
 ```
 
 #### Using Where Null To Find Records With Unset Values
-````php
+```php
 $users = DB::table('users')
     ->whereNull('updated_at')->get();
 ```
 
 #### Order By, Group By, And Having
-````php
+```php
 $users = DB::table('users')
     ->orderBy('name', 'desc')
     ->groupBy('count')
@@ -197,7 +200,7 @@ $users = DB::table('users')
 ```
 
 #### Offset & Limit
-````php
+```php
 $users = DB::table('users')->skip(10)->take(5)->get();
 ```
 
@@ -206,7 +209,7 @@ $users = DB::table('users')->skip(10)->take(5)->get();
 The query builder may also be used to write join statements. Take a look at the following examples:
 
 #### Basic Join Statement
-````php
+```php
 DB::table('users')
     ->join('contacts', 'users.id', '=', 'contacts.user_id')
     ->join('orders', 'users.id', '=', 'orders.user_id')
@@ -215,7 +218,7 @@ DB::table('users')
 ```
 
 #### Left Join Statement
-````php
+```php
 DB::table('users')
     ->leftJoin('posts', 'users.id', '=', 'posts.user_id')
     ->get();
@@ -226,7 +229,7 @@ DB::table('users')
 The query builder also provides a variety of aggregate methods, such as `count`, `max`, `min`, `avg`, and `sum`.
 
 #### Using Aggregate Methods
-````php
+```php
 $users = DB::table('users')->count();
 
 $price = DB::table('orders')->max('price');
@@ -243,7 +246,7 @@ $total = DB::table('users')->sum('votes');
 Sometimes you may need to use a raw expression in a query. These expressions will be injected into the query as strings, so be careful not to create any SQL injection points! To create a raw expression, you may use the `DB::raw` method:
 
 #### Using A Raw Expression
-````php
+```php
 $users = DB::table('users')
     ->select(DB::raw('count(*) as user_count, status'))
     ->where('status', '<>', 1)
@@ -254,7 +257,7 @@ $users = DB::table('users')
 ## Inserts
 
 ### Inserting Records Into A Table
-````php
+```php
 DB::table('users')->insert(
     array('email' => 'john@example.com', 'votes' => 0)
 );
@@ -262,7 +265,8 @@ DB::table('users')->insert(
 
 #### Inserting Records Into A Table With An Auto-Incrementing ID
 If the table has an auto-incrementing id, use `insertGetId` to insert a record and retrieve the id:
-````php
+
+```php
 $id = DB::table('users')->insertGetId(
     array('email' => 'john@example.com', 'votes' => 0)
 );
@@ -270,7 +274,7 @@ $id = DB::table('users')->insertGetId(
 **Note:** When using PostgreSQL the `insertGetId` method expects the auto-incrementing column to be named "id".
 
 #### Inserting Multiple Records Into A Table
-````php
+```php
 DB::table('users')->insert(array(
     array('email' => 'daniel@example.com', 'votes' => 0),
     array('email' => 'taylor@example.com', 'votes' => 0),
@@ -280,14 +284,14 @@ DB::table('users')->insert(array(
 ## Updates
 
 #### Updating Records In A Table
-````php
+```php
 DB::table('users')
     ->where('id', 1)
     ->update(array('votes' => 1));
 ```
 
 #### Incrementing or decrementing a value of a column
-````php
+```php
 DB::table('users')->increment('votes');
 
 DB::table('users')->increment('votes', 5);
@@ -297,31 +301,33 @@ DB::table('users')->decrement('votes');
 DB::table('users')->decrement('votes', 5);
 ```
 You may also specify additional columns to update:
-````php
+
+```php
 DB::table('users')->increment('votes', 1, array('name' => 'John'));
 ```
 
 ## Deletes
 
 #### Deleting Records In A Table
-````php
+```php
 DB::table('users')->where('votes', '<', 100)->delete();
 ```
 
 #### Deleting All Records From A Table
-````php
+```php
 DB::table('users')->delete();
 ```
 
 #### Truncating A Table
-````php
+```php
 DB::table('users')->truncate();
 ```
 
 ## Unions
 
 The query builder also provides a quick way to "union" two queries together:
-````php
+
+```php
 $first = DB::table('users')->whereNull('first_name');
 
 $users = DB::table('users')->whereNull('last_name')->union($first)->get();

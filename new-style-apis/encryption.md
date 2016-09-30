@@ -5,7 +5,7 @@
 
 ## Configuration
 
-Before using Nova's encryptor, you should set the `ENCRYPT_KEY` option of your app/Config.php configuration file to a 32 character, random string. If this value is not properly set, all values encrypted by Nova will be insecure.
+Before using Nova's encryptor, you should set the `ENCRYPT_KEY` option of your **app/Config/App.php** configuration file to a 32 character, random string. If this value is not properly set, all values encrypted by Nova will be insecure.
 
 For an easy way to set an encryption key, navigate to your project directory and use `php nova make:key` in your console/terminal.
 

@@ -6,21 +6,21 @@
 
 ## Introduction
 
-All the classes of the **Auth** system live in the namespace **Auth** and is implemented as a reference structure for User Authentication in the **\App\** namespace.
+All the classes of the **Auth** system live in the namespace **Auth** and is implemented as a reference structure for user authentication in the **App** namespace.
 
 To note that additional Route Filters are also added to support this reference implementation, and the proper configuration of a valid `ENCRYPT_KEY` is required.
 
-Being a Users Management, a Database is required and in **scripts/nova_users.sql** you will find the associated MySQL dump for a users table.
+Being users management, a database is required and in **scripts/nova_users.sql** you will find the associated MySQL dump for a users table.
 
-The **App\Modules\Users** also implements a small private area for the authenticated User. The private area is a simple Dashboard and a Profile page, where the users have the ability to change their password.
+The **App\Modules\Users** also implements a small private area for the authenticated user. The private area is a simple dashboard and a profile page, where the users have the ability to change their password.
 
-> **Important:** Nova's Authentication uses the new [[Database API]] and not the [[Helpers\Database]]. If you choose to use the Nova Authentication, you would need to use the new Database API in the whole application and to not touch the Helpers\Database instances.
+> **Important:** Nova's authentication uses the new Database API and not the Helpers\Database. If you choose to use the Nova authentication, you would need to use the new database API in the whole application and to not touch the helpers\database instances.
 
 ## Configuration
 
 Nova aims to make implementing authentication very simple. In fact, almost everything is configured for you out of the box. The authentication configuration file is located at **app/Config/Auth.php**, which contains several well documented options for tweaking the behaviour of the authentication facilities.
 
-By default, Nova includes a User model in your **app/Models** directory which may be used with the default `extended` authentication driver, which uses `Database\ORM`.
+By default, Nova includes a u¡ser model in your **app/Models** directory which may be used with the default `extended` authentication driver, which uses `Database\ORM`.
 
 If your application is not using `ORM`, you may use the `database` authentication driver which uses the Nova query builder.
 
