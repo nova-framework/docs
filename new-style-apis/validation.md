@@ -494,7 +494,7 @@ Let's assume our web application is for game collectors. If a game collector reg
     });
 ```
 The first argument passed to the `sometimes` method is the name of the field we are conditionally validating. The second argument is the rules we want to add. If the `Closure` passed as the third argument returns `true`, the rules will be added. This method makes it a breeze to build complex conditional validations. You may even add conditional validations for several fields at once:
-
+¡
 ```php
     $v->sometimes(array('reason', 'cost'), 'required', function($input)
     {

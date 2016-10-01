@@ -57,10 +57,10 @@ Route::post('blogsave', 'App\Controllers\Blog@savePost');
 ```
 
 ## Groups
-Routes can be placed in a group, which allows all routes within the group to inherit the group name.
+Routes can be placed in a group, which allows all routes within the group to inherit the group name. The first param is an array of options at the least is requires a prefix. The second param is a closure where sub routes are placed:
 
 ```php
-Route::group('blog', function() {
+Route::group(['prefix' => 'blog'], function() {
     Route::get('index', 'App\Controllers\Blog@Index');
     Route::get('add', 'App\Controllers\Demo@Add');
 });
@@ -175,7 +175,7 @@ Occasionally, you may need to specify a route parameter, but make the presence o
 Route::get('request/{param1}/{param2?}', 'App\Controllers\Demos@request');
 ```
 
-You may also use Regular Expression Route Constraints, the below constraint will only allow numerical values for the id, using regex.
+You may also ¡use Regular Expression Route Constraints, the below constraint will only allow numerical values for the id, using regex.
 
 ```php
 Route::get('request/{id}', 'App\Controllers\Demos@request')->where('id', '[0-9]+');
