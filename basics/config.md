@@ -423,9 +423,7 @@ Set namespace for modules
 'namespace' => 'App\Modules\\',
 ```
 
-```
 To activate modules place the module name in this array.
-
 
 ```php
 'modules' => array(
