@@ -1,6 +1,6 @@
 This improved **Response** API, able to simplify the Framework's Response management. Practically, it is now possible to do in a Controller Method:
 
-````php
+```php
 // Create a Response instance with string content
 return Response::make(json_encode($user));
 

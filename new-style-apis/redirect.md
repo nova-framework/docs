@@ -1,13 +1,14 @@
 To use this Class, add the following to the top of the file.
 
-````php
+```php
 use Redirect;
 ```
 
 **Redirect::to($path, $status = 302, $headers = array(), $secure = null)**
 
 Creates a new redirect response to the given path.
-````php
+
+```php
 // Create a Redirect Response to a location within the application
 return Redirect::to('user/profile');
 
@@ -20,42 +21,48 @@ return Redirect::to('profile')->with('message', 'Welcome Back!');
 
 **Redirect::home($status = 302)**
 
-Creates a new redirect response to the "home" route.
-````php
+Creates a new redirect response to the "home" route.\
+
+```php
 return Redirect::home();
 ```
 
 **Redirect::back($status = 302, $headers = array())**
 
 Create a new redirect response to the previous location.
-````php
+
+```php
 return Redirect::back(302);
 ```
 
 **Redirect::refresh($status = 302, $headers = array())**
 
 Create a new redirect response to the current URI.
-````php
+
+```php
 return Redirect::refresh(302);
 ```
 
 **Redirect::guest($path, $status = 302, $headers = array(), $secure = null)**
 
 Create a new redirect response, while putting the current URL in the session.
-````php
+
+```php
 return Redirect::guest('user/profile');
 ```
 
 **Redirect::away($path, $status = 302, $headers = array())**
 
 Create a new redirect response to an external URL (no validation).
-````php
+
+```php
 return Redirect::away('http://www.google.com');
 ```
 
 **Redirect::secure($path, $status = 302, $headers = array())**
 
 Create a new redirect response to the given HTTPS path.
-````php
+
+```php
 return Redirect::secure('user/profile');
 ```

@@ -1,13 +1,15 @@
 The Request class provides many methods for examining the HTTP request for your application and extends the `Symfony\Component\HttpFoundation\Request` class.
 
-**Please note that both [[Input]] and Request do NOT sanitize your data, it is up to you to do that.**
+**Please note that both Input and Request do NOT sanitise your data, it is up to you to do that.**
 
 #### Retrieving The Request URI
+
 ```php
 $uri = Request::path();
 ```
 
 #### Retrieving The Request Method
+
 ```php
 $method = Request::method();
 
@@ -18,6 +20,7 @@ if (Request::isMethod('post'))
 ```
 
 #### Determine If The Request Path Matches A Pattern
+
 ```php
 if (Request::is('admin/*'))
 {
@@ -80,6 +83,7 @@ if (Request::wantsJson())
 #### Checking The Requested Response Format
 
 The `Request::format` method will return the requested response format based on the HTTP Accept header:
+
 ```php
 if (Request::format() == 'json')
 {

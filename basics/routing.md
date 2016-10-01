@@ -78,13 +78,13 @@ Router::any('blog/add', 'App\Controllers\Blog@add');
 The **Router::group()** can also accept an array as the first parameter and permit commands like:
 ```php
 Router::group(['prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'], function() {
-    Route::match('get',            'users',             'Users@index');
-    Route::match('get',            'users/create',      'Users@create');
-    Route::match('post',           'users',             'Users@store');
-    Route::match('get',            'users/(:any)',      'Users@show');
-    Route::match('get',            'users/(:any)/edit', 'Users@edit');
-    Route::match(['put', 'patch'], 'users/(:any)',      'Users@update');
-    Route::match('delete',         'users/(:any)',      'Users@destroy');
+    Route::match('get',               'users',                  'Users@index');
+    Route::match('get',               'users/create',       'Users@create');
+    Route::match('post',             'users',                  'Users@store');
+    Route::match('get',               'users/(:any)',        'Users@show');
+    Route::match('get',               'users/(:any)/edit', 'Users@edit');
+    Route::match(['put', 'patch'], 'users/(:any)',        'Users@update');
+    Route::match('delete',          'users/(:any)',        'Users@destroy');
 });
 ```
 Where the prefix **admin** will turn the route **users/create** into **admin/users/create** and the namespace **App\Controllers\Admin** will prepend onto **Users@create**, turning into **App\Controllers\Admin\Users@create**
@@ -154,7 +154,7 @@ class Users extends Controller
 
 The index methods will respond to the root URI handled by the Controller, which, in this case, is users.
 
-If your controller action contains multiple words, you may access the action using hyphan - syntax in the URI. For example, the following controller action on our **App\Controllers\Users** would respond to the users/admin-profile URI:
+If your controller action contains multiple words, you may access the action using hyphen - syntax in the URI. For example, the following controller action on our **App\Controllers\Users** would respond to the users/admin-profile URI:
 
 ```php
 public function getAdminProfile()
@@ -192,6 +192,14 @@ Route::get('request/{id}/{name}', 'App\Controller\Demos@request')
 ```
 
 > **Please Note:** the `where()` method is not available on Unnamed Parameters.
+
+To use a wildcard route add a slug route passing to a catchall method adding a where slug to the end to send all requests to this route. 
+
+> **Please Note** this route should come last, any routes following this route will not be executed.
+
+```php
+Route::any('{slug}', 'App\Controllers\Demo@catchAll')->where('slug', '(.*)');
+```
 
 If you wanted to set a default value to a named parameter, you may also use the `defaults()` method:
 

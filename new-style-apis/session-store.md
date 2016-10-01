@@ -7,7 +7,7 @@
 
 Since HTTP driven applications are stateless, sessions provide a way to store information about the user across requests. Nova ships with a variety of session back-ends available for use through a clean, unified API.
 
-The session configuration is stored in `app/Config/Session.php`. Be sure to review the well documented options available to you in this file. By default, Nova is configured to use the file session driver, which will work well for the majority of applications.
+The session configuration is stored in **app/Config/Session.php**. Be sure to review the well documented options available to you in this file. By default, Nova is configured to use the file session driver, which will work well for the majority of applications.
 
 #### Reserved Keys
 
@@ -73,6 +73,7 @@ Session::regenerate();
 ## Flash Data
 
 Sometimes you may wish to store items in the session only for the next request. You may do so using the `Session::flash` method:
+
 ```php
 Session::flash('key', 'value');
 ```

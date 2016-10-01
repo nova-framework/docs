@@ -55,6 +55,7 @@ Multiple rules may be delimited using either a "pipe" character, or as separate 
     );
 ```
 Once a `Validator` instance has been created, the `fails` (or `passes`) method may be used to perform the validation.
+
 ```php
     if ($validator->fails())
     {
@@ -63,10 +64,12 @@ Once a `Validator` instance has been created, the `fails` (or `passes`) method m
 ```
 If validation has failed, you may retrieve the error messages from the validator.
 
-    $messages = $validator->messages();
+```php
+$messages = $validator->messages();
 ```
 You may also access an array of the failed validation rules, without messages. To do so, use the `failed` method:
 
+```php
     $failed = $validator->failed();
 ```
 #### Validating Files
@@ -79,10 +82,12 @@ The `Validator` class provides several rules for validating files, such as `size
 After calling the `messages` method on a `Validator` instance, you will receive a `MessageBag` instance, which has a variety of convenient methods for working with error messages.
 
 #### Retrieving The First Error Message For A Field
+
 ```php
     echo $messages->first('email');
 ```
 #### Retrieving All Error Messages For A Field
+
 ```php
     foreach ($messages->get('email') as $message)
     {
@@ -90,6 +95,7 @@ After calling the `messages` method on a `Validator` instance, you will receive 
     }
 ```
 #### Retrieving All Error Messages For All Fields
+
 ```php
     foreach ($messages->all() as $message)
     {
@@ -97,6 +103,7 @@ After calling the `messages` method on a `Validator` instance, you will receive 
     }
 ```
 #### Determining If Messages Exist For A Field
+
 ```php
     if ($messages->has('email'))
     {
@@ -104,12 +111,14 @@ After calling the `messages` method on a `Validator` instance, you will receive 
     }
 ```
 #### Retrieving An Error Message With A Format
+
 ```php
     echo $messages->first('email', '<p>:message</p>');
 ```
 > **Note:** By default, messages are formatted using Bootstrap compatible syntax.
 
 #### Retrieving All Error Messages With A Format
+
 ```php
     foreach ($messages->all('<li>:message</li>') as $message)
     {
@@ -120,6 +129,7 @@ After calling the `messages` method on a `Validator` instance, you will receive 
 ## Error Messages & Views
 
 Once you have performed validation, you will need an easy way to get the error messages back to your views. This is conveniently handled by Nova. Consider the following routes as an example:
+
 ```php
     Route::get('register', function()
     {
@@ -142,17 +152,19 @@ Note that when validation fails, we pass the `Validator` instance to the Redirec
 
 However, notice that we do not have to explicitly bind the error messages to the view in our GET route. This is because Nova will always check for errors in the session data, and automatically bind them to the view if they are available. **So, it is important to note that an `$errors` variable will always be available in all of your views, on every request**, allowing you to conveniently assume the `$errors` variable is always defined and can be safely used. The `$errors` variable will be an instance of `MessageBag`.
 
-So, after redirection, you may utilize the automatically bound `$errors` variable in your view:
+So, after redirection, you may utilise the automatically bound `$errors` variable in your view:
 ```php
     <?php echo $errors->first('email'); ?>
 ```
 ### Named Error Bags
 
 If you have multiple forms on a single page, you may wish to name the `MessageBag` of errors. This will allow you to retrieve the error messages for a specific form. Simply pass a name as the second argument to `withErrors`:
+
 ```php
     return Redirect::to('register')->withErrors($validator, 'login');
 ```
 You may then access the named `MessageBag` instance from the `$errors` variable:
+
 ```php
     <?php echo $errors->login->first('email'); ?>
 ```
@@ -340,7 +352,9 @@ The file under validation must have a MIME type corresponding to one of the list
 
 #### Basic Usage Of MIME Rule
 
-    'photo' => 'mimes:jpeg,bmp,png'
+```php
+'photo' => 'mimes:jpeg,bmp,png'
+```
 
 <a name="rule-min"></a>
 #### min:_value_
@@ -420,20 +434,24 @@ The field under validation must be a valid timezone identifier according to the 
 The field under validation must be unique on a given database table. If the `column` option is not specified, the field name will be used.
 
 #### Basic Usage Of Unique Rule
+
 ```php
     'email' => 'unique:users'
 ```
 #### Specifying A Custom Column Name
+
 ```php
     'email' => 'unique:users,email_address'
 ```
 #### Forcing A Unique Rule To Ignore A Given ID
+
 ```php
     'email' => 'unique:users,email_address,10'
 ```
 #### Adding Additional Where Clauses
 
 You may also specify more conditions that will be added as "where" clauses to the query:
+
 ```php
     'email' => 'unique:users,email_address,NULL,id,account_id,1'
 ```
@@ -450,6 +468,7 @@ The field under validation must be formatted as an URL.
 ## Conditionally Adding Rules
 
 In some situations, you may wish to run validation checks against a field **only** if that field is present in the input array. To quickly accomplish this, add the `sometimes` rule to your rule list:
+
 ```php
     $v = Validator::make($data, array(
         'email' => 'sometimes|required|email',
@@ -467,6 +486,7 @@ Sometimes you may wish to require a given field only if another field has a grea
     ));
 ```
 Let's assume our web application is for game collectors. If a game collector registers with our application and they own more than 100 games, we want them to explain why they own so many games. For example, perhaps they run a game re-sell shop, or maybe they just enjoy collecting. To conditionally add this requirement, we can use the `sometimes` method on the `Validator` instance.
+
 ```php
     $v->sometimes('reason', 'required|max:500', function($input)
     {
@@ -474,6 +494,7 @@ Let's assume our web application is for game collectors. If a game collector reg
     });
 ```
 The first argument passed to the `sometimes` method is the name of the field we are conditionally validating. The second argument is the rules we want to add. If the `Closure` passed as the third argument returns `true`, the rules will be added. This method makes it a breeze to build complex conditional validations. You may even add conditional validations for several fields at once:
+
 ```php
     $v->sometimes(array('reason', 'cost'), 'required', function($input)
     {
