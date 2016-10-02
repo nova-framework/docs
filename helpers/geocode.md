@@ -1,12 +1,12 @@
 This function connects to google maps and retrieves the lat/lon of the address provided
 
-````php
+```php
 GeoCode::getLngLat(['Hessle Road', 'Hull'])
 ```
 
 Returns:
 
-````php
+```php
 Array
 (
     [lon] => -0.348839

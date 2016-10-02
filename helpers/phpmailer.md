@@ -2,19 +2,19 @@ PHPMailer is a third party class for sending emails, Full docs are available at 
 
 Make an alias:
 
-````php
+```php
 use Helpers\Mail;
 ```
 
 To use PHPMailer create a new instance of it:
 
-````php
+```php
 $mail = new Mail();
 ```
 
 Once an instance has been created all the properties are available to you, a typical example:
 
-````php
+```php
 $mail = new Mail();
 $mail->setFrom('noreply@domain.com');
 $mail->addAddress('user@domain.com');
@@ -25,15 +25,15 @@ $mail->send();
 
 To add attachments:
 
-````php
+```php
 $mail->addAttachment('relative/path/to/image');
-````
+```
 
 To use gmail use at your own risk!! You must enable an option in order to allow to send email through gmail goto https://myaccount.google.com/security#connectedapps login and enable Allow access to less secure apps.
 
 The class has the ability to send via SMTP in order to do so edit Helpers/PhpMailer/Mail.php and enter your SMTP settings you can also set a default email from address so you don't have to supply it each time:
 
-````php
+```php
 public $From     = 'noreply@domain.com';
 public $FromName = SITETITLE;
 public $Host     = 'smtp.gmail.com';

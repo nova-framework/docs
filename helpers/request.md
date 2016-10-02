@@ -1,91 +1,92 @@
 The **Helpers\Request** class is used for detecting the type of request and retrieving the request.
 
 ### getMethod()
-````php
+
+```php
 Request::getMethod()
 ```
 Returns either GET or POST, depending if a $_GET request or a $_POST request has happened.
 
 ### getIpAddress()
-````php
+```php
 Request::getIpAddress()
 ```
 Returns the client's IP Address.
 
 ### post()
-````php
+```php
 Request::post($key)
 ```
 Returns the post key.
 
 ### get()
-````php
+```php
 Request::get($key)
 ```
 Returns the get key.
 
 ### server()
-````php
+```php
 Request::server($key)
 ```
 Returns the server key.
 
 ### headers()
-````php
+```php
 Request::headers($key)
 ```
 Returns the HTTP Request Headers key.
 
 ### files()
-````php
+```php
 Request::files($key)
 ```
 Returns the file key.
 
 ### put()
-````php
+```php
 Request::put($key)
 ```
 Returns the put key.
 
 ### isAjax()
-````php
+```php
 Request::isAjax()
 ```
 Detect if the request is a ajax request.
 
 ### isPost()
-````php
+```php
 Request::isPost()
 ```
 Detect if the request is a post request.
 
 ### isGet()
-````php
+```php
 Request::isGet()
 ```
 Detect if the request is a get request.
 
 ### isHead()
-````php
+```php
 Request::isHead()
 ```
 Detect if the request is a head request.
 
 ### isPut()
-````php
+```php
 Request::isPut()
 ```
 Detect if the request is a put request.
 
 ### isDelete()
-````php
+```php
 Request::isDelete()
 ```
 Detect if the request is a delete request.
 
 ### isOptions()
-````php
+```php
 Request::isOptions()
 ```
 Detect if the request is an options request.

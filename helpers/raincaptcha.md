@@ -8,13 +8,13 @@ RainCaptcha is a CAPTCHA class that does not require any image processing extens
 
 Create an alias:
 
-````php
+```php
 use Helpers\RainCaptcha;
 ```
 
 To use the class create a new instance, this can then be used to generate a captcha image using **->getImage()**.
 
-````php
+```php
 $rainCaptcha = new RainCaptcha();
 
 <img id="captchaImage" src="<?php echo $rainCaptcha->getImage(); ?>" />
@@ -28,7 +28,7 @@ $rainCaptcha = new RainCaptcha();
 
 To check if a user's input matches the captcha
 
-````php
+```php
 $rainCaptcha = new RainCaptcha();
 
 if (!$rainCaptcha->checkAnswer($_POST['captcha'])) {

@@ -4,7 +4,7 @@ To get the extension of a file call the getExtension method and pass the file na
 
 Create an alias
 
-````php
+```php
 use Helpers\Document;
 
 Document::getExtension('customfile.zip'); //returns zip
@@ -12,13 +12,13 @@ Document::getExtension('customfile.zip'); //returns zip
 
 To remove the extension of a file call the removeExtension method and pass the file name, the extension will then be removed and returned.
 
-````php
+```php
 Document::removeExtension('customfile.zip'); //returns customfile
 ```
 
 To find out the size in a human readable way call the formatBytes method:
 
-````php
+```php
 Document::formatBytes('4562'); //returns 4.46 KB
 ```
 
@@ -26,15 +26,15 @@ Using the getFileType a filename is passed and returned is the name of the group
 
 These are the current groups:
 
-````php
-    $images = array('jpg', 'gif', 'png', 'bmp');
-    $docs = array('txt', 'rtf', 'doc', 'docx', 'pdf');
-    $apps = array('zip', 'rar', 'exe', 'html');
-    $video = array('mpg', 'wmv', 'avi', 'mp4');
-    $audio = array('wav', 'mp3');
-    $db = array('sql', 'csv', 'xls','xlsx');
+```php
+$images = array('jpg', 'gif', 'png', 'bmp');
+$docs = array('txt', 'rtf', 'doc', 'docx', 'pdf');
+$apps = array('zip', 'rar', 'exe', 'html');
+$video = array('mpg', 'wmv', 'avi', 'mp4');
+$audio = array('wav', 'mp3');
+$db = array('sql', 'csv', 'xls','xlsx');
 ```
 
-````php
+```php
 Document::getFileType('customfile.zip'); //returns Application
 ```

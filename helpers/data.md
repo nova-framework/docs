@@ -1,29 +1,36 @@
 Data helper contains a bunch of useful methods for looking at and altering your data.
-````php
+
+```php
 Data::pr($data)
 ```
 Returns the data inside a print_r wrapped around pre tags.
-````php
+
+```php
 Data::vd($data)
 ```
 Returns var_dump
-````php
+
+```php
 Data::sl($data)
 ```
 Returns the length of the string
-````php
+
+```php
 Data::stu($data)
 ```
 Convert to uppercase
-````php
+
+```php
 Data::stl($data)
 ```
 Convert to lower
-````php
+
+```php
 Data::ucw($data)
 ```
 Returns the string with the first letter of each word in uppercase using ucwords
-````php
+
+```php
 Data::createKey($length = 32)
 ```
 Create a key and set the length.

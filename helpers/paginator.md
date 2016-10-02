@@ -10,7 +10,7 @@ Lastly a method called page_links will return the page links.
 
 The model that uses the limit will need to expect the limit:
 
-````php
+```php
 public function getContacts($limit)
 {
     return $this->db->select('
@@ -23,7 +23,7 @@ public function getContacts($limit)
 
 **Pagination concept**
 
-````php
+```php
 //create a new object
 $pages = new Paginator('1', 'p');
 
@@ -39,7 +39,7 @@ $data['pageLinks'] = $pages->pageLinks();
 
 **Usage example:**
 
-````php
+```php
 $pages = new Paginator('50','p');
 $data['records'] = $this->model->getContacts($pages->getLimit());
 $pages->setTotal($data['records'][0]->total);  

@@ -8,7 +8,7 @@ Table builder allows you to add rows, aliases, set primary key, default values, 
 
 To start working with Table Builder, you need to create instance class of \Helpers\TableBuilder. Preferably for performance, create your instance class in any model and pass it \Helpers\Database instance to avoid duplicating database connection.
 
-````php
+```php
     private $tableBuilder;
 
     // Declaration of constructor in new model
@@ -29,7 +29,7 @@ After initiating new table builder instance you can work with it.
 
 Now we can create simple table, let's create table for comments:
 
-````php
+```php
 // Another model's instance
 public function createCommentTable () 
 {
@@ -43,7 +43,7 @@ public function createCommentTable ()
 
 This example of code would create table named comments with id, author and message fields. If you would try to run this code again you'll see error. To prevent that let's set IF NOT EXISTS to true:
 
-````php
+```php
 // First argument is field name and second is type or alia
 $this->tableBuilder->addField('author', 'VARCHAR(40)');
 $this->tableBuilder->addField('message', 'TEXT');
@@ -60,7 +60,7 @@ Table builder supports aliases instead of using SQL types in addField method. Th
 
 You can add globally your own alias, for example, in config:
 
-````php
+```php
 // configs above
 
 TableBuilder::setAlias('name', 'VARCHAR(40)');
@@ -74,7 +74,7 @@ TableBuilder::setAlias('name', 'VARCHAR(40)');
 
 Method addField is used to create field in query:
 
-````php
+```php
 $tableBuilder->addField($field_name, $type_or_alias, $is_null, $options);
 ```
 
@@ -82,7 +82,7 @@ field_name is your name for the field, type_or_alias is defined type in MySQL or
 
 Example of setting field date with CURRENT_TIMESTAMP:
 
-````php
+```php
 $tableBuilder->addField('date', 'TIMESTAMP', FALSE, \Helpers\TableBuilder::CURRENT_TIMESTAMP);
 ```
 
@@ -90,7 +90,7 @@ $tableBuilder->addField('date', 'TIMESTAMP', FALSE, \Helpers\TableBuilder::CURRE
 
 Method setDefault is used to determine default value of field in query. There's the example:
 
-````php
+```php
 $tableBuilder->setDefault('group_id', 0);
 ```
 
@@ -102,7 +102,7 @@ This example is illustrating how to set default user group_id in table.
 
 Method create is used to finish the query and create table in the database:
 
-````php
+```php
 $table->create();
 ```
 

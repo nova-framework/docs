@@ -1,6 +1,6 @@
 The Date helper is used for calculations with dates.
 
-````php
+```php
 Date::difference($from, $to, $type = null)
 ```
 
@@ -8,7 +8,7 @@ Date::difference($from, $to, $type = null)
 
 * **$type** - default to null will return an array containing:
 
-````php
+```php
 [y] => 0
 [m] => 2
 [d] => 26
@@ -28,19 +28,19 @@ Date::difference($from, $to, $type = null)
 
 to return a set item like the number of days pass d as the third parameter.
 
-````php
+```php
 Date::businessDays($startDate, $endDate, $weekendDays = false)
 ```
 
 Get the number of days between 2 dates, set $weekendDays to true to get the number of weekends.
 
-````php
+```php
 Date::businessDates($startDate, $endDate, $nonWork = 6)
 ```
 
 Get an array of dates between 2 dates (not including weekends). $nonWork day of week(int) where weekend begins - 5 = fri -> sun, 6 = sat -> sun, 7 = sunday
 
-````php
+```php
 Date::daysInMonth($month = 0, $year = '')
 ```
 
