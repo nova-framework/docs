@@ -14,9 +14,13 @@ An improved Database API was recently added, which includes a **QueryBuilder** a
 
 To note that this new Database API doesn't replace any of the existing classes, the actual **Core\Model** and **Helpers\Database** remain untouched. The end-user can choose which Database API is used in their application, with the only condition to not use both of them simultaneously, which will duplicate the Database connections.
 
+From here on in only the new Database\Model will be covered, this is the recommended approach. 
+
+> **Please Note** in version 4 all legacy classes will be removed including the Database helper.
+
 ## Basic Usage
 
-Via a Facade which permit commands like:
+Using a Facade allows to leverage the database connection for instance a simple example:
 
 ```php
 use DB;
@@ -89,9 +93,8 @@ $users = $query->where('role', '=', 'admin')->get();
 ```php
 $users = DB::table('users')->get();
 
-foreach ($users as $user)
-{
-    var_dump($user->name);
+foreach ($users as $user)  {
+    pr($user->name);
 }
 ```
 
@@ -99,7 +102,7 @@ foreach ($users as $user)
 ```php
 $user = DB::table('users')->where('name', 'John')->first();
 
-var_dump($user->name);
+pr($user->name);
 ```
 
 #### Retrieving A Single Column From A Row
@@ -119,14 +122,25 @@ $roles = DB::table('roles')->lists('title', 'name');
 
 #### Specifying A Select Clause
 ```php
+//select name and email
 $users = DB::table('users')->select('name', 'email')->get();
 
+//select unique records
 $users = DB::table('users')->distinct()->get();
 
+//select name as an alias of user_name
 $users = DB::table('users')->select('name as user_name')->get();
 ```
 
 #### Using Where Operators
+Where are in the form of 3 params (what, operator, value). By default the operate used is = that can be omitted and use only 2 params such as
+
+Where id = 2
+```php
+where('id', 2)
+```
+
+To select all votes with more then 100:
 ```php
 $users = DB::table('users')->where('votes', '>', 100)->get();
 ```
@@ -176,6 +190,7 @@ $users = DB::table('users')
 ```
 
 #### Offset & Limit
+Skip the first 10 records and return the next 5.
 ```php
 $users = DB::table('users')->skip(10)->take(5)->get();
 ```
@@ -220,6 +235,12 @@ $total = DB::table('users')->sum('votes');
 ## Raw Expressions
 
 Sometimes you may need to use a raw expression in a query. These expressions will be injected into the query as strings, so be careful not to create any SQL injection points! To create a raw expression, you may use the `DB::raw` method:
+
+### Run a raw query
+
+```php
+$data = DB::select("SELECT * FROM nova_users");
+```
 
 #### Using A Raw Expression
 ```php
