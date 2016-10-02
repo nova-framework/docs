@@ -15,27 +15,13 @@ An improved Database API was recently added, which includes a **QueryBuilder** a
 To note that this new Database API doesn't replace any of the existing classes, the actual **Core\Model** and **Helpers\Database** remain untouched. The end-user can choose which Database API is used in their application, with the only condition to not use both of them simultaneously, which will duplicate the Database connections.
 
 ## Basic Usage
-Then new API is structured on three levels.
 
-First, one of the levels, being a Database Connection, built on top of PDO, which is available both via getting an instance:
-
-```php
-use Database\Connection;
-
-$db = Connnection::getInstance();
-
-$prefix = $db->getTablePrefix();
-
-$data = $db->select("SELECT * FROM {$prefix}users");
-```
-
-and via a Facade which permit commands like:
+Via a Facade which permit commands like:
 
 ```php
 use DB;
 
 $prefix = DB::getTablePrefix();
-
 $data = DB::select("SELECT * FROM {$prefix}users");
 ```
 
@@ -49,9 +35,7 @@ DB::connection('mysql')->table('users')->get();
 
 Commands for **insert/update/delete** are available.
 
-To note that the **Database\Connection** fetches the data into objects or an array of objects.
-
-The second level is represented by a very simple but powerful **QueryBuilder**, which permits commands like:
+QueryBuilder has support for commands like:
 
 ```php
 use DB;
@@ -61,11 +45,9 @@ $users = DB::table('users')->get();
 $users = DB::table('users')->where('role', '=', 'admin')->get();
 ```
 
-The third level is represented by a simple, yet powerful, Model, which uses the Database\Connection, instead of 
+Alternatively a Model can be used, which uses the Database\Model, instead of Helpers\Database.
 
 ```php
-Helpers\Database.
-
 namespace App\Models;
 
 use Database\Model;
@@ -73,13 +55,7 @@ use Database\Model;
 class Users extends Model
 {
     protected $table = 'users';
-
     protected $primaryKey = 'id';
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 }
 ```
 
