@@ -12,17 +12,38 @@ The new **Mailing API** provides a clean, simple API over the popular [SwiftMail
 <a name="mailer-basic-usage"></a>
 ## Basic Usage
 
-The `Mailer::send` method may be used to send an e-mail message:
+Create an use statement:
 
 ```php
-Mailer::send('Emails/Welcome', $data, function($message)
+use Mailer;
+```
+
+Then the `Mailer::send` method may be used to send an e-mail message:
+
+```php
+Mailer::send('Emails/Welcome', ['title' => 'demo', 'content' => 'ok'], function($message)
 {
-   $message->to('foo@example.com', 'John Smith')->subject('Welcome!');
+   $message->to('to@example', 'John Smith')->subject('Welcome!');
 });
 ```
-The first argument passed to the `send` method is the name of the view that should be used as the e-mail body. The second is the `$data` that should be passed to the view, and the third is a Closure allowing you to specify various options on the e-mail message.
+The first argument passed to the `send` method is the name of the view that should be used as the e-mail body. The second is the `$data` that should be passed to the view, and the third is a closure allowing you to specify various options on the e-mail message.
 
 > **Note:** A `$message` variable is always passed to e-mail views, and allows the inline embedding of attachments. So, it is best to avoid passing a `message` variable in your view payload.
+
+### Message options
+
+* from - ('email address', 'custom name')
+* to - ('email address', 'custom name')
+* cc - ('email address', 'custom name')
+* bcc - ('email address', 'custom name')
+* reply to - ('email address', 'custom name')
+* sender - ('email address', 'custom name')
+* return path - set the return path of the message
+* subject - set the subject of the email
+* priority - set the priority level
+* attach - path to the attachment, options ie: array('as' => 'display', 'mime' => 'mime')
+* embed - a file path in the message and get the CID.
+* embedData - Embed in-memory data in the message and get the CID. ($data, $name, $contentType = null)
 
 You may also specify a plain text view to use in addition to an HTML view:
 
@@ -40,9 +61,7 @@ You may specify other options on the e-mail message such as any carbon copies or
 Mailer::send('Emails/Welcome', $data, function($message)
 {
     $message->from('us@example.com', 'Nova Framework');
-
     $message->to('foo@example.com')->cc('bar@example.com');
-
     $message->attach($pathToFile);
 });
 ```

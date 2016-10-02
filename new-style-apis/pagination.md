@@ -1,11 +1,12 @@
 There are several ways to paginate items. The simplest is by using the paginate method on the query builder.
 
 ### Paginating Database Results
+//pass the number of records to limit per page, the default is 25
 ```php
 $users = DB::table('users')->paginate(15);
 ```
 
-by default the url parameter used to track pages is called offset so use something else such as page add this line to app/Boot/Global.php:
+By default the url parameter used to track pages is called offset so use something else such as page add this line to app/Boot/Global.php:
 
 ````php
 Paginator::setPageName('page');
@@ -21,7 +22,10 @@ The argument passed to the `paginate` method is the number of items you wish to 
     }
     ?>
 </div>
+```
+Display the page links
 
+```php
 <?=$users->links();?>
 ```
 
@@ -34,7 +38,7 @@ You may also access additional pagination information via the following methods:
 * getFrom
 * getTo
 * count
-* isEmpty()
+* isEmpty
 
 ### "Simple Pagination"
 
@@ -44,7 +48,7 @@ If you are only showing "Next" and "Previous" links in your pagination view, you
 $someUsers = DB::table('users')->where('votes', '>', 100)->simplePaginate(15);
 ```
 
-### Creating A Paginator Manually
+### Creating A Paginator instance Manually
 
 Sometimes you may wish to create a pagination instance manually, passing it an array of items. You may do so using the `Paginator::make` method:
 
@@ -66,7 +70,7 @@ http://example.com/something?page=2&sort=votes
 If you wish to append a "hash fragment" to the paginator's URLs, you may use the fragment method:
 
 ```php
-$users->fragment('foo')->links();
+$users->fragment('aomething')->links();
 ```
 This method call will generate URLs that look something like this:
 
@@ -123,8 +127,7 @@ class Users extends Controller
 
     public function __construct()
     {
-        parent::__construct();
-
+        parent::__construct();¡
         $this->model = new \App\Models\Users();
     }
 

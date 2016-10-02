@@ -1,4 +1,12 @@
-This improved **Response** API, able to simplify the Framework's Response management. Practically, it is now possible to do in a Controller Method:
+This improved **Response** API, able to simplify the Framework's Response management. It is now possible to do in a Controller Method:
+
+after doing a use:
+
+```php
+use Response;
+```
+
+Commands:
 
 ```php
 // Create a Response instance with string content
@@ -18,7 +26,5 @@ return Response::error('404', array('error' => 'Not Found'));
 ```
 
 It is also possible to use those Response instances in the Route Filters, in the case when the given Response will be sent to the browser and the further process will be skipped.
-
-To note that Response class was moved to Core considering as being now a vital part of Framework, for it to properly work, and is not an (optional) Helper.
 
 The new Response API permits further simplifications on Routing.

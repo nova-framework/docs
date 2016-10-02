@@ -4,7 +4,7 @@ To use this Class, add the following to the top of the file.
 use Redirect;
 ```
 
-**Redirect::to($path, $status = 302, $headers = array(), $secure = null)**
+**Redirect::to(¡$path, $status = 302, $headers = array(), $secure = null)**
 
 Creates a new redirect response to the given path.
 
