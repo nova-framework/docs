@@ -72,6 +72,17 @@ $message->attach($pathToFile, array('as' => $display, 'mime' => $mime));
 ```
 > **Note:** The message instance passed to a `Mail::send` Closure extends the SwiftMailer message class, allowing you to call any method on that class to build your e-mail messages.
 
+To pass a variable through to the callback ie to send a $email = 'someone@domain.com' a 'use()' can be used:
+
+```php
+Mailer::send('Emails/Welcome', ['title' => 'demo', 'content' => 'ok'], function($message) use($email)
+{
+   $message->to($email, 'John Smith')->subject('Welcome!');
+});
+```
+
+> **Note** to pass multiple variables add them to an array and pass that.
+
 <a name="embedding-inline-attachments"></a>
 ## Embedding Inline Attachments
 
