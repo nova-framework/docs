@@ -111,7 +111,7 @@ Embedding inline images into your e-mails is typically cumbersome; however, Nova
 <a name="mail-and-local-development"></a>
 ## Mail & Local Development
 
-When developing an application that sends e-mail, it's usually desirable to disable the sending of messages from your local or development environment. To do so, you may either call the `Mailer::pretend` method, or set the pretend option in the `app/Config/Mail.php` configuration file to `true`. When the mailer is in `pretend` mode, messages will be written to your application's log files instead of being sent to the recipient.
+When developing an application that sends e-mail, it's usually desirable to disable the sending of messages from your local or development environment. To do so, you may either call the `Mailer::pretend` method, or set the pretend option in the `app/Config/Mail.php` configuration file to `true`. When the mailer is in `pretend` mode, messages will be written to  **app/Storage/Logs/error.log** files instead of being sent to the recipient.
 
 #### Enabling Pretend Mail Mode
 ```php
