@@ -264,11 +264,35 @@ $user->touch();
 <a name="soft-deleting"></a>
 ## Soft Deleting
 
-When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, specify the `softDelete` property on the model:
+When soft deleting a model, it is not actually removed from your database. Instead, a `deleted_at` timestamp is set on the record. To enable soft deletes for a model, include the SoftDeletingTrait:
 
 ```php
-protected $softDelete = true;
+use Database\ORM\SoftDeletingTrait;
 ```
+Then inside the model add:
+
+```php
+use SoftDeletingTrait;
+```
+
+Full class example:
+
+```php
+<?php
+namespace App\Modules\UsefulLinks\Models;
+
+use Database\ORM\Model;
+use Database\ORM\SoftDeletingTrait;
+use DB;
+
+class UsefulLink extends Model
+{
+	use SoftDeletingTrait;
+     
+     //rest of code
+}
+```
+
 Now, when you call the `delete` method on the model, the `deleted_at` column will be set to the current timestamp. When querying a model that uses soft deletes, the "deleted" models will not be included in query results.
 
 #### Forcing Soft Deleted Models Into Results
