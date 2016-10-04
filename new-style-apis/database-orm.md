@@ -283,7 +283,6 @@ namespace App\Modules\UsefulLinks\Models;
 
 use Database\ORM\Model;
 use Database\ORM\SoftDeletingTrait;
-use DB;
 
 class UsefulLink extends Model
 {
