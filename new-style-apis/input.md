@@ -76,6 +76,12 @@ return Redirect::to('form')->withInput(Input::except('password'));
 Input::old('username');
 ```
 
+### Retrieving Old Data from array using dot notation
+
+```php
+Input::old('items.1');
+```
+
 ## Files
 
 #### Retrieving An Uploaded File
