@@ -58,3 +58,5 @@ php nova make:key
 ```
 
 This will generate a 32 character alpha-numeric key.
+
+1
