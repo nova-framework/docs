@@ -118,7 +118,7 @@ public function index()
 
 public function after($data)
 {
-    View::renderTemplate('default', $data);
+    return $this->getView()->withData($data);
 }
 ```
 
