@@ -37,14 +37,6 @@ define('CONFIG_STORE', 'files'); // Supported: "files", "database"
 
 **Routing Configuration**
 
-Router config has been moved to config.php.
-
-By default parameters are named
-
-```php
-'parameters' => 'named',       // Supported: "named" and "unnamed".
-```
-
 Assets routing:
 
 
