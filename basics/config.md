@@ -42,30 +42,30 @@ Assets routing:
 
 ```php
 'assets' => array(
-        // The driver type used for serving the Asset Files.
-        'driver' => 'default',     // Supported: "default" and "custom".
+    // The driver type used for serving the Asset Files.
+    'driver' => 'default',     // Supported: "default" and "custom".
 
-        // The name of Assets Dispatcher used as 'custom' driver.
-        'dispatcher' => 'Shared\Routing\Assets\CustomDispatcher',
+    // The name of Assets Dispatcher used as 'custom' driver.
+    'dispatcher' => 'Shared\Routing\Assets\CustomDispatcher',
 
-        // The served file Cache Time.
-        'cacheTime' => 10800,
+    // The served file Cache Time.
+    'cacheTime' => 10800,
 
-        // The Valid Vendor Paths - be aware that improper configuration of the Valid Vendor Paths could introduce
-        // severe security issues, try to limit the access to a precise area, where aren't present "unsafe" files.
-        //
-        // '/vendor/almasaeed2010/adminlte/dist/css/AdminLTE.min.css'
-        //          ^____________________^____^____________________This are the parts of path which are validated.
-        //
-        'paths' => array(
-            'almasaeed2010/adminlte' => array(
-                'bootstrap',
-                'dist',
-                'plugins'
-            ),
-            'twbs/bootstrap' => 'dist',
+    // The Valid Vendor Paths - be aware that improper configuration of the Valid Vendor Paths could introduce
+    // severe security issues, try to limit the access to a precise area, where aren't present "unsafe" files.
+    //
+    // '/vendor/almasaeed2010/adminlte/dist/css/AdminLTE.min.css'
+    //          ^____________________^____^____________________This are the parts of path which are validated.
+    //
+    'paths' => array(
+        'almasaeed2010/adminlte' => array(
+            'bootstrap',
+            'dist',
+            'plugins'
         ),
-    )
+        'twbs/bootstrap' => 'dist',
+    ),
+)
 ```
 
 
@@ -167,74 +167,74 @@ Set alias paths - these allow shorter access to the methods without having to ca
 
 ```php
 'aliases' => array(
-    // The Helpers.
-        'Mail'          => 'Helpers\Mailer',
-        'Assets'        => 'Helpers\Assets',
-        'Csrf'          => 'Helpers\Csrf',
-        'Date'          => 'Helpers\Date',
-        'Document'      => 'Helpers\Document',
-        'Encrypter'     => 'Helpers\Encrypter',
-        'FastCache'     => 'Helpers\FastCache',
-        'Form'          => 'Helpers\Form',
-        'Ftp'           => 'Helpers\Ftp',
-        'GeoCode'       => 'Helpers\GeoCode',
-        'Hooks'         => 'Helpers\Hooks',
-        'Inflector'     => 'Helpers\Inflector',
-        'Number'        => 'Helpers\Number',
-        'RainCaptcha'   => 'Helpers\RainCaptcha',
-        'ReservedWords' => 'Helpers\ReservedWords',
-        'SimpleCurl'    => 'Helpers\SimpleCurl',
-        'TableBuilder'  => 'Helpers\TableBuilder',
-        'Tags'          => 'Helpers\Tags',
+// The Helpers.
+    'Mail'          => 'Helpers\Mailer',
+    'Assets'        => 'Helpers\Assets',
+    'Csrf'          => 'Helpers\Csrf',
+    'Date'          => 'Helpers\Date',
+    'Document'      => 'Helpers\Document',
+    'Encrypter'     => 'Helpers\Encrypter',
+    'FastCache'     => 'Helpers\FastCache',
+    'Form'          => 'Helpers\Form',
+    'Ftp'           => 'Helpers\Ftp',
+    'GeoCode'       => 'Helpers\GeoCode',
+    'Hooks'         => 'Helpers\Hooks',
+    'Inflector'     => 'Helpers\Inflector',
+    'Number'        => 'Helpers\Number',
+    'RainCaptcha'   => 'Helpers\RainCaptcha',
+    'ReservedWords' => 'Helpers\ReservedWords',
+    'SimpleCurl'    => 'Helpers\SimpleCurl',
+    'TableBuilder'  => 'Helpers\TableBuilder',
+    'Tags'          => 'Helpers\Tags',
 
-        // The Forensics Console.
-        'Console'       => 'Forensics\Console',
+    // The Forensics Console.
+    'Console'       => 'Forensics\Console',
 
-        // The Support Classes.
-        'Arr'           => 'Support\Arr',
-        'Str'           => 'Support\Str',
+    // The Support Classes.
+    'Arr'           => 'Support\Arr',
+    'Str'           => 'Support\Str',
 
-        // The Support Facades.
-        'App'           => 'Support\Facades\App',
-        'Auth'          => 'Support\Facades\Auth',
-        'Cache'         => 'Support\Facades\Cache',
-        'Config'        => 'Support\Facades\Config',
-        'Cookie'        => 'Support\Facades\Cookie',
-        'Crypt'         => 'Support\Facades\Crypt',
-        'DB'            => 'Support\Facades\DB',
-        'Event'         => 'Support\Facades\Event',
-        'File'          => 'Support\Facades\File',
-        'Hash'          => 'Support\Facades\Hash',
-        'Input'         => 'Support\Facades\Input',
-        'Language'      => 'Support\Facades\Language',
-        'Mailer'        => 'Support\Facades\Mailer',
-        'Paginator'     => 'Support\Facades\Paginator',
-        'Password'      => 'Support\Facades\Password',
-        'Redirect'      => 'Support\Facades\Redirect',
-        'Redis'         => 'Support\Facades\Redis',
-        'Request'       => 'Support\Facades\Request',
-        'Response'      => 'Support\Facades\Response',
-        'Route'         => 'Support\Facades\Route',
-        'Router'        => 'Support\Facades\Router',
-        'Session'       => 'Support\Facades\Session',
-        'Validator'     => 'Support\Facades\Validator',
-        'Log'           => 'Support\Facades\Log',
-        'URL'           => 'Support\Facades\URL',
-        'Form'          => 'Support\Facades\Form',
-        'HTML'          => 'Support\Facades\HTML',
-        'Template'      => 'Support\Facades\Template',
-        'View'          => 'Support\Facades\View',
-        'Cron'          => 'Support\Facades\Cron',
-        'Module'        => 'Support\Facades\Module',
+    // The Support Facades.
+    'App'           => 'Support\Facades\App',
+    'Auth'          => 'Support\Facades\Auth',
+    'Cache'         => 'Support\Facades\Cache',
+    'Config'        => 'Support\Facades\Config',
+    'Cookie'        => 'Support\Facades\Cookie',
+    'Crypt'         => 'Support\Facades\Crypt',
+    'DB'            => 'Support\Facades\DB',
+    'Event'         => 'Support\Facades\Event',
+    'File'          => 'Support\Facades\File',
+    'Hash'          => 'Support\Facades\Hash',
+    'Input'         => 'Support\Facades\Input',
+    'Language'      => 'Support\Facades\Language',
+    'Mailer'        => 'Support\Facades\Mailer',
+    'Paginator'     => 'Support\Facades\Paginator',
+    'Password'      => 'Support\Facades\Password',
+    'Redirect'      => 'Support\Facades\Redirect',
+    'Redis'         => 'Support\Facades\Redis',
+    'Request'       => 'Support\Facades\Request',
+    'Response'      => 'Support\Facades\Response',
+    'Route'         => 'Support\Facades\Route',
+    'Router'        => 'Support\Facades\Router',
+    'Session'       => 'Support\Facades\Session',
+    'Validator'     => 'Support\Facades\Validator',
+    'Log'           => 'Support\Facades\Log',
+    'URL'           => 'Support\Facades\URL',
+    'Form'          => 'Support\Facades\Form',
+    'HTML'          => 'Support\Facades\HTML',
+    'Template'      => 'Support\Facades\Template',
+    'View'          => 'Support\Facades\View',
+    'Cron'          => 'Support\Facades\Cron',
+    'Module'        => 'Support\Facades\Module',
 
-        // The Compatibility Support.
-        'Errors'        => 'Shared\Legacy\Error',
+    // The Compatibility Support.
+    'Errors'        => 'Shared\Legacy\Error',
 
-        //
-        'Core\Controller' => 'Shared\Legacy\Controller',
-        'Core\Model'      => 'Shared\Legacy\Model',
-        'Core\Template'   => 'Support\Facades\Template',
-        'Core\View'       => 'Support\Facades\View',
+    //
+    'Core\Controller' => 'Shared\Legacy\Controller',
+    'Core\Model'      => 'Shared\Legacy\Model',
+    'Core\Template'   => 'Support\Facades\Template',
+    'Core\View'       => 'Support\Facades\View',
 );
 ```
 
