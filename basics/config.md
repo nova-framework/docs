@@ -10,7 +10,7 @@
 - [reCAPTCHA](#recaptcha)
 - [Session](#session)
 
-#Config
+<a name='config'>#Config</a>
 
 Settings for the framework setup in **app/Config.php** and **app/Config/**
 
