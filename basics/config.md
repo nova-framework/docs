@@ -7,7 +7,7 @@
 - [Mail](#mail)
 - [Modules](#modules)
 - [Profiler](#profiler)
-- [reCAPTCHA](#recaptcha)
+- [ReCAPTCHA](#recaptcha)
 - [Session](#session)
 
 <a name='config'></a>
@@ -356,6 +356,7 @@ Set connections, additional databases can be used by adding additional arrays:
 ),
 ```
 
+<a name='languages'></a>
 #Languages
 
 Array of all supported languages
@@ -379,6 +380,7 @@ Config::set('languages', array(
 ));
 ```
 
+<a name='mail'></a>
 #Mail
 
 Mail settings:
@@ -403,6 +405,7 @@ Config::set('mail', array(
 ));
 ```
 
+<a name='modules'></a>
 #Modules
 
 Set path to where modules are located
@@ -444,6 +447,7 @@ To activate modules place the module name in this array.
     ),
 ```
 
+<a name='profiler'></a>
 # Profiler
 
 You can set these options to true, if you need help with debugging, by default database number of sql queries is logged in the profiler **seen at the bottom of the default theme**
@@ -458,6 +462,7 @@ Config::set('profiler', array(
 ));
 ```
 
+<a name='reCAPTCHA'></a>
 # reCAPTCHA
 
 ```php
@@ -471,6 +476,7 @@ Config::set('recaptcha', array(
 ));
 ```
 
+<a name='session'></a>
 #Session
 
 Set session options
