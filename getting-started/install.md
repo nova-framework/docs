@@ -5,7 +5,6 @@
 - [Nginx configuration](#nginx-configuration)
 - [IIS with URL Rewrite module installed](#iis-with-url-rewrite-module-installed)
 
-
 #### Recommended
 
 This framework was designed and is strongly recommended to be installed above the document root directory, with it pointing to the public folder.
@@ -29,8 +28,7 @@ For a video example see [http://novacasts.com/courses/nova-fundamentals/install]
 
 Installing Nova-Framework 3 on xampp virtual server for Windows.
 
-- Download composer installer for windows and run Composer-Setup.exe as you well need this to install the Nova Framework
-package.
+- Download composer installer for windows and run Composer-Setup.exe as you well need this to install the Nova Framework package.
 - Open terminal and run composer and if it installed correctly you will see a list of composer commands displayed.
 
 You can install Nova two different ways.
@@ -39,14 +37,14 @@ The first way is under the C:/XAMPP/htdocs directory. (see further down on page 
 
 - Now in terminal go to the C:/XAMPP/htdocs directory.
 - Run the below command replacing foldername with the name of your project.
+
 ```php
 composer create-project nova-framework/framework foldername -s dev
+```
 
 - Now go to the folder with the name of your project created under the htdocs folder.
-
 - Now lets create your virtualhost:
-
-  - Open httpd-vhosts.conf file C:/XAMPP/apache/conf/extra/httpd-vhosts.conf Add following code.
+- Open httpd-vhosts.conf file C:/XAMPP/apache/conf/extra/httpd-vhosts.conf Add following code.
 
 ```php
 <Directory C:/XAMPP/htdocs>
@@ -70,17 +68,14 @@ composer create-project nova-framework/framework foldername -s dev
 
 change projectname to you're projects name.
 
-  - Save the file and exit out of Xampp.
-
-  - Open hosts file in C:\windows\system32\drivers\etc you need Administrator privilege to edit the file.
-
-  - Add 127.0.0.1    projectname.dev at the end of the file, Save and close the file.  Again changing projectname to your's.
+- Save the file and exit out of Xampp.
+- Open hosts file in C:\windows\system32\drivers\etc you need Administrator privilege to edit the file.
+- Add 127.0.0.1    projectname.dev at the end of the file, Save and close the file.  Again changing projectname to your's.
 
 ```php
 127.0.0.1       localhost
 127.0.0.1       projectname.dev
 ```
-
 
 - Restart Xampp and start apache server.
 - Go to your project folder and open app/Config/App.php and change to your URL.
@@ -92,27 +87,21 @@ change projectname to you're projects name.
     'url' => 'http://www.nova.dev/',
 ```
 
-
 - now open browser and go to your url.  You should see the Nova startup screen.
 
 **CONGRATS**, you're up and running.
 
-
-
 The second way is to create a new folder like C:/vhosts.
 
 - Now in terminal go to the C:/vhosts directory.
-
 - Run the below command replacing foldername with the name of your project.
+
 ```php
 composer create-project nova-framework/framework foldername -s dev
 ```
 
-
-- - Now go to the folder with the name of your project created under the vhosts folder.
-
+- Now go to the folder with the name of your project created under the vhosts folder.
 - Now lets create your virtualhost:
-
 - Open httpd-vhosts.conf file C:/XAMPP/apache/conf/extra/httpd-vhosts.conf Add following code.
 
 ```php
@@ -138,9 +127,7 @@ composer create-project nova-framework/framework foldername -s dev
 change projectname to you're projects name.
 
 - Save the file and exit out of Xampp.
-
 - Open hosts file in C:\windows\system32\drivers\etc you need Administrator privilege to edit the file.
-
 - Add 127.0.0.1 projectname.dev at the end of the file, Save and close the file.  Again changing projectname to your's.
 
 ```php
@@ -149,7 +136,6 @@ change projectname to you're projects name.
 ```
 
 - Restart Xampp and start apache server.
-
 - Go to your project folder and open app/Config/App.php and change to your URL.
   
 ```php
@@ -161,9 +147,7 @@ change projectname to you're projects name.
 
  - now open browser and go to your url.  You should see the Nova startup screen.
 
-** CONGRATS**, you're up and running.
-
-
+**CONGRATS**, you're up and running.
 
 ---
 
