@@ -69,7 +69,7 @@ Assets routing:
 )
 ```
 
-
+<a name='app'></a>
 #App
 
 When the Environment is set to development, in ** public/index.php** the debug mode will be set to true.
