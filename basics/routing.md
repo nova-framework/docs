@@ -9,8 +9,8 @@ To define a route, call the static name **Route::** followed by either a post or
 Route::get('', 'closure or controller');
 ```
 
-To respond to both get and post requests use a match
-¡
+To respond to both get and post requests use a match.
+
 ```php
  Route::match('['get', 'post']', 'users\index'  'App\Controllers\Users@index');
 ```
@@ -213,3 +213,14 @@ Route::get('request/{id}/{name?}', 'App\Controllers\Demos@request')
         'name' => NULL
     ]);
 ```
+
+### Route Pattern
+
+As from **3.73.0** instead of doing:
+
+```php
+->where('slug', '(.*)’); 
+```
+
+On every Route definition which need that, you can setup a pattern with this parameter name a (regex) pattern, and it will be applied to any parameter with this name, aka {slug}.
+Logically, the patterns **should** be defined before the Routes definition.
