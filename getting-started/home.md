@@ -64,13 +64,15 @@ resource_url() accepts two params:
 
 ### Named Params
 
-by default routes use named params instead of (:any) use {paramname} the value in the route should match ie $paramname
+All params should use the format of {paramname} the value in the route should match the param ie $paramname
 
 ```php
 Route::get('user/{id}', function($id){
   echo $id;
 })
 ```
+
+>**Note**  from version 3.73.0 unnamed params have been removed.
 
 ### Optional Parameters
 New to 3 is allowing params to be optional.

@@ -10,6 +10,7 @@ Route::get('', 'closure or controller');
 ```
 
 To respond to both get and post requests use a match
+¡
 ```php
  Route::match('['get', 'post']', 'users\index'  'App\Controllers\Users@index');
 ```
@@ -76,6 +77,7 @@ Router::any('blog/add', 'App\Controllers\Blog@add');
 ### Group Prefixes and Namespaces
 
 The **Router::group()** can also accept an array as the first parameter and permit commands like:
+
 ```php
 Router::group(['prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'], function() {
     Route::match('get',               'users',                  'Users@index');
@@ -126,6 +128,7 @@ Route::resource('admin/articles', 'App\Controllers\Admin\Articles');
 An Implicit Controller allows you to easily define a single route to handle every action in a controller. 
 
 First, define the route using the Route::controller method:
+
 ```php
 Route::controller('users', 'App\Controllers\Users');
 ```
@@ -175,7 +178,7 @@ Occasionally, you may need to specify a route parameter, but make the presence o
 Route::get('request/{param1}/{param2?}', 'App\Controllers\Demos@request');
 ```
 
-You may also ¡use Regular Expression Route Constraints, the below constraint will only allow numerical values for the id, using regex.
+You may also use Regular Expression Route Constraints, the below constraint will only allow numerical values for the id, using regex.
 
 ```php
 Route::get('request/{id}', 'App\Controllers\Demos@request')->where('id', '[0-9]+');
@@ -191,7 +194,7 @@ Route::get('request/{id}/{name}', 'App\Controller\Demos@request')
     ]);
 ```
 
-> **Please Note:** the `where()` method is not available on Unnamed Parameters.
+> **Note:** the `where()` method is not available on Unnamed Parameters.
 
 To use a wildcard route add a slug route passing to a catchall method adding a where slug to the end to send all requests to this route. 
 
@@ -210,5 +213,3 @@ Route::get('request/{id}/{name?}', 'App\Controllers\Demos@request')
         'name' => NULL
     ]);
 ```
-
-**Please Note:** the `defaults()` method is not available on Unnamed Parameters.
