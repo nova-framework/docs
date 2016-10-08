@@ -239,6 +239,7 @@ Set alias paths - these allow shorter access to the methods without having to ca
 );
 ```
 
+<a name='auth'></a>
 #Auth
 
 Configuration options for use within the Auth system.
