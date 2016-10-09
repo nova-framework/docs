@@ -16,7 +16,7 @@ return View::make('Welcome/Welcome');
 To load a view from a module pass the module name as a third parameter.
 
 ```php
-return View::make('Posts/Post', ['posts', $posts], 'Modulename');
+return View::make('Posts/Post', ['posts' => $posts], 'Modulename');
 ```
 
 Another way and one that is **Recommended** is to call **return $this->getView()**
