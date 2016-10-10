@@ -1,14 +1,15 @@
 - [Introduction](#introduction)
-- [Basic Usage](#basic-usage)
+- [Basic Usage](#basicusage)
 - [Selects](#selects)
 - [Joins](#joins)
 - [Aggregates](#aggregates)
-- [Raw Expressions](#raw-expressions)
+- [Raw Expressions](#rawexpressions)
 - [Inserts](#inserts)
 - [Updates](#updates)
 - [Deletes](#deletes)
 - [Unions](#unions)
 
+<a name='introduction'></a>
 ## Introduction
 An improved Database API was recently added, which includes a **QueryBuilder** and a simple but powerful Model. Everything regarding this API is living within the namespace **'\Database\'** for isolation reasons.
 
@@ -18,6 +19,7 @@ From here on in only the new Database\Model will be covered, this is the recomme
 
 > **Please Note** in version 4 all legacy classes will be removed including the Database helper.
 
+<a name='basicusage'></a>
 ## Basic Usage
 
 Using a Facade allows to leverage the database connection for instance a simple example:
@@ -29,6 +31,7 @@ $prefix = DB::getTablePrefix();
 $data = DB::select("SELECT * FROM {$prefix}users");
 ```
 
+<a name='multipleconnections'></a>
 ## Multiple connections
 
 Connect to a different database by passing the connection name to connection() the connections are setup in **app/Config/Database.php**
@@ -87,6 +90,7 @@ $query = $model->newQuery();
 $users = $query->where('role', '=', 'admin')->get();
 ```
 
+<a name='selects'></a>
 ## Selects
 
 #### Retrieving All Rows From A Table
@@ -195,6 +199,7 @@ Skip the first 10 records and return the next 5.
 $users = DB::table('users')->skip(10)->take(5)->get();
 ```
 
+<a name='joins'></a>
 ## Joins
 
 The query builder may also be used to write join statements. Take a look at the following examples:
@@ -232,6 +237,7 @@ $price = DB::table('orders')->avg('price');
 $total = DB::table('users')->sum('votes');
 ```
 
+<a name='rawexpressions'></a>
 ## Raw Expressions
 
 Sometimes you may need to use a raw expression in a query. These expressions will be injected into the query as strings, so be careful not to create any SQL injection points! To create a raw expression, you may use the `DB::raw` method:
@@ -251,6 +257,7 @@ $users = DB::table('users')
     ->get();
 ```
 
+<a name='inserts'></a>
 ## Inserts
 
 ### Inserting Records Into A Table
@@ -278,6 +285,7 @@ DB::table('users')->insert(array(
 ));
 ```
 
+<a name='updates'></a>
 ## Updates
 
 #### Updating Records In A Table
@@ -303,6 +311,7 @@ You may also specify additional columns to update:
 DB::table('users')->increment('votes', 1, array('name' => 'John'));
 ```
 
+<a name='deletes'></a>
 ## Deletes
 
 #### Deleting Records In A Table
@@ -320,6 +329,7 @@ DB::table('users')->delete();
 DB::table('users')->truncate();
 ```
 
+<a name='unions'></a>
 ## Unions
 
 The query builder also provides a quick way to "union" two queries together:
