@@ -1,3 +1,5 @@
+#**From v3.73.2 this has been removed please use the Database API or the ORM instead**
+
 The database class is used to connect to a MySQL database using the connection details set in the app/Config.php.
 
 The constants (DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS) are used to connect to the database, the class extends PDO, it can pass the connection details to its parent construct.
