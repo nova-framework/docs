@@ -145,6 +145,7 @@ Service providers
     'Cache\CacheServiceProvider',
     'Routing\RoutingServiceProvider',
     'Cookie\CookieServiceProvider',
+    'Module\ModuleServiceProvider',
     'Database\DatabaseServiceProvider',
     'Encryption\EncryptionServiceProvider',
     'Filesystem\FilesystemServiceProvider',
@@ -152,9 +153,15 @@ Service providers
     'Log\LogServiceProvider',
     'Mail\MailServiceProvider',
     'Pagination\PaginationServiceProvider',
+    'Redis\RedisServiceProvider',
     'Auth\Reminders\ReminderServiceProvider',
     'Session\SessionServiceProvider',
+    'Language\LanguageServiceProvider',
     'Validation\ValidationServiceProvider',
+    'Html\HtmlServiceProvider',
+    'View\ViewServiceProvider',
+    'Template\TemplateServiceProvider',
+    'Cron\CronServiceProvider',
 )
 ```
 
@@ -168,18 +175,12 @@ Set alias paths - these allow shorter access to the methods without having to ca
 
 ```php
 'aliases' => array(
-// The Helpers.
-    'Mail'          => 'Helpers\Mailer',
+   // The Helpers.
     'Assets'        => 'Helpers\Assets',
-    'Csrf'          => 'Helpers\Csrf',
     'Date'          => 'Helpers\Date',
     'Document'      => 'Helpers\Document',
-    'Encrypter'     => 'Helpers\Encrypter',
-    'FastCache'     => 'Helpers\FastCache',
-    'Form'          => 'Helpers\Form',
     'Ftp'           => 'Helpers\Ftp',
     'GeoCode'       => 'Helpers\GeoCode',
-    'Hooks'         => 'Helpers\Hooks',
     'Inflector'     => 'Helpers\Inflector',
     'Number'        => 'Helpers\Number',
     'RainCaptcha'   => 'Helpers\RainCaptcha',
@@ -194,7 +195,7 @@ Set alias paths - these allow shorter access to the methods without having to ca
     // The Support Classes.
     'Arr'           => 'Support\Arr',
     'Str'           => 'Support\Str',
-
+    
     // The Support Facades.
     'App'           => 'Support\Facades\App',
     'Auth'          => 'Support\Facades\Auth',
@@ -216,7 +217,6 @@ Set alias paths - these allow shorter access to the methods without having to ca
     'Request'       => 'Support\Facades\Request',
     'Response'      => 'Support\Facades\Response',
     'Route'         => 'Support\Facades\Route',
-    'Router'        => 'Support\Facades\Router',
     'Session'       => 'Support\Facades\Session',
     'Validator'     => 'Support\Facades\Validator',
     'Log'           => 'Support\Facades\Log',
@@ -227,15 +227,6 @@ Set alias paths - these allow shorter access to the methods without having to ca
     'View'          => 'Support\Facades\View',
     'Cron'          => 'Support\Facades\Cron',
     'Module'        => 'Support\Facades\Module',
-
-    // The Compatibility Support.
-    'Errors'        => 'Shared\Legacy\Error',
-
-    //
-    'Core\Controller' => 'Shared\Legacy\Controller',
-    'Core\Model'      => 'Shared\Legacy\Model',
-    'Core\Template'   => 'Support\Facades\Template',
-    'Core\View'       => 'Support\Facades\View',
 );
 ```
 
