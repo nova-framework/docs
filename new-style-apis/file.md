@@ -32,10 +32,10 @@ Get the returned value of a file.
 File::requireOnce($file);
 ```
 
+Require the given file once.
+
 ```php
-put($path, $contents, $lock = false)
+File::put($path, $contents, $lock = false)
 ```
 
 Write the contents of a file.
-
-Require the given file once.
