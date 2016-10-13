@@ -1,3 +1,5 @@
+#**From v3.73.3 this has been removed**
+
 Break recordset into a series of pages.
 
 First create a new instance of the class pass in the number of items per page and the instance identifier, this is used for the GET parameter such as ?p=2
