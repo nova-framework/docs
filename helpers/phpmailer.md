@@ -1,3 +1,5 @@
+#**From v3.73.3 this has been removed**
+
 PHPMailer is a third party class for sending emails, Full docs are available at https://github.com/Synchro/PHPMailer
 
 Make an alias:
