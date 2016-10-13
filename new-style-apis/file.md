@@ -39,3 +39,22 @@ File::put($path, $contents, $lock = false)
 ```
 
 Write the contents of a file.
+
+
+```php
+File::append($path, $data);
+```
+
+Append data to a file.
+
+```php
+File::delete($paths);
+```
+
+Delete the file at a given path.
+
+```php
+File::move($path, $target);
+```
+
+Move a file to a new location.
