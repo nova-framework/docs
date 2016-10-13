@@ -7,6 +7,19 @@ To this end Nova does not come with lots of built in libraries / helpers or modu
 
 This has been tested with php 5.6 and php 7 please report any bugs.
 
+#**From v3.73.3 the following helpers have been removed**
+
+* PHPMailer
+* CSRF
+* Form
+* Hooks
+* Request
+* Pagantor
+* Password
+* Session
+* Url
+
+
 # Routing images / js / css files
 From within Templates your css, js and images must be in a Assets folder to be routed correctly. This applies to Modules as well, to have a css file from a Module the css file would be placed inside **app/Modules/ModuleName/Assets/css/file.css.** Additionally there is an Assets folder in the root of nova this is for storing resources outside of templates that can still be routed from above the document root.
 
