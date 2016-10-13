@@ -1,3 +1,5 @@
+#**From v3.73.3 this has been removed**
+
 The password class uses php 5 password_ functions.
 
 To create a hash of a password, call the make method and provide the password to be hashed, once done save the $hash.
