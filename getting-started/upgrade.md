@@ -39,7 +39,7 @@ public function __construct()
 Views like classes should have filenames starting with a capital letter for both the directory and the file, for instance, welcome/index.php becomes Welcome/Index.php.
 
 ```php
-View::render('Welcome/Index', $data);
+View::make('Welcome/Index', $data);
 ```
 
 ## Loading Images, CSS, js, and assets
