@@ -1,3 +1,5 @@
+# Upgrade
+
 This guide will point out the key points to be aware of when upgrading to version 3.
 
 All classes within the app directory have a new namespace of App, controllers and models/modules have the following namespaces for classes placed directly in those directories.
@@ -56,6 +58,7 @@ Assets::css([
 ```
 
 An example of loading an image from Default/Assets/images.
+
 ```php
 <img src='<?=template_path('images/nova.png', 'Default');?>'>
 ```
