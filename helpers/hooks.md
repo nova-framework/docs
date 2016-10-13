@@ -1,3 +1,5 @@
+#**From v3.73.3 this has been removed**
+
 ### Add modules with hooks
 
 The hooks helper allows modules to be created within the module folder. Hooks allow code to be injected into various parts of the framework as well as creating new routes for modules to use.
