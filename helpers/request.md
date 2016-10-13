@@ -1,3 +1,5 @@
+#**From v3.73.3 this has been removed**
+
 The **Helpers\Request** class is used for detecting the type of request and retrieving the request.
 
 ### getMethod()
