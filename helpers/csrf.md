@@ -1,3 +1,5 @@
+#**From v3.73.3 this has been removed**
+
 The CSRF helper is used to protect post request from cross site request forgeries. For more information on CSRF see https://www.owasp.org/index.php/Cross-Site_Request_Forgery_%28CSRF%29_Prevention_Cheat_Sheet
 
 To use place at the top of controller like:
