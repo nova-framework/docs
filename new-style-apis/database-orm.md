@@ -718,7 +718,7 @@ In addition to traditional polymorphic relations, you may also specify many-to-m
 Next, we're ready to setup the relationships on the model. The `Post` and `Video` model will both have a `morphToMany` relationship via a `tags` method:
 
 ```php
-    class Post extends Model 
+class Post extends Model 
 {
     public function tags()
     {
@@ -760,7 +760,7 @@ $posts = Post::has('comments', '>=', 3)->get();
 If you need even more power, you may use the `whereHas` and `orWhereHas` methods to put "where" conditions on your `has` queries:
 
 ```php
-    $posts = Post::whereHas('comments', function($q)
+$posts = Post::whereHas('comments', function($q)
 {
     $q->where('content', 'like', 'foo%');
 
@@ -802,7 +802,7 @@ echo $phone->user->email;
 Eager loading exists to alleviate the N + 1 query problem. For example, consider a `Book` model that is related to `Author`. The relationship is defined like so:
 
 ```php
-    class Book extends Model 
+class Book extends Model 
 {
     public function author()
     {
@@ -851,7 +851,7 @@ In the example above, the `author` relationship will be eager loaded, and the au
 Sometimes you may wish to eager load a relationship, but also specify a condition for the eager load. Here's an example:
 
 ```php
-   $users = User::with(array('posts' => function($query)
+$users = User::with(array('posts' => function($query)
 {
     $query->where('title', 'like', '%first%');
 
@@ -1090,7 +1090,7 @@ $roles = $roles->sortBy('created_at');
 
 Sometimes, you may wish to return a custom Collection object with your own added methods. You may specify this on your ORM model by overriding the `newCollection` method:
 
-``php
+```php
 class User extends Model 
 {
     public function newCollection(array $models = array())
@@ -1099,6 +1099,7 @@ class User extends Model
     }
 }
 ```
+
 <a name="accessors-and-mutators"></a>
 ## Accessors & Mutators
 
