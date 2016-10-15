@@ -80,13 +80,13 @@ The **Router::group()** can also accept an array as the first parameter and perm
 
 ```php
 Router::group(['prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'], function() {
-    Route::match('get',               'users',                  'Users@index');
-    Route::match('get',               'users/create',       'Users@create');
-    Route::match('post',             'users',                  'Users@store');
+    Route::match('get',               'users',               'Users@index');
+    Route::match('get',               'users/create',        'Users@create');
+    Route::match('post',              'users',               'Users@store');
     Route::match('get',               'users/(:any)',        'Users@show');
-    Route::match('get',               'users/(:any)/edit', 'Users@edit');
-    Route::match(['put', 'patch'], 'users/(:any)',        'Users@update');
-    Route::match('delete',          'users/(:any)',        'Users@destroy');
+    Route::match('get',               'users/(:any)/edit',   'Users@edit');
+    Route::match(['put', 'patch'],    'users/(:any)',        'Users@update');
+    Route::match('delete',            'users/(:any)',        'Users@destroy');
 });
 ```
 Where the prefix **admin** will turn the route **users/create** into **admin/users/create** and the namespace **App\Controllers\Admin** will prepend onto **Users@create**, turning into **App\Controllers\Admin\Users@create**
@@ -100,10 +100,10 @@ The **Router::resource()** method introduces the ability to write the group of r
 |GET|/photo|index|
 |GET|/photo/create|create|
 |POST|/photo|store|
-|GET|/photo/(:any)|show|
-|GET|/photo/(:any)/edit|edit|
-|PUT/PATCH|/photo/(:any)|update|
-|DELETE|/photo/(:any)|destroy|
+|GET|/photo/{id}|show|
+|GET|/photo/{id}/edit|edit|
+|PUT/PATCH|/photo/{id}|update|
+|DELETE|/photo/{id}|destroy|
 
 The previous code snippet can now be written as:
 
