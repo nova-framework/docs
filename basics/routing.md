@@ -157,7 +157,7 @@ class Users extends Controller
 
 The index methods will respond to the root URI handled by the Controller, which, in this case, is users.
 
-If your controller action contains multiple words, you may access the action using hyphen - syntax in the URI. For example, the following controller action on our **App\Controllers\Users** would respond to the users/admin-profile URI:
+If your controller action contains multiple words, you may access the action using hyphen - syntax in the URI. For example, the following controller method in **App\Controllers\Users** would respond to the users/admin-profile URI:
 
 ```php
 public function getAdminProfile()
