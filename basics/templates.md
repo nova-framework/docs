@@ -9,7 +9,7 @@ From within Templates your css, js and images must be in a Assets folder to be r
 
 Routing CSS:
 
->**Note** Template folder less then 4 charactors should be in capital letters ie **Scf** should be **SCF** or resources will not be found.
+>**Note** Template folder names less then 4 charactors should be in capital letters ie **Scf** should be **SCF** or resources will not be found. Folders such as Default are OK.
 
 CSS files can be loaded by using Assets::css() and passing in an array of css paths.
 site_url() is used to determine the website url. Place paths to the files relative to the root.
