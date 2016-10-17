@@ -1,5 +1,7 @@
 The assets helper is for loading CSS and JS files rather than writing out the full script/link tag for each and every item, instead, add them to an array pass to the assets and it output the link/script tags for you.
 
+>**Note** Template folder less then 4 charactors should be in capital letters ie **Scf** should be **SCF** or resources will not be found.
+
 Usage example for loading CSS files:
 
 ```php
