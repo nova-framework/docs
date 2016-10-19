@@ -7,6 +7,8 @@ To this end Nova does not come with lots of built in libraries / helpers or modu
 
 This has been tested with php 5.6 and php 7 please report any bugs.
 
+#**From v3.73.3 site_url() no longer returns a trailing slash**
+
 #**From v3.73.3 the following helpers have been removed**
 
 * PHPMailer
