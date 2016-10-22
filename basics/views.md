@@ -19,10 +19,10 @@ To load a view from a module pass the module name as a third parameter.
 return View::make('Posts/Post', ['posts' => $posts], 'Modulename');
 ```
 
-In cases when you only need to load a view from a module the second param and be omited like this:
+In cases when you only need to load a view from a module the second param should be an empty array like this:
 
 ```php
-return View::make('Post/Post', 'Blog');
+return View::make('Post/Post', [], 'Blog');
 ```
 
 Another way and one that is **Recommended** is to call **return $this->getView()**
