@@ -19,6 +19,12 @@ To load a view from a module pass the module name as a third parameter.
 return View::make('Posts/Post', ['posts' => $posts], 'Modulename');
 ```
 
+In cases when you only need to load a view from a module the second param and be omited like this:
+
+```php
+return View::make('Post/Post', 'Blog');
+```
+
 Another way and one that is **Recommended** is to call **return $this->getView()**
 This will automatically determine the path and view file to be loaded based on the controller and method used.
 
