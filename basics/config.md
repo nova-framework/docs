@@ -452,6 +452,21 @@ Config::set('profiler', array(
     'withDatabase' => false,
 ));
 ```
+When the debug setting is set in app/Config/App.php (on by default) the following metrics are shown on the default and AdminLTE theme:
+
+> Elapsed Time: 0.1120 sec | Memory Usage: 4.35MB | SQL: 0 queries | UMAX: 223
+
+**Elapsed Time**
+Total time executed in seconds
+
+**Memory Usage**
+Total memory in MB used
+
+**SQL**
+When withDatabase setting is true the total number of queries ran
+
+**UMAX**
+UMAX represents a estimation of the maximum number of pages served per second, you can use UMAX as a general speed evaluation on a reasonable server load. Bigger is the number given by UMAX, better is it.
 
 <a name='reCAPTCHA'></a>
 # reCAPTCHA
