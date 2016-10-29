@@ -7,7 +7,7 @@ To this end Nova does not come with lots of built in libraries / helpers or modu
 
 This has been tested with php 5.6 and php 7 please report any bugs.
 
-## From v3.74.0 changes: 
+## 3.74.0 changes: 
 
 All classes from the System directory now have a primary namespace of Nova. The major change is prefixing of System classes namespaces with Nova\\, then instead of:
 
@@ -49,11 +49,11 @@ Same way for going i.e. Error 400
 App::abort(400);
 ```
 
-## From v3.73.3 changes:
+## 3.73.3 changes:
 
 site_url() no longer returns a trailing slash
 
-## From v3.73.3 changes:
+## 3.73.3 changes:
 
 The following helpers have been removed
 
