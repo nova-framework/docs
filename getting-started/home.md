@@ -7,9 +7,55 @@ To this end Nova does not come with lots of built in libraries / helpers or modu
 
 This has been tested with php 5.6 and php 7 please report any bugs.
 
-#**From v3.73.3 site_url() no longer returns a trailing slash**
+## From v3.74.0 changes: 
 
-#**From v3.73.3 the following helpers have been removed**
+All classes from the System directory now have a primary namespace of Nova. The major change is prefixing of System classes namespaces with Nova\\, then instead of:
+
+```php
+use Database\ORM\Model;
+```
+
+You should use:
+
+```php
+use Nova\Database\ORM\Model;
+```
+
+Also added is **translatable error pages** this means all error pages such as 400, 404 contain text that can be translated.
+
+Added a new helper function **vendor_url()** and add the missing file app/Views/Error/500.php
+
+Its usage is for Layouts and is simple as:
+
+```php
+vendor_url('dist/css/AdminLTE.min.css', 'almasaeed2010/adminlte')
+```
+
+**Improve the HTTP Exceptions handling**
+
+Improved the HTTP Exceptions handling, simplifying and unifying the logic, making possible to expose the entire Error Pages generation to the end-user, them making possible their customizations as Template, Layout, etc.
+
+As a collateral consequence, the Response::error() was removed, not being useful anymore.
+
+As usage the App::abort():
+
+```php
+App::abort(404);
+```
+
+Same way for going i.e. Error 400
+
+```php
+App::abort(400);
+```
+
+## From v3.73.3 changes:
+
+site_url() no longer returns a trailing slash
+
+## From v3.73.3 changes:
+
+The following helpers have been removed
 
 * PHPMailer
 * CSRF
