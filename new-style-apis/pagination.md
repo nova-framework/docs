@@ -50,12 +50,6 @@ $someUsers = DB::table('users')->where('votes', '>', 100)->simplePaginate(15);
 
 ### Creating A Paginator instance Manually
 
-Import Paginator:
-
-```php
-use Nova\Support\Facades\Paginator;
-```
-
 Sometimes you may wish to create a pagination instance manually, passing it an array of items. You may do so using the `Paginator::make` method:
 
 ```php
