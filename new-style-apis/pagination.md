@@ -119,7 +119,6 @@ class User extends BaseModel
 ```php
 namespace App\Controllers;
 
-use App\Core\View;
 use App\Core\Controller;
 
 use App\Models\User;
@@ -135,7 +134,7 @@ class Users extends Controller
     {
         $users = User::paginate(25);
 
-        return View::getView()
+        return $this->getView()
             ->shares('title', 'Dashboard')
             ->with('users', $users);
     }
