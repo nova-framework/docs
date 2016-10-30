@@ -1,22 +1,22 @@
 There are several ways to paginate items. The simplest is by using the paginate method on the query builder.
 
 ### Paginating Database Results
-//pass the number of records to limit per page, the default is 25
 ```php
+//pass the number of records to limit per page, the default is 25
 $users = DB::table('users')->paginate(15);
 ```
 
 By default the url parameter used to track pages is called offset so use something else such as page add this line to app/Boot/Global.php:
 
-````php
+```php
 Paginator::setPageName('page');
-````
+```
 
 The argument passed to the `paginate` method is the number of items you wish to display per page. Once you have retrieved the results, you may display them on your view, and create the pagination links using the `links` method:
 
 ```php
 <div class="container">
-    <?php 
+    <?php
     foreach ($users as $user) {
         echo $user->name;
     }
@@ -53,6 +53,8 @@ $someUsers = DB::table('users')->where('votes', '>', 100)->simplePaginate(15);
 Sometimes you may wish to create a pagination instance manually, passing it an array of items. You may do so using the `Paginator::make` method:
 
 ```php
+use Paginator;
+
 $paginator = Paginator::make($items, $totalItems, $perPage);
 ```
 
@@ -85,9 +87,9 @@ http://example.com/something?page=2#foo
 ```php
 namespace App\Models;
 
-use Database\Model;
+use Nova\Database\ORM\Model as BaseModel;
 
-class Users extends Model
+class User extends BaseModel
 {
     /**
      * The table associated with the Model.
@@ -117,27 +119,25 @@ class Users extends Model
 ```php
 namespace App\Controllers;
 
-use Core\View;
-use Core\Controller;
+use App\Core\View;
+use App\Core\Controller;
+
+use App\Models\User;
 
 class Users extends Controller
 {
-
-    private $model;
-
     public function __construct()
     {
-        parent::__construct();¡
-        $this->model = new \App\Models\Users();
+        parent::__construct();
     }
 
     public function dashboard()
     {
-        $users = $this->model->paginate();
+        $users = User::paginate(25);
 
         return View::getView()
             ->shares('title', 'Dashboard')
-            ->withUsers($users);
+            ->with('users', $users);
     }
 }
 ```
