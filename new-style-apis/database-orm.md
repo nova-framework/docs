@@ -31,6 +31,7 @@ Before getting started, be sure to configure a database connection in **app/Conf
 To get started, create an ORM model. Models typically live in the `app/Models` directory, but you are free to place them anywhere with a relevant namespace within the app directory.
 
 #### Defining An ORM Model
+
 ```php
 use Database\ORM\Model;
 
@@ -60,6 +61,7 @@ Once a model is defined, you are ready to start retrieving and creating records 
 $users = User::all();
 ```
 #### Retrieving A Record By Primary Key
+
 ```php
 $user = User::find(1);
 
@@ -90,6 +92,7 @@ App::error(function(ModelNotFoundException $e)
 ```
 
 #### Querying Using ORM Models
+
 ```php
 $users = User::where('votes', '>', 100)->take(10)->get();
 
@@ -105,11 +108,13 @@ Of course, you may also use the query builder aggregate functions.
 ```php
 $count = User::where('votes', '>', 100)->count();
 ```
+
 If you are unable to generate the query you need via the fluent interface, feel free to use `whereRaw`
 
 ```php
 $users = User::whereRaw('age > ? and votes = 100', array(25))->get();
 ```
+
 #### Chunking Results
 
 If you need to process a lot (thousands) of ORM records, using the `chunk` command will allow you to do without eating all of your RAM:
@@ -123,6 +128,7 @@ User::chunk(200, function($users)
     }
 });
 ```
+
 The first argument passed to the method is the number of records you wish to receive per "chunk". The Closure passed as the second argument will be called for each chunk that is pulled from the database.
 
 #### Specifying The Query Connection
@@ -132,6 +138,7 @@ You may also specify which database connection should be used when running an OR
 ```php
 $user = User::on('connection-name')->find(1);
 ```
+
 <a name="mass-assignment"></a>
 ## Mass Assignment
 
@@ -149,6 +156,7 @@ class User extends Model
     protected $fillable = array('first_name', 'last_name', 'email');
 }
 ```
+
 In this example, only the three listed attributes will be mass-assignable.
 
 #### Defining Guarded Attributes On A Model
@@ -161,6 +169,7 @@ The inverse of `fillable` is `guarded`, and serves as a "black-list" instead of 
     protected $guarded = array('id', 'password');
  }   
 ```
+
 > **Note:** When using `guarded`, you should still never pass `Input::get()` or any raw array of user controlled input into a `save` or `update` method, as any column that is not guarded may be updated.
 
 #### Blocking All Attributes From Mass Assignment
@@ -170,6 +179,7 @@ In the example above, the `id` and `password` attributes may **not** be mass ass
 ```php
 protected $guarded = array('*');
 ```
+
 <a name="insert-update-delete"></a>
 ## Insert, Update, Delete
 
@@ -194,13 +204,16 @@ $insertedId = $user->id;
 ```
 
 #### Setting The Guarded Attributes On The Model
+
 ```php
 class User extends Model 
 {
     protected $guarded = array('id', 'account_id');
 }
+
 ```
 #### Using The Model Create Method
+
 ```php
 // Create a new user in the database...
 $user = User::create(array('name' => 'John'));
@@ -229,11 +242,13 @@ Sometimes you may wish to save not only a model, but also all of its relationshi
 ```php
 $user->push();
 ```
+
 You may also run updates as queries against a set of where conditions:
 
 ```php
 $affectedRows = User::where('votes', '>', 100)->update(array('status' => 2));
 ```
+
 #### Deleting An Existing Model
 
 To delete a model, simply call the `delete` method on the instance:
@@ -244,6 +259,7 @@ $user->delete();
 ```
 
 #### Deleting An Existing Model By Key
+
 ```php
 User::destroy(1);
 User::destroy(array(1, 2, 3));
@@ -254,6 +270,7 @@ Of course, you may also run a delete query on a set of where conditions:
 ```php
 $affectedRows = User::where('votes', '>', 100)->delete();
 ```
+
 #### Updating Only The Model's Timestamps
 
 If you wish to simply update the timestamps on a model, you may use the `touch` method:
@@ -261,6 +278,7 @@ If you wish to simply update the timestamps on a model, you may use the `touch` 
 ```php
 $user->touch();
 ```
+
 <a name="soft-deleting"></a>
 ## Soft Deleting
 
@@ -269,6 +287,7 @@ When soft deleting a model, it is not actually removed from your database. Inste
 ```php
 use Database\ORM\SoftDeletingTrait;
 ```
+
 Then inside the model add:
 
 ```php
@@ -301,11 +320,13 @@ To force soft deleted models to appear in a result set, use the `withTrashed` me
 ```php
 $users = User::withTrashed()->where('account_id', 1)->get();
 ```
+
 The `withTrashed` method may be used on a defined relationship:
 
 ```php
 $user->posts()->withTrashed()->get();
 ```
+
 If you wish to **only** receive soft deleted models in your results, you may use the `onlyTrashed` method:
 
 ```php
@@ -316,6 +337,7 @@ To restore a soft deleted model into an active state, use the `restore` method:
 ```php
 $user->restore();
 ```
+
 You may also use the `restore` method on a query:
 
 ```php
@@ -331,10 +353,13 @@ If you wish to truly remove a model from the database, you may use the `forceDel
 ```php
 $user->forceDelete();
 ```
+
 The `forceDelete` method also works on relationships:
+
 ```php
 $user->posts()->forceDelete();
 ```
+
 To determine if a given model instance has been soft deleted, you may use the `trashed` method:
 
 ```php
@@ -343,6 +368,7 @@ if ($user->trashed())
     //
 }
 ```
+
 <a name="timestamps"></a>
 ## Timestamps
 
@@ -351,9 +377,11 @@ By default timestamps are off to use the `created_at` and `updated_at` columns o
 The created_at should have a default of CURRENT_TIMESTAMP in your table schema.
 
 #### Disabling Auto Timestamps
+
 ```php
  public $timestamps = true;
 ```
+
 #### Providing A Custom Timestamp Format
 
 If you wish to customise the format of your timestamps, you may override the `getDateFormat` method in your model:
@@ -364,6 +392,7 @@ protected function getDateFormat()
     return 'U';
 }
 ```
+
 <a name="query-scopes"></a>
 ## Query Scopes
 
@@ -388,6 +417,7 @@ public function scopeWomen($query)
 ```php
 $users = User::popular()->women()->orderBy('created_at')->get();
 ```
+
 #### Dynamic Scopes
 
 Sometimes You may wish to define a scope that accepts parameters. Just add your parameters to your scope function:
@@ -398,6 +428,7 @@ public function scopeOfType($query, $type)
     return $query->whereType($type);
 }
 ```
+
 Then pass the parameter into the scope call:
 
 ```php
@@ -436,7 +467,9 @@ The first argument passed to the `hasOne` method is the name of the related mode
 ```php
 $phone = User::find(1)->phone;
 ```
+
 The SQL performed by this statement will be as follows:
+
 ```
 select * from users where id = 1
 
@@ -450,6 +483,7 @@ return $this->hasOne('App\Models\Phone', 'foreign_key');
 
 return $this->hasOne('App\Models\Phone', 'foreign_key', 'local_key');
 ```
+
 #### Defining The Inverse Of A Relation
 
 To define the inverse of the relationship on the `Phone` model, we use the `belongsTo` method:
@@ -463,6 +497,7 @@ class Phone extends Model
     }
 }
 ```
+
 In the example above, ORM will look for a `user_id` column on the `phones` table. If you would like to define a different foreign key column, you may pass it as the second argument to the `belongsTo` method:
 
 ```php
@@ -474,6 +509,7 @@ class Phone extends Model
     }
 }
 ```
+
 Additionally, you pass a third parameter which specifies the name of the associated column on the parent table:
 
 ```php
@@ -485,6 +521,7 @@ class Phone extends Model
     }
 }
 ```
+
 <a name="one-to-many"></a>
 ### One To Many
 
@@ -499,16 +536,19 @@ class Post extends Model
     }
 }
 ```
+
 Now we can access the post's comments through the dynamic property):
 
 ```php
 $comments = Post::find(1)->comments;
 ```
+
 If you need to add further constraints to which comments are retrieved, you may call the `comments` method and continue chaining conditions:
 
 ```php
 $comments = Post::find(1)->comments()->where('title', '=', 'foo')->first();
 ```
+
 Again, you may override the conventional foreign key by passing a second argument to the `hasMany` method. And, like the `hasOne` relation, the local column may also be specified:
 
 ```php
@@ -516,6 +556,7 @@ return $this->hasMany('App\Models\Comment', 'foreign_key');
 
 return $this->hasMany('App\Models\Comment', 'foreign_key', 'local_key');
 ```
+
 #### Defining The Inverse Of A Relation
 
 To define the inverse of the relationship on the `Comment` model, we use the `belongsTo` method:
@@ -529,6 +570,7 @@ class Comment extends Model
     }
 }
 ```
+
 <a name="many-to-many"></a>
 ### Many To Many
 
@@ -545,21 +587,25 @@ class User extends Model
     }
 }
 ```
+
 Now, we can retrieve the roles through the `User` model:
 
 ```php
 $roles = User::find(1)->roles;
 ```
+
 If you would like to use an unconventional table name for your pivot table, you may pass it as the second argument to the `belongsToMany` method:
 
 ```php
 return $this->belongsToMany('App\Models\Role', 'user_roles');
 ```
+
 You may also override the conventional associated keys:
 
 ```php
 return $this->belongsToMany('App\Models\Role', 'user_roles', 'user_id', 'foo_id');
 ```
+
 Of course, you may also define the inverse of the relationship on the `Role` model:
 
 ```php
@@ -571,6 +617,7 @@ class Role extends Model
     }
 }
 ```
+
 <a name="has-many-through"></a>
 ### Has Many Through
 
@@ -603,6 +650,7 @@ class Country extends Model
     }
 }
 ```
+
 If you would like to manually specify the keys of the relationship, you may pass them as the third and fourth arguments to the method:
 
 ```php
@@ -614,6 +662,7 @@ class Country extends Model
     }
 }
 ```
+
 <a name="polymorphic-relations"></a>
 ### Polymorphic Relations
 
@@ -644,6 +693,7 @@ class Order extends Model
     }
 }
 ```
+
 #### Retrieving A Polymorphic Relation
 
 Now, we can retrieve the photos for either a staff member or an order:
@@ -656,6 +706,7 @@ foreach ($staff->photos as $photo)
     //
 }
 ```
+
 #### Retrieving The Owner Of A Polymorphic Relation
 
 However, the true "polymorphic" magic is when you access the staff or order from the `Photo` model:
@@ -665,6 +716,7 @@ $photo = Photo::find(1);
 
 $imageable = $photo->imageable;
 ```
+
 The `imageable` relation on the `Photo` model will return either a `Staff` or `Order` instance, depending on which type of model owns the photo.
 
 #### Polymorphic Relation Table Structure
@@ -726,6 +778,7 @@ class Post extends Model
     }
 }
 ```
+
 The `Tag` model may define a method for each of its relationships:
 
 ```php
@@ -742,6 +795,7 @@ class Tag extends Model
     }
 }    
 ```
+
 <a name="querying-relations"></a>
 ## Querying Relations
 
@@ -757,6 +811,7 @@ You may also specify an operator and a count:
 ```php
 $posts = Post::has('comments', '>=', 3)->get();
 ```
+
 If you need even more power, you may use the `whereHas` and `orWhereHas` methods to put "where" conditions on your `has` queries:
 
 ```php
@@ -766,6 +821,7 @@ $posts = Post::whereHas('comments', function($q)
 
 })->get();
 ```
+
 <a name="dynamic-properties"></a>
 ### Dynamic Properties
 
@@ -783,11 +839,13 @@ class Phone extends Model
 
 $phone = Phone::find(1);
 ```
+
 Instead of echoing the user's email like this:
 
 ```php
 echo $phone->user()->first()->email;
 ```
+
 It may be shortened to simply:
 
 ```php
@@ -817,6 +875,7 @@ foreach (Book::all() as $book) {
     echo $book->author->name;
 }
 ```
+
 This loop will execute 1 query to retrieve all of the books on the table, then another query for each book to retrieve the author. So, if we have 25 books, this loop would run 26 queries.
 
 Thankfully, we can use eager loading to drastically reduce the number of queries. The relationships that should be eager loaded may be specified via the `with` method:
@@ -826,12 +885,15 @@ foreach (Book::with('author')->get() as $book) {
     echo $book->author->name;
 }
 ```
+
 In the loop above, only two queries will be executed:
+
 ```
 select * from books
 
 select * from authors where id in (1, 2, 3, 4, 5, ...)
 ```
+
 Wise use of eager loading can drastically increase the performance of your application.
 
 Of course, you may eager load multiple relationships at one time:
@@ -839,11 +901,13 @@ Of course, you may eager load multiple relationships at one time:
 ```php
 $books = Book::with('author', 'publisher')->get();
 ```
+
 You may even eager load nested relationships:
 
 ```php
 $books = Book::with('author.contacts')->get();
 ```
+
 In the example above, the `author` relationship will be eager loaded, and the author's `contacts` relation will also be loaded.
 
 ### Eager Load Constraints
@@ -869,6 +933,7 @@ $users = User::with(array('posts' => function($query)
 
 }))->get();
 ```
+
 ### Lazy Eager Loading
 
 It is also possible to eagerly load related models directly from an already existing model collection. This may be useful when dynamically deciding whether to load related models or not, or in combination with caching.
@@ -877,6 +942,7 @@ It is also possible to eagerly load related models directly from an already exis
 $books = Book::all();
 $books->load('author', 'publisher');
 ```
+
 <a name="inserting-related-models"></a>
 ## Inserting Related Models
 
@@ -892,6 +958,7 @@ $post = Post::find(1);
 $comment = $post->comments()->save($comment);
 
 ```
+
 In this example, the `post_id` field will automatically be set on the inserted comment.
 
 ### Associating Models (Belongs To)
@@ -903,6 +970,7 @@ $account = Account::find(10);
 $user->account()->associate($account);
 $user->save();
 ```
+
 ### Inserting Related Models (Many To Many)
 
 You may also insert related models when working with many-to-many relations. Let's continue using our `User` and `Role` models as examples. We can easily attach new roles to a user using the `attach` method:
@@ -913,16 +981,19 @@ You may also insert related models when working with many-to-many relations. Let
 $user = User::find(1);
 $user->roles()->attach(1);
 ```
+
 You may also pass an array of attributes that should be stored on the pivot table for the relation:
 
 ```php
 $user->roles()->attach(1, array('expires' => $expires));
 ```
+
 Of course, the opposite of `attach` is `detach`:
 
 ```php
 $user->roles()->detach(1);
 ```
+
 #### Using Sync To Attach Many To Many Models
 
 You may also use the `sync` method to attach related models. The `sync` method accepts an array of IDs to place on the pivot table. After this operation is complete, only the IDs in the array will be on the intermediate table for the model:
@@ -930,6 +1001,7 @@ You may also use the `sync` method to attach related models. The `sync` method a
 ```php
 $user->roles()->sync(array(1, 2, 3));
 ```
+
 #### Adding Pivot Data When Syncing
 
 You may also associate other pivot table values with the given IDs:
@@ -937,6 +1009,7 @@ You may also associate other pivot table values with the given IDs:
 ```php
 $user->roles()->sync(array(1 => array('expires' => true)));
 ```
+
 Sometimes you may wish to create a new related model and attach it in a single command. For this operation, you may use the `save` method:
 
 ```php
@@ -949,6 +1022,7 @@ In this example, the new `Role` model will be saved and attached to the user mod
 ```php
 User::find(1)->roles()->save($role, array('expires' => $expires));
 ```
+
 <a name="touching-parent-timestamps"></a>
 ## Touching Parent Timestamps
 
@@ -965,6 +1039,7 @@ class Comment extends Model
     }
 }
 ```
+
 Now, when you update a `Comment`, the owning `Post` will have its `updated_at` column updated:
 
 ```php
@@ -972,6 +1047,7 @@ $comment = Comment::find(1);
 $comment->text = 'Edit to this comment!';
 $comment->save();
 ```
+
 <a name="working-with-pivot-tables"></a>
 ## Working With Pivot Tables
 
@@ -984,6 +1060,7 @@ foreach ($user->roles as $role) {
     echo $role->pivot->created_at;
 }
 ```
+
 Notice that each `Role` model we retrieve is automatically assigned a `pivot` attribute. This attribute contains a model representing the intermediate table, and may be used as any other ORM model.
 
 By default, only the keys will be present on the `pivot` object. If your pivot table contains extra attributes, you must specify them when defining the relationship:
@@ -991,6 +1068,7 @@ By default, only the keys will be present on the `pivot` object. If your pivot t
 ```php
 return $this->belongsToMany('App\Models\Role')->withPivot('foo', 'bar');
 ```
+
 Now the `foo` and `bar` attributes will be accessible on our `pivot` object for the `Role` model.
 
 If you want your pivot table to have automatically maintained `created_at` and `updated_at` timestamps, use the `withTimestamps` method on the relationship definition:
@@ -998,6 +1076,7 @@ If you want your pivot table to have automatically maintained `created_at` and `
 ```php
 return $this->belongsToMany('App\Models\Role')->withTimestamps();
 ```
+
 #### Deleting Records On A Pivot Table
 
 To delete all records on the pivot table for a model, you may use the `detach` method:
@@ -1005,6 +1084,7 @@ To delete all records on the pivot table for a model, you may use the `detach` m
 ```php
 User::find(1)->roles()->detach();
 ```
+
 Note that this operation does not delete records from the `roles` table, but only from the pivot table.
 
 #### Defining A Custom Pivot Model
@@ -1017,6 +1097,7 @@ public function newPivot(Model $parent, array $attributes, $table, $exists)
     return new YourCustomPivot($parent, $attributes, $table, $exists);
 }
 ```
+
 <a name="collections"></a>
 ## Collections
 
@@ -1033,6 +1114,7 @@ if ($roles->contains(2)) {
     //
 }
 ```
+
 Collections may also be converted to an array or JSON:
 
 ```php
@@ -1046,6 +1128,7 @@ If a collection is cast to a string, it will be returned as JSON:
 ```php
 $roles = (string) User::find(1)->roles;
 ```
+
 #### Iterating Collections
 
 ORM collections also contain a few helpful methods for looping and filtering the items they contain:
@@ -1055,6 +1138,7 @@ $roles = $user->roles->each(function($role) {
     //
 });
 ```
+
 #### Filtering Collections
 
 When filtering collections, the callback provided will be used as callback for [array_filter](http://php.net/manual/en/function.array-filter.php).
@@ -1065,9 +1149,11 @@ $users = $users->filter(function($user)
     return $user->isAdmin();
 });
 ```
+
 > **Note:** When filtering a collection and converting it to JSON, try calling the `values` function first to reset the array's keys.
 
 #### Applying A Callback To Each Collection Object
+
 ```php
 $roles = User::find(1)->roles;
 
@@ -1075,17 +1161,22 @@ $roles->each(function($role) {
     //
 });
 ```
+
 #### Sorting A Collection By A Value
+
 ```php
 $roles = $roles->sortBy(function($role)
 {
     return $role->created_at;
 });
 ```
+
 #### Sorting A Collection By A Value
+
 ```php
 $roles = $roles->sortBy('created_at');
 ```
+
 #### Returning A Custom Collection Type
 
 Sometimes, you may wish to return a custom Collection object with your own added methods. You may specify this on your ORM model by overriding the `newCollection` method:
@@ -1116,6 +1207,7 @@ class User extends Model
     }
 }
 ```
+
 In the example above, the `first_name` column has an accessor. Note that the value of the attribute is passed to the accessor.
 
 #### Defining A Mutator
@@ -1131,6 +1223,7 @@ class User extends Model
     }
 }
 ```
+
 <a name="date-mutators"></a>
 ## Date Mutators
 
@@ -1144,6 +1237,7 @@ public function getDates()
     return array('created_at');
 }
 ```
+
 When a column is considered a date, you may set its value to a UNIX timestamp, date string (`Y-m-d`), date-time string, and of course a `DateTime` / `Carbon` instance.
 
 To totally disable date mutations, simply return an empty array from the `getDates` method:
@@ -1154,6 +1248,7 @@ public function getDates()
     return array();
 }   
 ```
+
 #### Setting A Model Boot Method
 
 ORM models also contain a static `boot` method, which may provide a convenient place to register your event bindings.
@@ -1186,6 +1281,7 @@ User::creating(function($user)
     if ( ! $user->isValid()) return false;
 });
 ```
+
 #### Setting A Model Boot Method
 
 ORM models also contain a static boot method, which may provide a convenient place to register your event bindings.
@@ -1207,6 +1303,7 @@ class User extends Model
 To consolidate the handling of model events, you may register a model observer. An observer class may have methods that correspond to the various model events. For example, `creating`, `updating`, `saving` methods may be on an observer, in addition to any other model event name.
 
 So, for example, a model observer might look like this:
+
 ```php
 class UserObserver 
 {
@@ -1245,6 +1342,7 @@ Note that entire collections of models may also be converted to arrays:
 ```php
 return User::all()->toArray();
 ```
+
 #### Converting A Model To JSON
 
 To convert a model to JSON, you may use the `toJson` method:
@@ -1278,9 +1376,11 @@ class User extends Model
 > **Note:** When hiding relationships, use the relationship's **method** name, not the dynamic accessor name.
 
 Alternatively, you may use the `visible` property to define a white-list:
+
 ```php
 protected $visible = array('first_name', 'last_name');
 ```
+
 Occasionally, you may need to add array attributes that do not have a corresponding column in your database. To do so, simply define an accessor for the value:
 
 ```php
@@ -1289,9 +1389,11 @@ public function getIsAdminAttribute()
     return $this->attributes['admin'] == 'yes';
 }
 ```
+
 Once you have created the accessor, just add the value to the `appends` property on the model:
 
 ```php
 protected $appends = array('is_admin');
 ```
+
 Once the attribute has been added to the `appends` list, it will be included in both the model's array and JSON forms.
