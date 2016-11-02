@@ -66,3 +66,11 @@ Create a new redirect response to the given HTTPS path.
 ```php
 return Redirect::secure('user/profile');
 ```
+
+**Redirect::intended($path)**
+
+Redirect the user to the url they requested before having to login. Upon logging in the user is taken to the intended url. If that is not set the path provided will be used.
+
+```php
+return Redirect::intended('dashboard');
+````
