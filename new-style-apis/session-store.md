@@ -105,6 +105,12 @@ if (Session::get('url.intended')) {
 return Redirect::to($url);
 ```
 
+Or use Redirect::intended() which will do the same as above automatically.
+
+```php
+return Redirect::intended('dashboard');
+````
+
 ## Flash Data
 
 Sometimes you may wish to store items in the session only for the next request. You may do so using the `Session::flash` method:
