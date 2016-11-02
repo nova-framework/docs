@@ -16,21 +16,25 @@ The Nova framework uses the `flash` session key internally, so you should not ad
 ## Session Usage
 
 #### Storing An Item In The Session
+
 ```php
 Session::put('key', 'value');
 ```
 
 #### Push A Value Onto An Array Session Value
+
 ```php
 Session::push('user.teams', 'developers');
 ```
 
 #### Retrieving An Item From The Session
+
 ```php
 $value = Session::get('key');
 ```
 
 #### Retrieving An Item Or Returning A Default Value
+
 ```php
 $value = Session::get('key', 'default');
 
@@ -38,16 +42,19 @@ $value = Session::get('key', function() { return 'default'; });
 ```
 
 #### Retrieving An Item And Forgetting It
+
 ```php
 $value = Session::remove('key', 'default');
 ```
 
 #### Retrieving All Data From The Session
+
 ```php
 $data = Session::all();
 ```
 
 #### Determining If An Item Exists In The Session
+
 ```php
 if (Session::has('users'))
 {
@@ -56,18 +63,46 @@ if (Session::has('users'))
 ```
 
 #### Removing An Item From The Session
+
 ```php
 Session::forget('key');
 ```
 
 #### Removing All Items From The Session
+
 ```php
 Session::flush();
 ```
 
 #### Regenerating The Session ID
+
 ```php
 Session::regenerate();
+```
+
+#### Getting a users intended url before logging into a system
+
+Inside the Session data is the following:
+
+```
+[url] => Array
+(
+   [intended] => http://noveframework.dev/usefullinks/create
+)
+```
+
+This is the a link of the url attempted before the authentication happened, causing the use to have to login before getting to the page. This can be used like this: (array keys can be accessed using a dot notation ie url.intended)
+
+```php
+//if the session key exists use it or set a url to use.
+if (Session::get('url.intended')) {
+    $url = Session::get('url.intended');
+} else {
+    $url = 'dashboard';
+}
+
+// Redirect to url
+return Redirect::to($url);
 ```
 
 ## Flash Data
@@ -79,11 +114,13 @@ Session::flash('key', 'value');
 ```
 
 #### Reflashing The Current Flash Data For Another Request
+
 ```php
 Session::reflash();
 ```
 
 #### Reflashing Only A Subset Of Flash Data
+
 ```php
 Session::keep(array('username', 'email'));
 ```
