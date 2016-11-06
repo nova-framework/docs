@@ -80,6 +80,108 @@ This method call will generate URLs that look something like this:
 http://example.com/something?page=2#foo
 ```
 
+### Custom Pagination Presenters
+
+The default presenter class for the Nova Framework is located in the system folder `system/Pagination/BootstrapPresenter.php`
+
+Using this, we can create a new custom presenter for our pagination.
+
+To do so, create a new presenter class in the following location: `app\Pagination\Presenters`. In this example, our presenter will be called `CustomPresenter`. 
+
+> Please note, to make a custom presenter, we would need to extend the `Pagination\Presenter` Class.
+
+```php
+
+namespace App\Pagination\Presenters;
+
+use Pagination\Presenter;
+
+class CustomPresenter extends Presenter
+{
+    /**
+     * Get HTML wrapper for a page link.
+     *
+     * @param  string  $url
+     * @param  int  $page
+     * @param  string  $rel
+     * @return string
+     */
+    public function getPageLinkWrapper($url, $page, $rel = null)
+    {
+        $rel = is_null($rel) ? '' : ' class="'.$rel.'"';
+
+        return '<a href="'.$url.'"'.$rel.' class="page-numbers bg-border-color">'.$page.'</a>';
+    }
+
+    /**
+     * Get HTML wrapper for disabled text.
+     *
+     * @param  string  $text
+     * @return string
+     */
+    public function getDisabledTextWrapper($text)
+    {
+        return '<a href="">'.$text.'</a>';
+    }
+
+    /**
+     * Get HTML wrapper for active text.
+     *
+     * @param  string  $text
+     * @return string
+     */
+    public function getActivePageWrapper($text)
+    {
+        return '<a href="" class="page-numbers bg-border-color current">'.$text.'</a>';
+    }
+
+    /**
+     * Get HTML wrapper for the entire paginator.
+     *
+     * @param  string  $content
+     * @return string
+     */
+    public function getPaginationWrapper($content)
+    {
+        return '<nav class="navigation align-center">' .$content .'</nav>';
+    }
+
+    public function getPrevious($text = '&laquo;'){
+        return;
+    }
+
+    public function getNext($text = '&raquo;'){
+        return;
+    }
+
+}
+```
+
+Whenever you want to use the presenter, you would first need to import it by using
+
+```php
+use App\Pagination\Presenters\CustomPresenter;
+```
+
+Then create a new instance of the class.
+
+```php
+//paginate records
+$posts = Post::paginate();
+
+//setup custom presenter
+$presenter = new CustomPresenter($posts);
+
+//set the presenter to be used on the paginated object ie $posts pass in the $presenter
+$posts->setPresenter($presenter);
+```
+
+That’s it from there! To display the links, the usage is the same as always:
+
+```php
+echo $posts->links();
+```
+
 ### Full Example Usage
 
 **Users Model**
