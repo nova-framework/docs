@@ -16,6 +16,9 @@
     - [Number](#number)
     - [File](#file)
     - [Buttons](#buttons)
+    - [Reset](#reset)
+    - [Image](#image)
+    - [Url](#url)
 
 <a name="introduction"></a>
 ## Introduction
@@ -240,6 +243,73 @@ Output:
 
 > `selected="selected"` will be assigned to whichever option is used from the database, if anything.
 
+You can also use the following select elements:
+
+```php
+echo Form::selectMonth('month');
+```
+
+Output:
+
+```html
+<select name="month">
+    <option value="1">January</option>
+    <option value="2">February</option>
+    <option value="3">March</option>
+    <option value="4">April</option>
+    <option value="5">May</option>
+    <option value="6">June</option>
+    <option value="7">July</option>
+    <option value="8">August</option>
+    <option value="9">September</option>
+    <option value="10">October</option>
+    <option value="11">November</option>
+    <option value="12">December</option>
+</select>
+
+```
+
+```php
+echo Form::selectYear('year', 2010, 2016);
+```
+
+Output:
+
+```html
+<select name="year">
+    <option value="2010">2010</option>
+    <option value="2011">2011</option>
+    <option value="2012">2012</option>
+    <option value="2013">2013</option>
+    <option value="2014">2014</option>
+    <option value="2015">2015</option>
+    <option value="2016">2016</option>
+</select>
+
+```
+
+```php
+echo Form::selectRange('numbers', 10, 20);
+```
+
+Output:
+
+```html
+<select name="range">
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+</select>
+```
+
 <a name="checkboxes-and-radio-buttons"></a>
 ### Checkboxes and Radio Buttons
 
@@ -317,4 +387,49 @@ or
 
 ```php
 echo Form::button('Click Me!');
+```
+
+<a name="reset"></a>
+### Reset
+
+Adds a reset input field, which will reset the whole form, before any changes where made.
+
+```php
+echo Form::reset('reset', array('class' => 'form-control', 'id' => 'active');
+```
+
+Output:
+
+```html
+<input class="form-control" id="reset" type="reset" value="reset">
+```
+
+<a name="image"></a>
+### Image
+
+Adds a image input element to the form.
+
+```php
+echo Form::image('http://placehold.it/350x150', 'name', array());
+```
+
+Output:
+
+```html
+<input src="http://placehold.it/350x150" name="name" type="image" id="name">
+```
+
+<a name="url"></a>
+### Url
+
+Adds a url input field to the form.
+
+```php
+echo Form::url('name');
+```
+
+Output:
+
+```html
+<input name="name" type="url" id="name">
 ```
