@@ -372,9 +372,7 @@ if ($user->trashed())
 <a name="timestamps"></a>
 ## Timestamps
 
-By default timestamps are off to use the `created_at` and `updated_at` columns on your database table. Simply add these `timestamp` columns to your table. To use add the following property to your model:
-
-The created_at should have a default of CURRENT_TIMESTAMP in your table schema.
+By default timestamps are on if you don't want to use the `created_at` and `updated_at` columns on your database table. Turn off auto timestamps see below.
 
 #### Disabling Auto Timestamps
 
