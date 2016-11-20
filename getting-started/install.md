@@ -16,12 +16,10 @@ The framework is located on [Packagist](https://packagist.org/packages/nova-fram
 You can install the framework from a terminal by using:
 
 ```php
-composer create-project nova-framework/framework foldername
+composer create-project nova-framework/framework foldername 3.x -s dev
 ```
 
-The foldername is the desired folder to be created, if left off then a folder called framework will be created.
-
-For a video example see [http://novacasts.com/courses/nova-fundamentals/install](http://novacasts.com/courses/nova-fundamentals/install)
+The foldername is the desired folder to be created, if left off then a folder called 3.x will be created.
 
 ---
 #### XAMPP
@@ -39,7 +37,7 @@ The first way is under the C:/XAMPP/htdocs directory. (see further down on page 
 - Run the below command replacing foldername with the name of your project.
 
 ```php
-composer create-project nova-framework/framework foldername -s dev
+composer create-project nova-framework/framework foldername 3.x -s dev
 ```
 
 - Now go to the folder with the name of your project created under the htdocs folder.
@@ -97,7 +95,7 @@ The second way is to create a new folder like C:/vhosts.
 - Run the below command replacing foldername with the name of your project.
 
 ```php
-composer create-project nova-framework/framework foldername -s dev
+composer create-project nova-framework/framework foldername 3.x -s dev
 ```
 
 - Now go to the folder with the name of your project created under the vhosts folder.
