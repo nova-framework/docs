@@ -7,6 +7,12 @@ To this end Nova does not come with lots of built in libraries / helpers or modu
 
 This has been tested with php 5.6 and php 7 please report any bugs.
 
+## 3.75.0
+
+System has been moved to it's own repo and will be installed automatically into Vendor on install. All installs should be installed from the 3.x branch.
+
+Master branch for the dev team only.
+
 ## 3.74.0 changes: 
 
 All classes from the System directory now have a primary namespace of Nova. The major change is prefixing of System classes namespaces with Nova\\, then instead of:
