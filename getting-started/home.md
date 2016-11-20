@@ -9,12 +9,12 @@ This has been tested with php 5.6 and php 7 please report any bugs.
 
 ## 3.75.0
 
-System has been moved to it's own repo and will be installed automatically into Vendor on install. All installs should be installed from the 3.x branch.
+System has been moved to it's own repo and will be installed automatically into Vendor on install. All installs should be installed from the 3 branch.
 
 Install with the termianl command:
 
 ```php
-composer create-project nova-framework/framework foldername 3.x -s dev
+composer create-project nova-framework/framework foldername 3.* -s dev
 ```
 
 Master branch for the dev team only.
