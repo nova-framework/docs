@@ -1397,11 +1397,11 @@ protected $appends = array('is_admin');
 
 Once the attribute has been added to the `appends` list, it will be included in both the model's array and JSON forms.
 
-#### File Field
+## File Field
 
 Allows you to easily upload files to a directory and save the filename to a database attribute.
 
-##### Usage
+#### Usage
 
 In your ORM Model:
 
