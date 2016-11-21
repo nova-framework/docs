@@ -17,6 +17,7 @@
 - [Model Events](#model-events)
 - [Model Observers](#model-observers)
 - [Converting To Arrays / JSON](#converting-to-arrays-or-json)
+- [File Field](#file-field)
 
 <a name="introduction"></a>
 ## Introduction
@@ -1395,3 +1396,36 @@ protected $appends = array('is_admin');
 ```
 
 Once the attribute has been added to the `appends` list, it will be included in both the model's array and JSON forms.
+
+#### File Field
+
+Allows you to easily upload files to a directory and save the filename to a database attribute.
+
+##### Usage
+
+In your ORM Model:
+
+```php
+use Shared\Database\ORM\FileFieldTrait;
+
+public $files = array(
+    'image' => array(),
+    'poster' => array(
+        'path' => 'uploads/:class_slug/:attribute/:unique_id-:file_name',
+        'defaultPath' => 'uploads/default.png'
+    )
+);
+```
+In your Controller:
+
+```php
+$model = new Poster();
+
+if (Input::hasFile('poster')) {
+    $model->poster = Input::file('poster');
+}
+
+$model->save();
+```
+
+Each field can have a filesystem path pattern and a default path option. If you don't specify any of them, they will be loaded from the  default config.
