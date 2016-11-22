@@ -66,6 +66,16 @@ echo Form::open([
     'method' => 'POST',
     'action' => 'admin.posts.store'
 ]);
+
+// Passing an id for an action, while using an alias:
+
+echo Form::open([
+    'method' => 'POST',
+    'action' => [
+        'admin.posts.update',
+        $post->id
+    ]
+]);
 ```
 
 Alternatively, if you wanted to use a url instead, you can use the following:
@@ -132,7 +142,10 @@ Then in your view:
 ```php
 echo Form::model($post, [
     'method' => 'POST',
-    'url' => action('admin.posts.edit', $post->id)
+    'action' => [
+        'admin.posts.update', 
+        $post->id
+    ]
 ]);
 ```
 <a name="label"></a>
