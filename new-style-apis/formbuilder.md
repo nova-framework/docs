@@ -23,7 +23,7 @@
 <a name="introduction"></a>
 ## Introduction
 
-The form builder is a useful tool where you can create forms easily. To get started on using the form buidler, you can instantiate it by calling the namespace.
+The form builder is a useful tool where you can create forms easily. To get started on using the form builder, you can instantiate it by calling the namespace.
 
 ```php
 use Form;
