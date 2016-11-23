@@ -50,7 +50,7 @@ Output:
 Convert entities to HTML characters:
 
 ```php
-echo HTML::entities('&lt;i&gt;Hello World!&lt;/i&gt;');
+echo HTML::decode('&lt;i&gt;Hello World!&lt;/i&gt;');
 ```
 
 Output:
