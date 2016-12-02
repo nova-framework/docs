@@ -408,7 +408,7 @@ echo Form::button('Click Me!');
 Adds a reset input field, which will reset the whole form, before any changes where made.
 
 ```php
-echo Form::reset('reset', array('class' => 'form-control', 'id' => 'active');
+echo Form::reset('reset', array('class' => 'form-control', 'id' => 'active'));
 ```
 
 Output:
