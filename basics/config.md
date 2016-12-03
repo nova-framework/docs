@@ -125,7 +125,7 @@ Assign the default locale, used for translation.
 'timezone' => 'Europe/London',
 ```
 
-Assign encryption key, you can use `php nova make:key` in a terminal window/ssh or generate a key by going to http://jeffreybarke.net/tools/codeigniter-encryption-key-generator
+Assign encryption key, you can use `php nova make:key` in a terminal window/ssh or generate a key by going to http://novaframework.com/token-generator
 
 ```php
 key' => 'SomeRandomStringThere_1234567890'
