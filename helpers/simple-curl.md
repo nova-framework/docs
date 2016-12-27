@@ -5,7 +5,11 @@ There are four methods available these are get, post and put.
 You will need to declare the SimpleCurl helper first to use these examples below. You can do it by adding a use statement at the top of the controller.
 
 ```php
-use Helpers\SimpleCurl as Curl
+use SimpleCurl as Curl;
+
+// OR
+
+use Nova\Helpers\SimpleCurl as Curl;
 ```
 
 ### How to do a get request
