@@ -9,7 +9,11 @@ RainCaptcha is a CAPTCHA class that does not require any image processing extens
 Create an alias:
 
 ```php
-use Helpers\RainCaptcha;
+use RainCaptcha;
+
+// OR
+
+use Nova\Helpers\RainCaptcha;
 ```
 
 To use the class create a new instance, this can then be used to generate a captcha image using **->getImage()**.
