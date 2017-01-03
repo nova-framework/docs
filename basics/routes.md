@@ -5,7 +5,7 @@ Namespaces are included into all classes now, a namespace is like a layer. Addin
 
 With routes the namespace is Core\Router:: followed by the method call, typing out the namespace every time is long winded, thankfully shortcuts can be created by creating an alias:
 
-```
+```php
 use Core\Router;
 ```
 
@@ -13,7 +13,7 @@ By using the use keyword Core\Router can be references as Router.
 
 To define a route call the static name Router:: followed by either a post or get ('any' can also be used to match both post and get requests) to match the HTTP action. Next set the path to match and what do, call a closure or a controller.
 
-```
+```php
 Router::any('', 'closure or controller');
 ```
 
@@ -21,7 +21,7 @@ Router::any('', 'closure or controller');
 
 A closure is a function without a name, they are useful when you only need simple logic for a route, to use a closure first call Router:: then set the url pattern you want to match against followed by a function
 
-```
+```php
 Router::get('simple', function() {
   //do something simple
 });
@@ -30,9 +30,9 @@ Router::get('simple', function() {
 
 Controllers and model can be used in a closure by instantiating the root controller
 
-```
-$c = new Core\\Controller();
-$m = new Models\\Users();
+```php
+$c = new Core\Controller();
+$m = new Models\Users();
 
 $m->getUsers();
 ```
@@ -46,7 +46,8 @@ Closures are convenient but can soon become messy.
 To call a route to a controller instead of typing a function, instead enter a string. In the string type the namespace of the controller (Controller if located in the root of the controllers folder) then the controller name, finally specify what method of that class to load. They are dictated by a @ symbol.
 
 To have a controller called users (in the root of the controllers folder) and load a usersList function:
-```
+
+```php
 Router::get('users','Controllers\\Users@usersList');
 ```
 
@@ -54,12 +55,14 @@ The above would call the Users controllers and the userList method when /users i
 
 Routes can respond to both GET and POST requests.
 To use a post route:
-```
+
+```php
 Router::post('blogsave', 'Controllers\\Blog@savePost');
 ```
 
 To respond to either a post or get request use any:
-```
+
+```php
 Router::any('blogsave', 'Controllers\\Blog@savePost');
 ```
 
@@ -74,30 +77,33 @@ Routes can use filters to dynamically pass values to the controller / closure, t
 
 To use a filter place the filter inside parenthesis and use a colon inside route path
 
-```
+```php
 Router::get('blog/(:any)', 'Controllers\\Blog@post');
 ```
 
 Would get past to app/Controllers/Blog.php anything after blog/ will be passed to post method.
 
-```
+```php
 public function post($slug)
 {
 ```
 
 If no route is defined, you can call a custom callback, like:
-```
+
+```php
 Router::error('Core\\Error@index');
 ```
 
 Finally to run the routes:
-```
+
+```php
 Router::dispatch();
 ```
 
 # Full Example
-```
-use Core\\Router;
+
+```php
+use Core\Router;
 
 //define routes
 Router::get('', 'Controllers\\Welcome@index');
@@ -116,7 +122,7 @@ Router::dispatch();
 
 To enable legacy calls change the $fallback to true, default is false (off)
 
-```
+```php
 //turn on old style routing
 Router::$fallback = true;
 ```

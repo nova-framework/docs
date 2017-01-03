@@ -5,31 +5,37 @@ The advantages of using a session class is all sessions are prefixed using the c
 <b>Usage</b>
 
 Setting a session, call Session then ::set pass in the session name followed by its value
-```
-\\Helpers\\Session::set('username', 'Dave');
+
+```php
+\Helpers\Session::set('username', 'Dave');
 ```
 
 To retrieve an existing session use the get method:
-```
-\\Helpers\\Session::get('username');
+
+```php
+\Helpers\Session::get('username');
 ```
 
 Pull an existing session key and remove it, use the pull method:
-```
-\\Helpers\\Session::pull('username');
+
+```php
+\Helpers\Session::pull('username');
 ```
 
 use id to return the session id:
-```
-\\Helpers\\Session::id();
+
+```php
+\Helpers\Session::id();
 ```
 
 Destroy a session key  by calling:
-```
-\\Helpers\\Session::destroy('mykey');
+
+```php
+\Helpers\Session::destroy('mykey');
 ```
 
 To look inside the sessions array, call the display method:
-```
-print_r(\\Helpers\\Session::display());
+
+```php
+print_r(\Helpers\Session::display());
 ```

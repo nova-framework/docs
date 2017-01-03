@@ -8,12 +8,14 @@ This comes from the logger class in (app/Core/Logger.php) the actual error is re
 >This does not apply to fatal errors
 
 To disable the custom error logger comment out the following in app/Core/Config.php
-```
+
+```php
 set_exception_handler('Logger::exceptionHandler');
 set_error_handler('Logger::errorHandler');
 ```
 
 To loop through and display errors without doing it yourself call the display method of the error class:
-```
+
+```php
 echo Error::display($error);
 ```

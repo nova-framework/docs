@@ -4,14 +4,14 @@ There are four methods available these are get, post and put.
 You will need to declare the SimpleCurl helper first to use these examples below. You can do it by adding a use statement at the top of the controller.
 
 
-```
-use Helpers\\SimpleCurl as Curl
+```php
+use Helpers\SimpleCurl as Curl
 ```
 
 ## How to do a get request
 This example will show you how to a get request to get the current bitcoin prices from coinbase
 
-```
+```php
 // Get the spot price of a bitcoin it returns a json object.
 $spotrate = Curl::get('https://coinbase.com/api/v1/prices/spot_rate');
 $data['spotrate'] = json_decode($spotrate);
@@ -20,7 +20,7 @@ $data['spotrate'] = json_decode($spotrate);
 The get request returned the data as json data we encoded it and passed it to our view.
 Inside your view you could simply do
 
-```
+```php
 echo $data['spotrate']->amount
 echo $data['spotrate']->currency
 ```
@@ -31,7 +31,7 @@ This should print out the currency and rate.
 
 This example will show you how to post a gist to github gists
 
-```
+```php
 // Post a gist to github
 $content = "Hello World!";
 $response = Curl::post('https://api.github.com/gists', json_encode(array(
@@ -49,7 +49,7 @@ The response will be details of the file and the url where it's located.
 ## How to do a put request
 This example will show you how to do a put request to httpbin a test service for curl.
 
-```
+```php
 $response = Curl::put('http://httpbin.org/put', array(
   'id' => 1,
   'first_name' => 'Simple',

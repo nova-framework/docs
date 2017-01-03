@@ -10,38 +10,38 @@ Inside the Core/Controller.php file the class is instantiated, resulting in $thi
 
 To use a language inside a controller use the following passing the file to be loaded located in the language/code/filename.php by default the language code will be en.
 
-```
+```php
 $this->language->load('file/to/load');
 ```
 
 The load method can also be passed if the data is to be returned with a true or false and the language code, useful to set a new language on the call:
 
-```
+```php
 $this->language->load('file/to/load',false,'nl');
 ```
 
 The default language can be set in the Config.php file:
 
-```
+```php
 //set a default language
 define('LANGUAGE_CODE', 'en');
 ```
 
 Inside the language file set the text, each language should contain the same text in their own language for instance:
 
-```
+```php
 //en
 $lang['welcome_message'] = 'Hello, welcome from the welcome controller!';
 ```
 
-```
+```php
 //nl
 $lang['welcome_message'] = 'Hallo, welkom van de welcome controller!';
 ```
 
 To use the language strings inside a controller, set a data array and call the get method passing the desired string to return:
 
-```
+```php
 $data['welcome_message'] = $this->language->get('welcome_message');
 ```
 
@@ -49,7 +49,7 @@ Then in the view echo $data['welcome_message'] to print the chosen language.
 
 # Welcome example
 
-```
+```php
 <?php
 namespace Controllers;
 

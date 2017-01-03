@@ -6,7 +6,7 @@ $mail = new \\Helpers\\PhpMailer\\Mail();
 
 Once an instance has been created all the properties are available to you, a typical example:
 
-```
+```php
 $mail = new \\Helpers\\PhpMailer\\Mail();
 $mail->setFrom('noreply@domain.com');
 $mail->addAddress('user@domain.com');
@@ -17,7 +17,7 @@ $mail->send();
 
 The class has the ability to send via SMTP in order to do so edit Helpers/PhpMailer/Mail.php and enter your SMTP settings you can also set a default email from address so you don't have to supply it each time:
 
-```
+```php
 public $From     = 'noreply@domain.com';
 public $FromName = SITETITLE;
 public $Host     = 'smtp.gmail.com';

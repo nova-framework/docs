@@ -2,11 +2,11 @@ Models control the data source, they are used for collecting and issuing data, t
 
 A Model is structured like a controller; it's a class. The model needs to extend the parent Model. Like a controller the constuctor needs to call the parent construct in order to gain access to its properties and methods.
 
-```
+```php
 <?php
 namespace Models;
 
-use Core\\Model;
+use Core\Model;
 
 class Contacts extends Model
 {
@@ -18,11 +18,11 @@ class Contacts extends Model
 
 The parent model is very simple it's only role is to create an instance of the database class located in (app/Helpers/Database.php) once set the instance is available to all child models that extend the parent model.
 
-```
+```php
 <?php
 namespace Core;
 
-use Helpers\\Database;
+use Helpers\Database;
 
 class Model
 {
@@ -43,7 +43,7 @@ Methods inside a model are used for getting data and returning data back to the 
 
 The most common us of a model is for performing database actions, here is a quick example:
 
-```
+```php
 public function getContacts()
 {
     return $this->db->select('SELECT firstName,lastName FROM '.PREFIX.'contacts');

@@ -2,7 +2,7 @@ IIS with URL Rewrite module installed - <a href='http://www.iis.net/downloads/mi
 
 For IIS the htaccess needs to be converted to web.config:
 
-```
+```php
 <configuration>
     <system.webserver>
         <directorybrowse enabled="true"/>

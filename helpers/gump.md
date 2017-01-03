@@ -4,8 +4,8 @@ To use the class call it by using the namespace \\Helpers\\Gump
 
 An example validating a username and password:
 
-```
-$is_valid = \\Helpers\\Gump::is_valid($_POST, array(
+```php
+$is_valid = \Helpers\Gump::is_valid($_POST, array(
     'username' => 'required|alpha_numeric',
     'password' => 'required|max_len,100|min_len,6'
 ));
@@ -20,8 +20,8 @@ if ($is_valid === true) {
 To pass the error array to the view pass $is_valid (this will hold any errors) as a third param to the render method.
 To loop through and display errors without doing it yourself call the display method of the error class:
 
-```
-echo \\Core\\Error::display($error);
+```php
+echo \Core\Error::display($error);
 ```
 
-For further examples see  <a href='https://github.com/Wixel/GUMP'>https://github.com/Wixel/GUMP</a> remember to replace GUMP with \\Helpers\\Gump
+For further examples see  <a href='https://github.com/Wixel/GUMP'>https://github.com/Wixel/GUMP</a> remember to replace GUMP with \Helpers\Gump

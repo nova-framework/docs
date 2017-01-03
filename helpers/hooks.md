@@ -19,7 +19,7 @@ The hooks: meta, css, afterBody, footer and js are placeholders to execute code 
 
 To use a hook first make reference to it:
 
-```
+```php
 use Helpers\\Hooks;
 
 $hooks = Hooks::get();
@@ -27,10 +27,10 @@ $hooks = Hooks::get();
 
 Once initiated calls can be called by running $hooks->run('hookName'), this will then run all code attached to the hook for instance to run all code attached to the css hook (used for injecting css files):
 
-```
+```php
 <?php
 
-use Helpers\\Hooks;
+use Helpers\Hooks;
 
 //initialise hooks
 $hooks = Hooks::get();
@@ -51,8 +51,8 @@ To add code to a hook call Hooks::addHook() this method expects 2 parameters:
 - The path to the class, start with the namespace followed by the class then @method to be called.
 
 
-```
-use Helpers\\Hooks;
+```php
+use Helpers\Hooks;
 
 Hooks::addHook('css', 'Models\\Demo\\Controllers\\Demo@css');
 ```
@@ -63,15 +63,15 @@ Once run any code inside the class method will be executed on the page where the
 
 Define the routes hook and pass in a path to the class and method to be used.
 
-```
-use Helpers\\Hooks;
+```php
+use Helpers\Hooks;
 
 Hooks::addHook("routes", 'Modules\\Demo\\Controllers\\Demo@routes');
 ```
 
 Next in the class create an alias for Router. Next in the method the routes will be used in call Router followed by the route desired, instead of calling a controller use a closure to run the code against the route.
 
-```
+```php
 <?php
 namespace Modules\\Demo\\Controllers;
 

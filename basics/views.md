@@ -4,11 +4,11 @@ Views are called from controllers once called they act as included files outputt
 
 The parent view class has two methods render and renderTemplate:
 
-```
+```php
 <?php
 namespace Core;
 
-use Helpers\\Session;
+use Helpers\Session;
 
 class View
 {
@@ -46,7 +46,7 @@ The renderTemplate is almost the same except its use is for including templates,
 
 For example, calling an email template can be done like this:
 
-```
+```php
 View::renderTemplate('header', $data, 'email');
 ```
 
@@ -56,7 +56,7 @@ The template folder used is dictated by the template set in the app/Core/Config 
 
 A view can be set inside a method, an array can optionally be created and passed to both the render and renderTemplate methods, this is useful for setting the page title and letting a header template use it.
 
-```
+```php
  $data['title'] = 'Welcome';
 
  View::renderTemplate('header', $data);
@@ -70,7 +70,7 @@ Views are normal php files they can contain php and html, as such any php logic 
 
 An example of a view; looping through an array and outputting its contents:
 
-```
+```php
  Contacts List
  <?php
  if ($data['contacts']) {

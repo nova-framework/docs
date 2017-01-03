@@ -2,7 +2,7 @@ The database class is used to connect to a MySQL database using the connection d
 
 The constants (DB_TYPE, DB_HOST, DB_NAME, DB_USER, DB_PASS) are used to connect to the database, the class extends PDO, it can pass the connection details to its parent construct.
 
-```
+```php
 try {
     parent::__construct(DB_TYPE.':host='.DB_HOST.'; dbname='.DB_NAME,DB_USER,DB_PASS);
     $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -28,14 +28,15 @@ This class has the following methods:
 <b>Select</b>
 The SELECT query below will return a result set based upon the SQL statement. The result set will return all records from a table called contacts.
 
-```
+```php
 $this->db->select("SELECT firstName, lastName FROM ".PREFIX."contacts");
 ```
 
 Optionally an array can be passed to the query, this is helpful to pass in dynamic values, they will be bound to the query in a prepared statement this ensures the data never goes into the query directly and avoids any possible sql injection.
 
 Example with passed data:
-```
+
+```php
 $this->db->select("SELECT firstName, lastName FROM ".PREFIX."contacts WHERE contactID = :id", array(':id' => $id));
 ```
 
@@ -51,7 +52,7 @@ $this->db->insert(PREFIX.'contacts', $data);
 
 The data array is created in a controller, then passed to a method in a model
 
-```
+```php
 $postdata = array(
     'firstName' => $firstName,
     'lastName'  => $lastName,
@@ -62,7 +63,8 @@ $this->model->insertContact($postdata);
 ```
 
 The model passes the array to the insert method along with the name of the table, optionally return the id of the inserted record back to the controller.
-```
+
+```php
 public function insertContact($data)
 {
     $this->db->insert(PREFIX.'contacts', $data);
@@ -76,7 +78,8 @@ public function insertContact($data)
 The update is very similar to insert an array is passed with data, this time also an identifier is passed and used as the where condition:
 
 Controller:
-```
+
+```php
 $postdata = array(
     'firstName' => $firstName,
     'lastName'  => $lastName,
@@ -89,7 +92,8 @@ $this->model->updateContact($postdata, $where);
 ```
 
 Model:
-```
+
+```php
 public function updateContact($data, $where)
 {
     $this->db->update(PREFIX.'contacts',$data, $where);
@@ -102,13 +106,14 @@ public function updateContact($data, $where)
 This method expects the name of the table and an array containing the columns and value for the where claus.
 
 Example array to pass:
-```
+
+```php
 $data = array('contactID' => $id);
 ```
 
 Delete in model
 
-```
+```php
 public function deleteContact($data)
 {
     $this->db->delete(PREFIX.'contacts', $data);
@@ -120,7 +125,7 @@ public function deleteContact($data)
 
 This method will delete all rows from the table, the method expects the table name as an argument.
 
-```
+```php
 public function deleteContact($table)
 {
     $this->db->truncate($table);

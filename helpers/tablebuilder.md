@@ -11,7 +11,7 @@ To start working with Table Builder, you need to create instance class of
 \Helpers\TableBuilder. Preferably for performance, create your instance class in any model
 and pass it \Helpers\Database instance to avoid duplicating database connection.
 
-```
+```php
     private $tableBuilder;
 
     // Declaration of constructor in new model
@@ -34,7 +34,7 @@ If you want to set your own name or don't want to have id field, pass `false` as
 
 Now we can create simple table, let's create table for comments:
 
-```
+```php
 // Another model's instance
 public function createCommentTable ()
 {
@@ -50,7 +50,7 @@ public function createCommentTable ()
 This example of code would create table named `comments` with `id`, `author` and `message` fields.
 If you would try to run this code again you'll see error. To prevent that let's set `IF NOT EXISTS` to true:
 
-```
+```php
 // First argument is field name and second is type or alia
 $this->tableBuilder->addField('author', 'VARCHAR(40)');
 $this->tableBuilder->addField('message', 'TEXT');
@@ -68,7 +68,7 @@ There's only 3 included types: int `INT(11)`, string `VARCHAR(255)` and descript
 
 You can add globally your own alias, for example, in config:
 
-```
+```php
 // configs above
 
 \Helpers\TableBuilder::setAlias('name', 'VARCHAR(40)');
@@ -83,7 +83,7 @@ You can add globally your own alias, for example, in config:
 
 Method `addField` is used to create field in query:
 
-```
+```php
 $tableBuilder->addField($field_name, $type_or_alias, $is_null, $options);
 ```
 
@@ -94,7 +94,7 @@ or `CURRENT_TIMESTAMP`.
 
 Example of setting field date with `CURRENT_TIMESTAMP`:
 
-```
+```php
 $tableBuilder->addField('date', 'TIMESTAMP', FALSE, \Helpers\TableBuilder::CURRENT_TIMESTAMP);
 ```
 
@@ -102,7 +102,7 @@ $tableBuilder->addField('date', 'TIMESTAMP', FALSE, \Helpers\TableBuilder::CURRE
 
 Method `setDefault` is used to determine default value of field in query. There's the example:
 
-```
+```php
 $tableBuilder->setDefault('group_id', 0);
 ```
 
@@ -115,7 +115,7 @@ This example is illustrating how to set default user `group_id` in table.
 
 Method `create` is used to finish the query and create table in the database:
 
-```
+```php
 $table->create();
 ```
 
@@ -130,7 +130,7 @@ Method `reset` resets all properties in tableBuilder in order you could start co
 If you run into some errors with table builder, you can debug SQL code by calling getSQL method:
 
 
-```
+```php
 // Some code ...
 
 echo $this->tableBuilder->getSQL();

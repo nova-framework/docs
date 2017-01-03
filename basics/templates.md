@@ -12,11 +12,11 @@ Below is the contents of the header.php template, the title comes from an array 
 
 The url helper is being used to get the full path to the css file.
 
-```
+```php
 <?php
 
-use Helpers\\Assets;
-use Helpers\\Url;
+use Helpers\Assets;
+use Helpers\Url;
 
 ?>
 <!DOCTYPE html>

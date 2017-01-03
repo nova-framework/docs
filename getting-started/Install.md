@@ -2,7 +2,7 @@ The framework is now on packagist <a href='https://packagist.org/packages/simple
 
 Install from terminal now by using:
 
-```
+```php
 composer create-project simple-mvc-framework/v2 foldername -s dev
 ```
 

@@ -2,7 +2,7 @@ Nginx configuration kindly provided by <a href='https://irsa.me/'>ARIS S RIPANDI
 
 No special configuration, you only need to configure Nginx and PHP-FPM.
 
-```
+```php
 server {
   listen 80;
   server_name yourdomain.tld;

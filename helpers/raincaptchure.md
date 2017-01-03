@@ -4,7 +4,7 @@ The class can also send a request to RainCaptcha API to verify if the text that 
 RainCaptcha is a CAPTCHA class that does not require any image processing extensions (GD, ImageMagick, etc). CAPTCHA was developed to be readable by humans and resistant to OCR software. It generates black-and-white images with 5 distorted letters on them and noise. Its checking algorithm is case-insensitive.
 To use the class create a new instance, this can then be used to generate a captcha image using ->getImage()
 
-```
+```php
 <?php $rainCaptcha = new \\Helpers\\RainCaptcha(); ?>
 
 <img id="captchaImage" src="<?php echo $rainCaptcha->getImage(); ?>" />
@@ -18,7 +18,7 @@ To use the class create a new instance, this can then be used to generate a capt
 
 To check if a user's input matches the captcha
 
-```
+```php
 $rainCaptcha = new \\Helpers\\RainCaptcha();
 
 if (!$rainCaptcha->checkAnswer($_POST['captcha'])) {
