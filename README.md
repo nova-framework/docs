@@ -1,10 +1,14 @@
-Simple MVC Framework is a PHP 5.3 MVC Framework. It's designed to be lightweight and modular, allowing developers to build better and easy to maintain code with PHP.
+Nova Framework is a PHP 5.5+ MVC Framework. It's designed to be lightweight and modular, allowing developers to build better and easy to maintain code with PHP.
 
-The base framework comes with a few helper classes, this is to keep code bloat down to a minimum. Classes can easily be added at any stage of development.
+The base framework comes with a range of helper classes, New classes can easily be added at any stage of development.
 
-> Version 2 has been released, their has been significant changes made to the framework, The most noteworthy changes are:
+Version 2.2 has been released, The most noteworthy changes are:
 
-- Routes added
-- ability to next models, helpers and controllers
-- introduced a config file for initial setup
-- Slimmer index file with autoloading
+
+*. Full PSR 1 & 2 compatibility
+*. Folders that contain classes now start with a capital letter
+*. Coding standards have been applied to all classes to adhere to the PHP Standard Recommendation (PSR) 1 & 2
+
+
+PSR 1 - Basic Coding Standards-  docs found at <a href='http://www.php-fig.org/psr/psr-1'>http://www.php-fig.org/psr/psr-1
+PSR 2 - Coding Style Guide -  docs found at <a href='http://www.php-fig.org/psr/psr-2'>http://www.php-fig.org/psr/psr-2
