@@ -6,35 +6,39 @@ The method used to get the records will need a get_limit passed to it, this will
 Lastly a method called page_links will return the page links.
 
 The model that uses the limit will need to expect the limit:
-```php
-public function get_contacts($limit){
-    return $this->db->select('SELECT * FROM '.PREFIX.'contacts '.$limit);
+
+```
+public function getContacts($limit){
+    return $this->db->select('
+        SELECT
+        *,
+        (SELECT count(id) FROM '.PREFIX.'contacts) as total
+     FROM '.PREFIX.'contacts '.$limit);
 }
 ```
 
 Pagination concept
-```php
+
+```
 //create a new object
-$pages = new Paginator('10','p');
+$pages = new \Helpers\Paginator('1', 'p');
+
+//calling a method to get the records with the limit set (_contacts would be the var holding the model data)
+$data['records'] = $this->model->getContacts($pages->getLimit());
 
 //set the total records, calling a method to get the number of records from a model
-$pages->set_total( $this->_model->get_all_count() );
-
-//calling a method to get the records with the limit set
-$data['records'] = $this->_model->get_all( $pages->get_limit() );
+$pages->setTotal( $data['records'][0]->total );
 
 //create the nav menu
-$data['page_links'] = $pages->page_links();
-
-//then pass this to the view, may be different depending on the system
-$this->_view->render('index', $data);
+$data['pageLinks'] = $pages->pageLinks();
 ```
 
 Usage example:
 
-```php
-$pages = new Paginator('50','p');
-$pages->set_total( count($this->_model->get_contacts()));
-$data['records'] = $this->_model->get_contacts( $pages->get_limit() );
-$data['page_links'] = $pages->page_links();
+
+```
+$pages = new \\Helpers\\Paginator('50','p');
+$data['records'] = $this->model->getContacts($pages->getLimit());
+$pages->setTotal($data['records'][0]->total);
+$data['pageLinks'] = $pages->pageLinks();
 ```
