@@ -12,13 +12,29 @@ Below is the contents of the header.php template, the title comes from an array 
 
 The url helper is being used to get the full path to the css file.
 
-```php
+```
+<?php
+
+use Helpers\\Assets;
+use Helpers\\Url;
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo LANGUAGE_CODE; ?>">
 <head>
+
+    <!-- Site meta -->
     <meta charset="utf-8">
-    <title><?php echo $data['title'].' - '.SITETITLE;?></title>
-    <link href="<?php echo url::get_template_path();?>css/style.css" rel="stylesheet">
+    <title><?php echo $data['title'].' - '.SITETITLE; //SITETITLE defined in app/Core/Config.php ?></title>
+
+    <!-- CSS -->
+    <?php
+    Assets::css(array(
+        '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css',
+        Url::templatePath() . 'css/style.css',
+    ));
+    ?>
+
 </head>
 <body>
 ```
