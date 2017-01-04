@@ -12,7 +12,7 @@ Route::get('', 'closure or controller');
 To respond to both get and post requests use a match.
 
 ```php
- Route::match('['get', 'post']', 'users\index'  'App\Controllers\Users@index');
+ Route::match(['get', 'post'], 'users\index'  'App\Controllers\Users@index');
 ```
 
 ## Closures
