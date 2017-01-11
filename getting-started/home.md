@@ -23,5 +23,11 @@ For more information on Migrations, visit `Migrations and Seeding`, under `Datab
 
 ### Changes
 
+#### Boot Stage
+The boot stage has been simplified, improving performance significantly.
 
-### Obsolete / Deprecated
+#### Config
+The Config API has been improved - now allowing the user to set a different configuration based on the environment the project is being worked on and overriding the framework config.
+
+#### Modules
+The Modules service has been improved and is now intergrated fully with the new Forge command line interface.
