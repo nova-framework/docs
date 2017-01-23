@@ -1,11 +1,37 @@
-![Nova Framework](http://novaframework.com/app/templates/publicthemes/nova/images/nova.png)
-
 # Overview
 Nova Framework is a PHP 5.6+ MVC Framework. It's designed to be lightweight and modular, allowing developers to build better and easy to maintain code with PHP.
 
 To this end Nova does not come with lots of built in libraries / helpers or modules instead, it's left to the user to decide what they want to implement, this allows freedom to design and build how you see fit. Having said that there are a limited number provided.
 
 This has been tested with php 5.6 and php 7 please report any bugs.
+
+## 3.75.10
+
+Automatically setup the Encryption Key after Composer based installation
+
+## 3.75.7
+
+Consolidate the Boot Stage and implement an Events driven Backend Menu
+
+SYSTEMDIR, now points to:
+
+vendor/nova-framework/system/
+
+Also, it is removed the SQL script scripts/nova_testing.sql which contains tables which are now not useful anymore.
+
+As improvements, the Main Menu from the Backend, implemented by the shipped Modules, is moved to a Events driven system, making it dynamically.
+
+Finally, this pull request remove the vendor existence check, considering that it is not useful anymore for Nova's target audience, which is supposed to be formed from users skilled enough to use ORM Models, the QueryBuilder and other advanced techniques.
+
+## 3.75.5
+
+Adjust the application to support renaming the Template Service as Layout. The Template Service was renamed as Layout, because what it handle really are the Layout files.
+
+Also, this renaming leave room for a future Template Service for handling the whole Templates, similar with the Modules one.
+
+## 3.75.4
+
+Update app/Config.php to support the Config Cache
 
 ## 3.75.0
 
@@ -19,7 +45,7 @@ composer create-project nova-framework/framework foldername 3.* -s dev
 
 Master branch for the dev team only.
 
-## 3.74.0 changes: 
+## 3.74.0 changes:
 
 All classes from the System directory now have a primary namespace of Nova. The major change is prefixing of System classes namespaces with Nova\\, then instead of:
 
@@ -163,7 +189,7 @@ Route::get('user/{id?}', function($id = null){
 As from **3.73.0** instead of doing:
 
 ```php
-->where('slug', '(.*)’); 
+->where('slug', '(.*)’);
 ```
 
 On every Route definition which need that, you can setup a pattern with this parameter name a (regex) pattern, and it will be applied to any parameter with this name, aka {slug}.
@@ -224,7 +250,7 @@ Session::set('item', 'value');
 
 ### Url
 
-**resource_url($path, $module = null)** 
+**resource_url($path, $module = null)**
 
 Returns the path the global assets folder or the assets folder of modules when passing the module name as a second param.
 
