@@ -1,6 +1,8 @@
 - [Basic Input](#basic-input)
+- [Cookies](#cookies)
 - [Old Input](#old-input)
 - [Files](#files)
+- [Request Information](#request-information)
 
 **Please note that both Input and Request do NOT sanitise your data, it is up to you to do that.**
 
@@ -44,6 +46,43 @@ $input = Input::get('products.0.name');
 ```
 
 > Note: Some JavaScript libraries such as Backbone may send input to the application as JSON. You may access this data via Input::get like normal.
+
+## Cookies
+
+All cookies created by the Nova framework are encrypted and signed with an authentication code, meaning they will be considered invalid if they have been changed by the client.
+
+#### Retrieving A Cookie Value
+
+```php
+$value = Cookie::get('name');
+```
+
+#### Attaching A New Cookie To A Response
+
+```php
+$response = Response::make('Hello World');
+
+$response->withCookie(Cookie::make('name', 'value', $minutes));
+```
+
+#### Queueing A Cookie For The Next Response
+
+If you would like to set a cookie before a response has been created, use the `Cookie::queue()` method. The cookie will automatically be attached to the final response from your application.
+
+```php
+Cookie::queue($name, $value, $minutes);
+```
+
+#### Creating A Cookie That Lasts Forever
+
+```php
+$cookie = Cookie::forever('name', 'value');
+```
+
+#### Forgetting A Cookie
+```php
+Cookie::forget('name');
+```
 
 ## Old Input
 
@@ -146,4 +185,97 @@ $size = Input::file('photo')->getSize();
 #### Retrieving The MIME Type Of An Uploaded File
 ```php
 $mime = Input::file('photo')->getMimeType();
+```
+
+## Request Information
+
+The Request class provides many methods for examining the HTTP request for your application and extends the `Symfony\Component\HttpFoundation\Request` class.
+
+#### Retrieving The Request URI
+
+```php
+$uri = Request::path();
+```
+
+#### Retrieving The Request Method
+
+```php
+$method = Request::method();
+
+if (Request::isMethod('post'))
+{
+    //
+}
+```
+
+#### Determine If The Request Path Matches A Pattern
+
+```php
+if (Request::is('admin/*'))
+{
+    //
+}
+```
+
+#### Get The Request URL
+```php
+$url = Request::url();
+```
+
+#### Retrieve A Request URI Segment
+```php
+$segment = Request::segment(1);
+```
+
+#### Retrieving A Request Header
+```php
+$value = Request::header('Content-Type');
+```
+
+#### Retrieving Values From $_SERVER
+```php
+$value = Request::server('PATH_INFO');
+```
+
+#### Determine If The Request Is Over HTTPS
+```php
+if (Request::secure())
+{
+    //
+}
+```
+
+#### Determine If The Request Is Using AJAX
+```php
+if (Request::ajax())
+{
+    //
+}
+```
+
+#### Determine If The Request Has JSON Content Type
+```php
+if (Request::isJson())
+{
+    //
+}
+```
+
+#### Determine If The Request Is Asking For JSON
+```php
+if (Request::wantsJson())
+{
+    //
+}
+```
+
+#### Checking The Requested Response Format
+
+The `Request::format` method will return the requested response format based on the HTTP Accept header:
+
+```php
+if (Request::format() == 'json')
+{
+    //
+}
 ```

@@ -28,10 +28,11 @@ Create an alias:
 ```php
 use View;
 ```
+
 Then to use:
 
 ```php
-return View::make('path);
+return View::make('path');
 ```
 
 **Example**
@@ -47,7 +48,8 @@ class Welcome extends Controller
 {
     public function index()
     {   
-        return View::make('Welcome/Welcome')->shares('title', 'Welcome);
+        return View::make('Welcome/Welcome')
+            ->shares('title', 'Welcome');
     }
 }
 ```
@@ -74,7 +76,9 @@ class Blog extends Controller
     public function blog()
     {
         $posts = $this->blog->getPosts();
-        View::make('Blog/Posts')->shares('title', 'Blog')->withPosts($posts);
+        View::make('Blog/Posts')
+            ->shares('title', 'Blog')
+            ->withPosts($posts);
     }
 }
 ```
@@ -88,7 +92,8 @@ class Users extends Controller
 {
     public function index()
     {
-      return $this->getView()->shares('title', 'The Title');
+      return $this->getView()
+          ->shares('title', 'The Title');
     }
 }
 
@@ -113,7 +118,9 @@ A controller can have many methods, a method can call another method, all standa
 $content = 'The contact for the page';
 $users = array('Dave', 'Kerry', 'John');
 
-return $this->getView()->withContent($content)->withUsers($users);
+return $this->getView()
+    ->withContent($content)
+    ->withUsers($users);
 ```
 
 Using a model is very similar, an array holds the results from the model, the model calls a method inside the model.

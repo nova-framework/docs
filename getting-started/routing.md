@@ -219,12 +219,12 @@ Route::get('request/{id}/{name?}', 'App\Controllers\Demos@request')
 As from **3.73.0** instead of doing:
 
 ```php
-->where('slug', '(.*)’); 
+->where('slug', '(.*)'); 
 ```
 
 On every Route definition which need that, you can setup a pattern with this parameter name a (regex) pattern, and it will be applied to any parameter with this name, aka {slug}.
 Logically, the patterns **should** be defined before the Routes definition.
 
 ```php
-Route::pattern('slug', '(.*)’);
+Route::pattern('slug', '(.*)');
 ```
