@@ -5,7 +5,11 @@
 <a name="introduction"></a>
 ## Introduction
 
-Nova comes with a `forge` command to help you backup your application's database. Any backup dumps created with this command will be stored in `app/Database/Backup`.
+Nova comes with a `forge` command to help you backup your application's database. This forge command is located under the `shared` namespace of `nova-framework/framework`. 
+
+Any backup dumps created with this command will be stored in the `app/Database/Backup` directory.
+
+> Please note that `nova-framework/app` doesn't come with the database backup extension and that the extension is not a supported native API.
 
 The following databases are supported:
 
