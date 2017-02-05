@@ -87,6 +87,7 @@ Since the images are above the document root, they have to be served from Nova. 
 <a name="template-syntax"></a>
 ## Template Syntax
 
+As well as using standard html and php for your template's syntax, you can also use Nova's templating engine. To use this, your template files should use the `.tpl.php` extension.
 
 #### Defining A Layout
 
