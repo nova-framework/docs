@@ -102,6 +102,7 @@ foreach ($users as $user)
     var_dump($user->name);
 }
 ```
+
 #### ORM Aggregates
 
 Of course, you may also use the query builder aggregate functions.
@@ -114,6 +115,52 @@ If you are unable to generate the query you need via the fluent interface, feel 
 
 ```php
 $users = User::whereRaw('age > ? and votes = 100', array(25))->get();
+```
+
+#### Date Filtering
+
+Nova offers some methods to help you filter dates, these are: `whereDate`, `whereMonth`, `whereDay` and `whereYear`.
+
+The `whereDate` method may be used to compare a column's value against a date:
+```php
+Post::whereDate('created_at', '=', date('Y-m-d'))->get();
+
+// OR
+
+Post::whereDate('created_at', '2017-02-04')->get();
+```
+
+The `whereDay` method may be used to compare a column's value against a specific day of a month:
+```php
+Post::whereDay('created_at', '=', date('d'))->get();
+
+// OR
+
+Post::whereDay('created_at', '04')->get();
+```
+
+The `whereMonth` method may be used to compare a column's value against a specific month of a year:
+```php
+Post::whereMonth('created_at', '=', date('m'))->get();
+
+// OR
+
+Post::whereMonth('created_at', '02')->get();
+```
+
+The `whereYear` method may be used to compare a column's value against a specific year:
+```php
+Post::whereYear('created_at', '=', date('Y'))->get();
+
+// OR
+
+Post::whereYear('created_at', '2017')->get();
+```
+
+Alternatively, you can use `Carbon`, instead of the `date()` method.
+
+```php
+Post::whereDate('created_at', '=', Carbon::today()->toDateString())->get();
 ```
 
 #### Chunking Results
