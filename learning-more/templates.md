@@ -127,14 +127,16 @@ Note that views which `extend` a layout simply override sections from the layout
 
 Sometimes, such as when you are not sure if a section has been defined, you may wish to pass a default value to the `@yield` directive. You may pass the default value as the second argument:
 
-`@yield('section', 'Default Content')`
+```php
+@yield('section', 'Default Content')
+```
 
 <a name="other-control-structures"></a>
 ## Other Control Structures
 
 #### Echoing Data
 
-```
+```php
 Hello, {{{ $name }}}.
 The current UNIX timestamp is {{{ time() }}}.
 ```
@@ -143,13 +145,13 @@ The current UNIX timestamp is {{{ time() }}}.
 
 Sometimes you may wish to echo a variable, but you aren't sure if the variable has been set. Basically, you want to do this:
 
-```
+```php
 {{{ isset($name) ? $name : 'Default' }}}
 ```
 
 However, instead of writing a ternary statement, Template allows you to use the following convenient short-cut:
 
-```
+```php
 {{{ $name or 'Default' }}}
 ```
 
@@ -157,27 +159,27 @@ However, instead of writing a ternary statement, Template allows you to use the 
 
 If you need to display a string that is wrapped in curly braces, you may escape the Template behavior by prefixing your text with an @ symbol:
 
-```
+```php
 @{{ This will not be processed by Template }}
 ```
 
 Of course, all user supplied data should be escaped or purified. To escape the output, you may use the triple curly brace syntax:
 
-```
+```php
 Hello, {{{ $name }}}.
 ```
 
 If you don't want the data to be escaped, you may use double curly-braces:
 
-```
+```php
 Hello, {{ $name }}.
 ```
 
->> Note: Be very careful when echoing content that is supplied by users of your application. Always use the triple curly brace syntax to escape any HTML entities in the content.
+> Note: Be very careful when echoing content that is supplied by users of your application. Always use the triple curly brace syntax to escape any HTML entities in the content.
 
 #### If Statements
 
-```
+```php
 @if (count($records) === 1)
     I have one record!
 @elseif (count($records) > 1)
@@ -193,7 +195,7 @@ Hello, {{ $name }}.
 
 #### Loops
 
-```
+```php
 @for ($i = 0; $i < 10; $i++)
     The current value is {{ $i }}
 @endfor
@@ -215,13 +217,13 @@ Hello, {{ $name }}.
 
 #### Including Sub-Views
 
-```
+```php
 @include('view.name')
 ```
 
 You may also pass an array of data to the included view:
 
-```
+```php
 @include('view.name', array('some'=>'data'))
 ```
 
@@ -229,7 +231,7 @@ You may also pass an array of data to the included view:
 
 To overwrite a section entirely, you may use the overwrite statement:
 
-```
+```php
 @extends('list.item.container')
 
 @section('list.item.content')
@@ -239,6 +241,6 @@ To overwrite a section entirely, you may use the overwrite statement:
 
 #### Comments
 
-```
+```php
 {{-- This comment will not be in the rendered HTML --}}
 ```
