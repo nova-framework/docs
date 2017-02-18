@@ -7,9 +7,9 @@
 
 #### Recommended
 
-This framework was designed and is strongly recommended to be installed above the document root directory, with it pointing to the public folder.
+This framework was designed and is strongly recommended to be installed above the document root directory, with it pointing to the webroot folder.
 
-Additionally, installing in a sub-directory, on a production server, will introduce severe security issues. If there is no choice still place the framework files above the document root and have only index.php and .htacess from the public folder in the sub folder and adjust the paths accordingly.
+Additionally, installing in a sub-directory, on a production server, will introduce severe security issues. If there is no choice still place the framework files above the document root and have only index.php and .htacess from the webroot folder in the sub folder and adjust the paths accordingly.
 
 The framework is located on [Packagist](https://packagist.org/packages/nova-framework/framework).
 
@@ -58,7 +58,7 @@ composer create-project nova-framework/framework foldername 3.* -s dev
 
 #this is the vhost address in XAMPP
 <VirtualHost *:80>
-    DocumentRoot "C:/XAMPP/htdocs/projectname/"
+    DocumentRoot "C:/XAMPP/htdocs/projectname/webroot/"
     ServerName projectname.dev
     SetEnv NS_ENV variable_value
 </VirtualHost>
@@ -116,7 +116,7 @@ composer create-project nova-framework/framework foldername 3.* -s dev
 
 #this is the vhost address in XAMPP
 <VirtualHost *:80>
-    DocumentRoot "C:/vhosts/projectname/"
+    DocumentRoot "C:/vhosts/projectname/webroot/"
     ServerName projectname.dev
     SetEnv NS_ENV variable_value
 </VirtualHost>
@@ -168,10 +168,10 @@ Then add your VirtualHost to the same file at the bottom:
 ```php
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
-    DocumentRoot "C:\xampp\testproject\public"
+    DocumentRoot "C:\xampp\testproject\webroot"
     ServerName testproject.dev
 
-    <Directory "C:\xampp\testproject\public">
+    <Directory "C:\xampp\testproject\webroot">
         Options Indexes FollowSymLinks Includes ExecCGI
         AllowOverride All
         Order allow,deny
