@@ -4,13 +4,19 @@ Views are called from controllers once called they act as included files outputt
 
 ### Using a view from a controller
 
-To load a view in a controller call **return View::make()** it's important return is used without is the system Middleware will not be called and no view will be loaded. 
+To load a view in a controller call **return View::make()** it's important return is used without it the system Middleware will not be called and no view will be loaded. 
 
 View::make accepts a path to the view relative to the **app/Views** folder. 
 The second param is the data and the third param is the name of the module when loading module views.
 
+Import the View:
+
 ```php
-return View::make('Welcome/Welcome');
+use View;
+```
+
+```php
+return View::make('Welcome/Welcome')->shares('title', 'Welcome');
 ```
 
 To load a view from a module pass the module name as a third parameter.
@@ -35,22 +41,31 @@ class Welcome extends Controller
 {
     public function index()
     {
-        return $this->getView()
+        return $this->getView()->shares('title', 'Welcome');
     }
 }
 ```
 
-This snippet is from the Welcome controller, from this Nova know's to load **app/Views/Welcome/Index.php** this worked out automatically when using this approach a folder matching the controller and method should exist in the Views folder. 
+This snippet is from the Welcome controller, from this Nova know's to load **app/Views/Welcome/Index.tpl** this worked out automatically when using this approach a folder matching the controller and method should exist in the Views folder. 
 
-For Modules view folders should be placed inside **app/Modules/ModuleName/Views/Controllername/Viewfile.php**
+For Modules view folders should be placed inside **app/Modules/ModuleName/Views/Controllername/Viewfile.tpl**
 
-For example a module called Blog has a method called post would have a view path of **app/Modules/Blog/View/Blog/Post.php**
+For example a module called Blog has a method called post would have a view path of **app/Modules/Blog/View/Blog/Post.tpl**
 
 
 
 ## Inside a view
 
-Views are normal PHP files, they can contain PHP and HTML, as such any PHP logic can be used inside a view though it's recommended to use only simple logic inside a view anything more complex is better suited inside a controller.
+Views are normal PHP files / template files (.tpl), they can contain PHP and HTML, as such any PHP logic can be used inside a view though it's recommended to use only simple logic inside a view anything more complex is better suited inside a controller.
+
+views with .tpl should not contain any way php use .php files or that or wrap them inside:
+
+```php
+@php
+//php code
+@endphp
+```
+For more on this please see the Template Engine page.
 
 An example of a view; looping through an array and outputting its contents:
 
@@ -67,74 +82,20 @@ An example of a view; looping through an array and outputting its contents:
 
 To return a view and store its contents use View::fetch, fetch takes 3 params:
 1. The view path relative to the view folder or module
-2. The data being passed
+2. The data being passed must be an array
 3. Optional when loading a view from a module pass in the module name.
 
 ```php
-$content = View::fetch('Page/Show', $data, 'Pages');
+$content = View::fetch('Page/Show', ['content' => $content], 'Pages');
 
 echo $content;
 ```
-## Post Processing
-
-a new method, called '**after**', which is automatically executed when the current Action return a value different of null or boolean.
-
-This post processing ability can be very useful in the **RESTful** Controllers, for example doing:
-
-```php
-public function index()
-{
-    $data = array(
-         'success' => true
-    );
-
-    return $data;
-}
-
-public function show($id)
-{
-    $data = array(
-         'success' => true
-    );
-
-    return $data;
-}
-
-public function after($data)
-{
-    header('Content-Type: application/json');
-
-    echo json_encode($data);
-}
-```
-
-Also, this post-processing can be very useful when it is used a Layout style rendering, to not write again and again the same snippets; as in example:
-
-```php
-public function index()
-{
-    $data['title'] = 'welcomeText';
-    $data['welcomeMessage'] = 'welcomeMessage';
-
-    // Render the View and fetch the output in a data variable.
-    $content = View::fetch('Welcome/Welcome', $data);
-
-    return $content;
-}
-
-public function after($data)
-{
-    return $this->getView()->withData($data);
-}
-```
-
-The returned value of the current Action is passed to post-processing method as a parameter.
 
 Alternative **View/Layout** options:
 
 ### Basic Commands
 
-While the actual **View\View** methods are static and they should call independently, the new API works with View instances, then we should build them. We have two methods of disposition, for standard Views and Templated one. A combined usage example is presented below:
+While the actual **View\View** methods are static and they should call independently, the new API works with View instances, then we should build them. We have two methods for standard Views and Themes files. A combined usage example is presented below:
 
 ```php
 return View::make('Welcome/SubPage')
@@ -145,14 +106,14 @@ return View::make('Welcome/SubPage')
 
 $page = View::make('Welcome/SubPage')->with('data', $data);
 
-return View::makeTemplate('default')
+return View::makeLayout('default')
     ->shares('title', $title)
-    ->withContent($page);
+    ->with('page' $page);
 ```
 
 View Methods can be chained.
-shares is a way to share a variable that is accessible to the view files, useful for settings the page title.
-to pass date ->with() command is used. With accepts 2 params:
+**shares()** is a way to share a variable that is accessible to the theme files, useful for settings the page title.
+to pass data to the view files use ->with() command. With accepts 2 params:
 1. the variable name to set
 2. the value
 
@@ -162,58 +123,48 @@ Another way to set the variable is to add the name to end of ->with for example 
 ->withContacts($data)
 ```
 
-The data can be passed to a View instance in diverse ways. The following commands are equivalent:
-
-```php
-$page = View::make('Welcome/SubPage');
-$page->with('info', $info);
-$page->withInfo($info);
-$page->info = $info;
-$page['info'] = $info;
-```
-
 To note the variable name transformation by dynamic **withX** methods.
 
 Also, the View instances can be nested. The following commands are equivalent:
 
 ```php
 // Add a View instance to a View's data
-$view = View::make('foo')->nest('footer', 'Partials/Footer');
+$view = View::make('foo')->shares('title', 'title')->nest('footer', 'Partials/Footer');
 
 // Equivalent functionality using the "with" method
-$view = View::make('foo')->with('footer', View::make('Partials/Footer'));
+$view = View::make('foo')->shares('title', 'title')->with('footer', View::make('Partials/Footer'));
 ```
 
-To note that nesting assumes that the nested View instance is a Standard View, not a Template one.
+To note that nesting assumes that the nested View instance is a Standard View, not a Theme one.
 
 There is also a new **shares()** method, similar with actual **share()** but working for instances.
 
-Every Controller has now the ability to specify its Template and Layout, as following:
+Every Controller has now the ability to specify its Theme and Layout file, as following:
 
 ```php
 class Welcome extends Controller
 {
-    protected $template = 'Admin';
+    protected $theme = 'Admin';
     protected $layout = 'custom';
 
 }
 ```
 
-WHERE the '**default**' Layout is a simple composition of your **header/footer** files. For details, see: **app/Templates/Default/default.php**
+WHERE the '**default**' Layout is a simple composition of your **header/footer** files. For details, see: **app/Templates/Bootstrap/default.php**
 
 ### Advanced Usage
 
 Rendering with partials (i.e. **header/footer**) from the standard Views location
 If you need to work with partials, for example blocks, header and footer files located in **app/Views** directory, it is very simple to do that. You have just to compose your views as following:
 
-The following examples use a very simple Template Layout file, called:
+The following examples use a very simple Theme Layout file, called:
 
-**app/Templates/Default/custom.php**
+**app/Themes/Bootstrap/custom.php**
 
 Rendering with a complete custom Template living on Views folder
 
 ```php
-return Template::make('custom')
+return View::makeLayout('custom')
    ->shares('title', $title)
    ->with('header', View::make('Partials/Header'))
    ->with('content', View::make('Page/Index', $data))
@@ -223,7 +174,7 @@ return Template::make('custom')
 OR
 
 ```php
-return Template::make('custom')
+return View::makeLayout('custom')
    ->shares('title', $title)
    ->withHeader(View::make('Partials/Header'))
    ->withContent(View::make('Page/Index', $data))
@@ -233,7 +184,7 @@ return Template::make('custom')
 OR
 
 ```php
-return Template::make('custom')
+return View::makeLayout('custom')
    ->shares('title', $title)
    ->nest('header', 'Partials/Header')
    ->nest('content', 'Page/Index', $data)
@@ -243,7 +194,7 @@ return Template::make('custom')
 OR
 
 ```php
-return Template::make('custom')
+return View::makeLayout('custom')
    ->shares('title', $title)
    ->with('content', View::make('Partials/Layout')
    ->nest('content', 'Page/Index', $data));
@@ -251,7 +202,7 @@ return Template::make('custom')
 Rendering in the Style, but using the new API
 
 ```php
-return Template::make('custom')
+return View::makeLayout('custom')
    ->shares('title', $title)
    ->with('header', View::makeTemplate('header'))
    ->with('content', View::make('Page/Index', $data))
