@@ -1,15 +1,3 @@
-The controller's middleware, represents a high-level processing API, executed by the requested controller, when it is instantiated, its requested method is known as being valid and callable, and working in the same flow as your wanted method.
-
-The graph of The Controller Execution Flow is as follow:
-
-**before() -> action() -> after()**
-
-While very efficient and accurate, sometimes this design is not the best. For example, to instantiate a controller and start its execution flow, only to obtain a redirect from a CSRF fault, can be costly as resources and response speed.
-
-Better is to have a solution for routing to handle the CSRF fault, before to even instantiate the requested controller, right after the route was identified; this was the used resources will be lower and response speed will be better.
-
-Enter the route filters: a method to execute specified callbacks right after the correct route was identified and before starting the execution of associated controller.
-
 ## Route Filters
 How do they work? Let's say that we want a CSRF filter. In the file **app/Filters.php** we define it as following:
 
