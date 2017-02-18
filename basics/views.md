@@ -15,6 +15,8 @@ Import the View:
 use View;
 ```
 
+Return the view
+
 ```php
 return View::make('Welcome/Welcome')->shares('title', 'Welcome');
 ```
@@ -31,7 +33,7 @@ In cases when you only need to load a view from a module the second param should
 return View::make('Post/Post', [], 'Blog');
 ```
 
-Another way and one that is **Recommended** is to call **return $this->getView()**
+The **Recommended** way to reutn a view is to call **return $this->getView()**
 This will automatically determine the path and view file to be loaded based on the controller and method used.
 
 For instance:
@@ -52,7 +54,9 @@ For Modules view folders should be placed inside **app/Modules/ModuleName/Views/
 
 For example a module called Blog has a method called post would have a view path of **app/Modules/Blog/View/Blog/Post.tpl**
 
+## .php or .tpl
 
+Views can use either .php for normal php files or .tpl should be used for views using the template engine. ie when you want to use template tags like {{{ $title }}} use .tpl
 
 ## Inside a view
 
