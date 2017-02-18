@@ -26,10 +26,38 @@ Available commands:
     clear:cache      Clears the cache folder
     clear:logs       Clears the log files
     clear:sessions   Clears the sessions folder
+    clear:views      Clears the view cache folder
   make
     make:controller  Create a controller
     make:key         Generate an encryption key for the config file
     make:model       Create a model
+```
+## remove cache files
+To remove the files in storage/cache:
+
+```php
+php nova clear:cache
+```
+
+## remove the log files
+To remove the files in storage/logs:
+
+```php
+php nova clear:logs
+```
+
+## remove the session files
+To remove the files in storage/sessions:
+
+```php
+php nova clear:sessions
+```
+
+## remove the view cache files
+To remove the files in storage/views:
+
+```php
+php nova clear:views
 ```
 
 ## Creating a controller
