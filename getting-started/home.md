@@ -5,13 +5,79 @@ To this end Nova does not come with lots of built in libraries / helpers or modu
 
 This has been tested with php 5.6 and php 7 please report any bugs.
 
+## 3.76.0
+
+Introduce the native **Template Engine** which respond to View files with the extension `.tpl` or `.ntp and update the Views Service.
+
+To note the that the `Layout Service` is removed, the equivalent API being included into `Views Service`. Then, instead of:
+
+```php
+$template = Layout::make('default', $data, $template);
+```
+You should do:
+
+```php
+$template = View::makeLayout('default', $template);
+```
+
+Renamed the **Templates** to **Themes**
+
+**Default** theme renamed to **Bootstrap** to avoid namespace conflicts due to the word ‘default’ being a reserved word in php
+
+**AdminLTE** renamed to **AdminLite**
+
+**public** renamed to **webroot** to give a clearer understanding of where to point your web root to.
+
+
+## 3.75.15
+
+Remove the loading of app/Config/* files, now them being managed by Config API. Introduce a Boot Stage speed improvement, loading the Config Files on demand.
+
+## 3.75.14
+
+Introduced a series of optimizations, including but not only: Service Providers also for Events and Routes into Application, Boot Stage optimizations and an improved handling of the `Config` Options stored into Database.
+
+Notable, the Routes defined into `app/Routes.php` are added by default using the Controllers namespace `App\Controllers`, then will simplify a bit the Routes definition, doing instead of:
+
+```php
+Route::get('/',       'App\Controllers\Welcome@index');
+Route::get('subpage', 'App\Controllers\Welcome@subPage');
+```
+
+this way:
+
+```php
+Route::get('/',       'Welcome@index');
+Route::get('subpage', 'Welcome@subPage');
+```
+
+To note that this Routing default namespace could be adjusted into `App\Providers\RouteServiceProvider`.
+
+The Config Options which are stored into Database are now handled via the new Model called `App\Models\Option`, which permit to improve their handling, but also give to end-user the ability to manage the Options as he wants and needs.
+
+No APIs changes.
+
+## 3.75.13
+
+Series of small improvements, including moving of the Application's Storage folder to the root directory.
+
+To note that the impact of this pull request in sites "to be updated" is very small, including also as only the removing of /app/Storage directory, while adding the /storage folder with its sub-directories.
+
+## 3.75.12
+
+Corrected image validation for users module and adjusted image profile path for adminLTE/backend.php
+
+## 3.75.11
+
+Improve the HTTP Exceptions handling.
+
 ## 3.75.10
 
-Automatically setup the Encryption Key after Composer based installation
+Automatically setup the Encryption Key after Composer based installation.
 
 ## 3.75.7
 
-Consolidate the Boot Stage and implement an Events driven Backend Menu
+Consolidate the Boot Stage and implement an Events driven Backend Menu.
 
 SYSTEMDIR, now points to:
 
