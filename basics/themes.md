@@ -4,7 +4,7 @@ A regular site would have multiple css files and a javascript folder containing 
 
 The typical elements of a page includes the following. The title comes **View::shares** set in controllers, this lets the controllers set the page titles in an array that is passed to the theme. The site title **Config::get('app.name', SITETITLE)** comes from app/Config/App.php 
 
-# Routing images / js / css files
+## Routing images / js / css files
 From within Themes your css, js and images must be in a Assets folder to be routed correctly. This applies to Modules as well, to have a css file from a Module the css file would be placed inside **app/Modules/ModuleName/Assets/css/file.css.** Additionally there is an Assets folder in the root of nova this is for storing resources outside of themes that can still be routed from above the document root.
 
 Routing CSS:
@@ -62,7 +62,7 @@ resource_url() accepts two params:
 ```
 
 
-Page example:
+## Page example:
 
 ```php
 <?php
@@ -168,3 +168,44 @@ default.php is the full page layouts
 default-rtl.php mean they are right to left formats.
 
 A theme can be as simple as a single layout file and an assets folder and message.php file.
+
+## Passing data to $css or $js from a controller
+
+In the theme Boostrap is a layout file default.php which contains:
+
+css:
+
+```php
+echo isset($css) ? $css : '';
+```
+
+js:
+
+```php
+echo isset($js) ? $js : '';
+```
+
+These are placeholder to use css or js code when used they should contain src paths for css/js files.
+
+For example in a controller it's possible to use the Assets helper to get the full script tag and file path of css/js files and return that to the template file.
+
+In a controller import Assets
+
+```php
+use Assets;
+```
+
+then call Assets:: and either css or js this example uses css to load a style.css file from the Bootstrap theme. Assets accepts two params the file path or an array of file paths followed by a boolean true or false which represents fetching the paths back.
+
+When set to true the paths will be returned
+
+```php
+$css = Assets::css(theme_url('css/style.css', 'Bootstrap'), true);
+```
+then to pass this to the template use shares()
+
+```php
+return View::make('Welcome/Welcome')
+    ->shares('title', __('Welcome'))
+    ->shares('css', $css);
+```
