@@ -11,8 +11,15 @@ Route::get('', 'closure or controller');
 
 To respond to both get and post requests use a match.
 
+A match takes 3 params
+1. HTTP type ie post, get
+2. the url patten to match against ie /users
+3. a closure or controller path
+
 ```php
- Route::match(['get', 'post'], 'users\index'  'App\Controllers\Users@index');
+ Route::match(['get', 'post'], 'users'  function(){
+ 
+ });
 ```
 
 ## Closures
@@ -28,8 +35,8 @@ Route::get('simple', function() {
 Controllers and models can also be used in a closure by instantiating the root controller.
 
 ```php
-$c = new \App\Core\Controller();
-$m = new \App\Models\Users(); 
+$c = new App\Core\Controller();
+$m = new App\Models\Users(); 
 
 $m->getUsers();
 ```
@@ -39,22 +46,30 @@ Having said that it's best to use a controller, if you need access to a model.
 Closures are convenient but can soon become messy.
 
 ## Controllers
-To call a route to a controller, instead of typing a function you can enter a string. In the string type the namespace of the controller (**App/Controllers** if located in the root of the controllers folder) then the controller name. Finally, specify what method of that class you wish to load. They are dictated by an **@** symbol.
+
+To call a route to a controller, instead of typing a function you can enter the controller name and specify what method of that class you wish to load. They are dictated by an **@** symbol.
 
 For example, to have a controller called **Users** (in the root of the controllers folder) and to load a **usersList method**, you would use the following:
 
 ```php
-Route::get('users', 'App\Controllers\Users@usersList');
+Route::get('users', 'Users@usersList');
 ```
 
 The above would call the users controller and the userList method when **/users** is located in the URL, via a get request.
 
-Routes can respond to both GET and POST requests. 
+Routes can respond to both GET and POST requests. All post routes require a CSRF filter to ensure the request has come from the application and it not an attempted attack.
+
+This means the posted data should also contain a valid $csrfToken ie:
+
+```php 
+<form action='<?=site_url('blog');?>' method='post'>
+<input type='hidden' name='csrfToken' value='<?=$csrfToken;?>'>
+```
 
 To use a post route:
 
 ```php
-Route::post('blogsave', 'App\Controllers\Blog@savePost');
+Route::post('blog', array('before' => 'csrf', 'uses' => 'Blog@store'));
 ```
 
 ## Groups
