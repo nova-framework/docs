@@ -1,4 +1,4 @@
-themes are the site's markup, where images, js, and css files are located as well as the site html structure. The default template is called Bootstrap.
+Themes are the site's markup, where images, js, and css files are located as well as the site html structure. The default template is called Bootstrap.
 
 A regular site would have multiple css files and a javascript folder containing js files, an image folder. The rest of the sites pages come from the views.
 
