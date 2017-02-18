@@ -15,7 +15,7 @@ CSS files can be loaded by using Assets::css() and passing in an array of css pa
 
 site_url() is used to determine the website url. Place paths to the files relative to the root.
 
-them_url() is used to load resources from the theme. It accepts two params:
+theme_url() is used to load resources from the theme. It accepts two params:
 1 - path to the css file relative to the theme's root.
 2 - the theme name to be used
 
