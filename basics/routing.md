@@ -77,24 +77,24 @@ Routes can be placed in a group, which allows all routes within the group to inh
 
 ```php
 Route::group(['prefix' => 'blog'], function() {
-    Route::get('index', 'App\Controllers\Blog@Index');
-    Route::get('add', 'App\Controllers\Demo@Add');
+    Route::get('/', 'Blog@Index');
+    Route::get('add', 'Blog@Add');
 });
 ```
 
-Is the equivalent to
+Is the equivalent to:
 
 ```php
-Router::any('blog/index', 'App\Controllers\Blog@index');
-Router::any('blog/add', 'App\Controllers\Blog@add');
+Route::any('blog', 'Blog@index');
+Route::any('blog/add', 'Blog@add');
 ```
 
 ### Group Prefixes and Namespaces
 
-The **Router::group()** can also accept an array as the first parameter and permit commands like:
+The **Route::group()** can also accept an array as the first parameter and permit commands like:
 
 ```php
-Router::group(['prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'], function() {
+Router::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::match('get',               'users',               'Users@index');
     Route::match('get',               'users/create',        'Users@create');
     Route::match('post',              'users',               'Users@store');
@@ -104,11 +104,11 @@ Router::group(['prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'], fun
     Route::match('delete',            'users/(:any)',        'Users@destroy');
 });
 ```
-Where the prefix **admin** will turn the route **users/create** into **admin/users/create** and the namespace **App\Controllers\Admin** will prepend onto **Users@create**, turning into **App\Controllers\Admin\Users@create**
+Where the prefix **admin** will turn the route **users/create** into **admin/users/create** and the namespace **Admin** will prepend onto **Users@create**, turning into **App\Controllers\Admin\Users@create**
 
-### Router::resource()
+### Route::resource()
 
-The **Router::resource()** method introduces the ability to write the group of resourceful routes, with the following specifications:
+The **Route::resource()** method introduces the ability to write the group of resourceful routes, with the following specifications:
 
 |HTTP Method|Route|Controller Method|
 |---|---|---|
@@ -123,7 +123,7 @@ The **Router::resource()** method introduces the ability to write the group of r
 The previous code snippet can now be written as:
 
 ```php
-Route::group(['prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'], function() {
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::resource('users', 'Users');
     Route::resource('categories', 'Categories');
     Route::resource('articles', 'Articles');
@@ -133,9 +133,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Controllers\Admin'], func
 OR
 
 ```php
-Route::resource('admin/users', 'App\Controllers\Admin\Users');
-Route::resource('admin/categories', 'App\Controllers\Admin\Categories');
-Route::resource('admin/articles', 'App\Controllers\Admin\Articles');
+Route::resource('admin/users', 'Admin\Users');
+Route::resource('admin/categories', 'Admin\Categories');
+Route::resource('admin/articles', 'Admin\Articles');
 ```
 
 ## Implicit Controllers
@@ -145,13 +145,13 @@ An Implicit Controller allows you to easily define a single route to handle ever
 First, define the route using the Route::controller method:
 
 ```php
-Route::controller('users', 'App\Controllers\Users');
+Route::controller('users', 'Users');
 ```
 
 The `Route::controller()` method accepts two arguments. The first is the base URI the controller handles, while the second is the class name of the Controller. Next, just add methods to your Controller, prefixed with the HTTP verb they respond to: (get / post) 
 
 ```php
-class App\Controllers;
+namespace App\Controllers;
 
 use App\Core\Controller;
 
@@ -190,19 +190,19 @@ Route parameters are always encased within `{}` braces and should consist of alp
 Occasionally, you may need to specify a route parameter, but make the presence of that route parameter optional. You may do so by placing a `?` mark after the parameter name.
 
 ```php
-Route::get('request/{param1}/{param2?}', 'App\Controllers\Demos@request');
+Route::get('request/{param1}/{param2?}', 'Demos@request');
 ```
 
 You may also use Regular Expression Route Constraints, the below constraint will only allow numerical values for the id, using regex.
 
 ```php
-Route::get('request/{id}', 'App\Controllers\Demos@request')->where('id', '[0-9]+');
+Route::get('request/{id}', 'Demos@request')->where('id', '[0-9]+');
 ```
 
 If you have multiple parameters with constraints, you may pass an array to the `where()` method.
 
 ```php
-Route::get('request/{id}/{name}', 'App\Controller\Demos@request')
+Route::get('request/{id}/{name}', 'Demos@request')
     ->where([
         'id' => '[0-9]+', 
         'name' => '[a-z]+'
@@ -216,13 +216,13 @@ To use a wildcard route add a slug route passing to a catchall method adding a w
 > **Please Note** this route should come last, any routes following this route will not be executed.
 
 ```php
-Route::any('{slug}', 'App\Controllers\Demo@catchAll')->where('slug', '(.*)');
+Route::any('{slug}', 'Demo@catchAll')->where('slug', '(.*)');
 ```
 
 If you wanted to set a default value to a named parameter, you may also use the `defaults()` method:
 
 ```php
-Route::get('request/{id}/{name?}', 'App\Controllers\Demos@request')
+Route::get('request/{id}/{name?}', 'Demos@request')
     ->defaults([
         'id' => 0,
         'name' => NULL
