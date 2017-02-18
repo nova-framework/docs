@@ -1,19 +1,21 @@
-Templates are the site's markup, where images, js, and css files are located as well as the site html structure. The default template is called Default.
+themes are the site's markup, where images, js, and css files are located as well as the site html structure. The default template is called Bootstrap.
 
 A regular site would have multiple css files and a javascript folder containing js files, an image folder. The rest of the sites pages come from the views.
 
-The typical elements of a page includes the following. The title comes View::shares set in controllers, this lets the controllers set the page titles in an array that is passed to the template. The site title **Config::get('app.name', SITETITLE)** comes from app/Config/App.php 
+The typical elements of a page includes the following. The title comes **View::shares** set in controllers, this lets the controllers set the page titles in an array that is passed to the theme. The site title **Config::get('app.name', SITETITLE)** comes from app/Config/App.php 
 
 # Routing images / js / css files
-From within Templates your css, js and images must be in a Assets folder to be routed correctly. This applies to Modules as well, to have a css file from a Module the css file would be placed inside **app/Modules/ModuleName/Assets/css/file.css.** Additionally there is an Assets folder in the root of nova this is for storing resources outside of templates that can still be routed from above the document root.
+From within Themes your css, js and images must be in a Assets folder to be routed correctly. This applies to Modules as well, to have a css file from a Module the css file would be placed inside **app/Modules/ModuleName/Assets/css/file.css.** Additionally there is an Assets folder in the root of nova this is for storing resources outside of themes that can still be routed from above the document root.
 
 Routing CSS:
 
->**Note** Template folder names less then 4 characters should be in capital letters ie **Scf** should be **SCF** or resources will not be found. Folders such as Default are OK.
+>**Note** Theme folder names less then 4 characters should be in capital letters ie **Scf** should be **SCF** or resources will not be found.
 
 CSS files can be loaded by using Assets::css() and passing in an array of css paths.
+
 site_url() is used to determine the website url. Place paths to the files relative to the root.
-template_url() is used to load resources from the template. It accepts two params:
+
+them_url() is used to load resources from the theme. It accepts two params:
 1 - path to the css file relative to the theme's root.
 2 - the theme name to be used
 
@@ -25,7 +27,7 @@ Assets::css([
     //external
     'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
     //load from template
-    template_url('css/style.css', 'Default'),
+    theme_url('css/style.css', 'Bootstrap'),
 ]);
 ```
 
@@ -40,14 +42,14 @@ Assets::js([
 ]);
 ```
 
-Loading images, since the images are above the document root they have to be served from Nova, this is done by either using template_url() for images in the theme or resource_url() for resources in the global assets folder or from a module.
+Loading images, since the images are above the document root they have to be served from Nova, this is done by either using theme_url() for images in the theme or resource_url() for resources in the global assets folder or from a module.
 
-template_url() accepts two params:
+theme_url() accepts two params:
 1 - path to the image file relative to the theme's root.
 2 - the theme name to be used
 
 ```php
-<img src='<?= template_url('images/nova.png', 'Default'); ?>' alt='logo'>
+<img src='<?= theme_url('images/nova.png', 'Default'); ?>' alt='logo'>
 ```
 
 For images, js and css files located in /assets
@@ -95,10 +97,10 @@ $langMenuLinks = ob_get_clean();
 echo isset($meta) ? $meta : ''; // Place to pass data / plugable hook zone
 
 Assets::css([
-    site_url('vendor/twbs/bootstrap/dist/css/bootstrap.min.css'),
-    site_url('vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css'),
+    vendor_url('dist/css/bootstrap.min.css', 'twbs/bootstrap'),
+    vendor_url('dist/css/bootstrap-theme.min.css', 'twbs/bootstrap'),
     'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
-    template_url('css/style.css', 'Default'),
+    theme_url('css/style.css', 'Bootstrap'),
 ]);
 
 echo isset($css) ? $css : ''; // Place to pass data / plugable hook zone
@@ -120,7 +122,7 @@ echo isset($css) ? $css : ''; // Place to pass data / plugable hook zone
 
 <div class="container">
     <p>
-        <img src='<?= template_url('images/nova.png', 'Default'); ?>' alt='<?= Config::get('app.name', SITETITLE); ?>'>
+        <img src='<?= theme_url('images/nova.png', 'Bootstrap'); ?>' alt='<?= Config::get('app.name', SITETITLE); ?>'>
     </p>
 
     <?= $content; ?>
@@ -130,7 +132,7 @@ echo isset($css) ? $css : ''; // Place to pass data / plugable hook zone
     <div class="container-fluid">
         <div class="row" style="margin: 15px 0 0;">
             <div class="col-lg-4">
-                <p class="text-muted">Copyright &copy; <?php echo date('Y'); ?> <a href="http://www.novaframework.com/" target="_blank"><b>Nova Framework <?= VERSION; ?></b></a></p>
+                <p class="text-muted">Copyright &copy; <?php echo date('Y'); ?> <a href="http://www.novaframework.com/" target="_blank"><b>Nova Framework <?= $version; ?> / Kernel <?= VERSION; ?></b></a></p>
             </div>
             <div class="col-lg-8">
                 <p class="text-muted pull-right">
@@ -146,7 +148,7 @@ echo isset($css) ? $css : ''; // Place to pass data / plugable hook zone
 <?php
 Assets::js([
     'https://code.jquery.com/jquery-1.12.4.min.js',
-    site_url('vendor/twbs/bootstrap/dist/js/bootstrap.min.js'),
+    vendor_url('dist/js/bootstrap.min.js', 'twbs/bootstrap'),
 ]);
 
 echo isset($js) ? $js : ''; // Place to pass data / plugable hook zone
@@ -160,8 +162,9 @@ echo isset($footer) ? $footer : ''; // Place to pass data / plugable hook zone
 </html>
 ```
 
-The default template comes with multiple files to demonstrate different use cases. 
+The default theme comes with 2 layout files to demonstrate different use cases. 
 
-default.php and custom.php are full page layouts whilst header.php and footer.php are partial layouts that can be mixed, the files ending with -rtl.php mean they are right to left formats.
+default.php is the full page layouts 
+default-rtl.php mean they are right to left formats.
 
 A theme can be as simple as a single layout file and an assets folder and message.php file.
