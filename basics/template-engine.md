@@ -109,6 +109,7 @@ There will be times where using php normally will be required you can so this by
 @php
 $total = 0;
 @endphp
+```
 
 <p>Total is {{ $total }}.</p>
 
@@ -131,7 +132,6 @@ Another option is to use @yield() which is a plaeholder to print any data passed
 For example a layout view:
 
 ```php
-
 <div class='row'>
 
     <div class='col-md-2'>
