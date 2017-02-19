@@ -1,20 +1,20 @@
 
 # Modules
 
-Modules are like mini applications. A module can be standalone section or add integration functionality to Nova. 
+Modules are like mini applications. A module can be standalone section or add integration functionality to Nova.
 
 ## Sample Modules:
 
-Nova comes with a few sample modules, these are for showing examples of what can be created with modules as such these are not offically supported modules, having said that they are kept up to date with any changes required.
+Nova comes with a few sample modules, these are for showing examples of what can be created with modules as such these are not officially supported modules, having said that they are kept up to date with any changes required.
 
 ### Demos
 
-Demos's purpose is to demonstrate some of Nova's featues, looking inside app/Modules/Demos/Routes.php are these routes:
+Demos's purpose is to demonstrate some of Nova's features, looking inside **app/Modules/Demos/Routes.php** are these routes:
 
-Each route is a different demo for instance going to /demo/database (requires a database being connected in **app/Confog/Database.php**)
+Each route is a different demo for instance going to **/demo/database** (requires a database being connected in **app/Confog/Database.php**)
 will show a sample of database interactions.
 
-/demo/modules will display a list of all active modules.
+**/demo/modules** will display a list of all active modules.
 
 ```php
 Route::get('database', 'Demos@database');
@@ -31,14 +31,14 @@ Route::get('password/{password}', 'Demos@password');
 
 ### Files
 
-This is a secure filemanager using elfFinder, go access it you must first login by going to /admin which uses the system module (see below)
+This is a secure filemanager using [elfFinder](https://studio-42.github.io/elFinder/), go access it you must first login by going to **/admin** which uses the system module (see below)
 This module is a full featured file manager capable of working with local files as well as third party adapters such as FTP, AW3 or Dropbox
 
 All files are stored above the webroot making it very secure.
 
 ### System
 
-The system module offers an admin area out of the box by going to /admin and logging in with these details:
+The system module offers an admin area out of the box by going to **/admin** and logging in with these details:
 
 username: admin
 password: admin
@@ -51,7 +51,7 @@ Nova comes with a groups of users, each user will have a role ie administrator, 
 
 # Creating a module
 
-Modules consist of files and folder which you use is up to you, a module can have few little to be up and running or can host many folder.
+Modules consist of files and folders which you use is up to you, a module can have few files to be up and running or can host many folders.
 
 Here are the common files and folders used:
 
@@ -69,7 +69,7 @@ Filters.php
 Routes.php
 ```
 
-A module uses the same types of files are the main controllers do so each module can have their own config settings, routes and events.
+A module uses the same types of files as the main controllers do so each module can have their own config settings, routes and events.
 
 Additional folders can be created with classes inside as long as they use the correct namespace ie for a class in **app/Modules/Contacts/Lib/Exchange.php** would have a namespace:
 
@@ -128,4 +128,4 @@ Next the module needs to be active to run go to **app/Config/Modules.php** add t
 
 This will enable the module and tell Nova about it's existance and the order to load it in.
 
-Now go to **/contacts** to see your view loaded! this is an extremely simple example but is the enough to have a module working, the next steps would be to have a model and use a database. From here all the steps are the same as with the main files are documented in these docs.
+Now go to **/contacts** to see your view loaded! this is an extremely simple example but is enough to have a module working, the next steps would be to have a model and use a database. From here all the steps are the same as with the main files are documented in these docs.
