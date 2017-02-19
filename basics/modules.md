@@ -2,9 +2,12 @@
 # Modules
 
 Modules are like mini applications. A module can be standalone section or add integration functionality to Nova. 
-For instance Nova with a few sample modules:
 
-## Demos
+## Sample Modules:
+
+Nova comes with a few sample modules, these are for showing examples of what can be created with modules as such these are not offically supported modules, having said that they are kept up to date with any changes required.
+
+### Demos
 
 Demos's purpose is to demonstrate some of Nova's featues, looking inside app/Modules/Demos/Routes.php are these routes:
 
@@ -26,15 +29,22 @@ Route::get('modules',  'Demos@modules');
 Route::get('password/{password}', 'Demos@password');
 ```
 
-## Files
+### Files
 
 This is a secure filemanager using elfFinder, go access it you must first login by going to /admin which uses the system module (see below)
 This module is a full featured file manager capable of working with local files as well as third party adapters such as FTP, AW3 or Dropbox
 
 All files are stored above the webroot making it very secure.
 
-## System
+### System
 
-## Users
+The system module offers an admin area out of the box by going to /admin and logging in with these details:
 
-Nova comes with a groups of users, each user will have a role ie administrator, edit, user this module is offers CRUD functions for adding, editing and deleting users and hteir roles.
+username: admin
+password: admin
+
+This demonstrates a way to have an backend area out of a module, it's recommended looking through these modules for greater understanding of their usage.
+
+### Users
+
+Nova comes with a groups of users, each user will have a role ie administrator, edit, user this module is offers CRUD functions for adding, editing and deleting users and their roles.
