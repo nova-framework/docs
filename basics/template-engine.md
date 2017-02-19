@@ -13,7 +13,7 @@ To display a variable it should be wrapped inside a set of `{{` and to close `}}
 {{ $title }}
 ```
 
-Variables wrapped inside {{ }} are **Not** escaped on output. All data user generated should alawys be escaped. 
+Variables wrapped inside {{ }} are **Not** escaped on output. All data user generated should always be escaped. 
 When using user generated variables use:
 
 ```php
