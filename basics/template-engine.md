@@ -71,7 +71,7 @@ This will result in $name being used if it exists otherwise the string 'no name 
 @endwhile
 ```
 
-### Swtich statements
+### Switch statements
 ```php 
 @switch ($item) {
     case '1':
