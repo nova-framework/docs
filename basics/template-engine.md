@@ -87,11 +87,15 @@ This will result in $name being used if it exists otherwise the string 'no name 
 
 To include other views into the existing view, specify the path starting from App\Views. Don't include the extension
 
+```php
 @include('Welcome/SubPage')
+```
 
-Optionally pass in data
+Optionally using an include from a module, when specifying the module name the view path will be from the module/views path.
 
-@include('Welcome/SubPage', ['content' => $content])
+```php
+@include('Welcome/Home', 'ModuleName')
+```
 
 ## Comments
 
@@ -116,6 +120,8 @@ $total = 0;
 ## View Layouts
 
 You can use any view inside another view so it makes sense that you can setup a master view for greater control over the layout of a set of views.
+
+> **Note** this is exclusivly for Views no theme layouts can be used with `@include` or `@extend` for layout specific changes go to the theme layouts.
 
 The convention is to have a folder called layouts in **app\Views\Layouts** you are of course free to choose your own path.
 
