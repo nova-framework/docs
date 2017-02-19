@@ -45,6 +45,7 @@ This will result in $name being used if it exists otherwise the string 'no name 
 @else
   <p>Total items: {{{ count($items) }}}</p>
 @endif
+```
 
 ### For loops
 
