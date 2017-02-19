@@ -124,15 +124,17 @@ You can use any view inside another view so it makes sense that you can setup a 
 
 > **Note** this is exclusivly for Views no theme layouts can be used with `@include` or `@extend` for layout specific changes go to the theme layouts.
 
+`@extends` should be used exclusively when you have a View skeleton, then populate with different variants.
+
 The convention is to have a folder called layouts in **app\Views\Layouts** you are of course free to choose your own path.
 
 For example setup a blog layout **app/Views/Layouts/BlogPosts.tpl**
 
-Create a section of content that can be extended by using @section() with it a name and follow it with @show to print the results.
+Create a section of content that can be extended by using @section() give it a name and follow it with @show to print the results.
 
 Anything inside will be displayed, this can be used on extended views to pass data into that section.
 
-Another option is to use @yield() which is a plaeholder to print any data passed to it.
+Another option is to use @yield() which is a placeholder to print any data passed to it.
 
 > @yield() can have a default @yield('revisions', 'No revisions yet')
 
