@@ -48,3 +48,84 @@ This demonstrates a way to have an backend area out of a module, it's recommende
 ### Users
 
 Nova comes with a groups of users, each user will have a role ie administrator, edit, user this module is offers CRUD functions for adding, editing and deleting users and their roles.
+
+# Creating a module
+
+Modules consist of files and folder which you use is up to you, a module can have few little to be up and running or can host many folder.
+
+Here are the common files and folders used:
+
+```php
+Assets/
+Controllers/
+Language/
+Models/
+Providers/
+Views/
+Bootstrap.php
+Config.php
+Events.php
+Filters.php
+Routes.php
+```
+
+A module uses the same types of files are the main controllers do so each module can have their own config settings, routes and events.
+
+Additional folders can be created with classes inside as long as they use the correct namespace ie for a class in **app/Modules/Contacts/Lib/Exchange.php** would have a namespace:
+
+```php
+namespace App\Modules\Contacts\Lib;
+```
+
+Each module should have a Routes.php to control what uri loads up a module controller.
+
+Lets build a simple module, create a new folder inside app/Modules called Contacts create a Controllers and Views folder and Routes.php
+
+inside Routes.php enter:
+
+```php
+Route::group(array('prefix' => 'contacts', 'namespace' => 'App\Modules\Contacts\Controllers'), function() {
+    Route::get('/', 'Contacts@index');
+});
+```
+
+This will create a route for the url **/contacts** which will then load **app/Modules/Contacts/Controllers/Contacts.php**
+
+Then create a class called **Contacts.php** in **/app/Modules/Contacts/Controllers:**
+
+```php
+<?php
+namespace App\Modules\Contacts\Controllers;
+
+use App\Core\Controller;
+
+class Contacts extends Controller
+{
+    public function index()
+    {
+        return $this->getView()->shares('title', 'Contacts');
+    }
+}
+```
+
+This is the bare minimum, set the namespace import the core controller, extend from that and create an index method that loads a view.
+
+Next create this path: **/app/Modules/Contacts/Views/Contacts/Index.php** and place some content inside:
+
+```php
+Hello from the Contacts Module.
+```
+
+Next the module needs to be active to run go to **app/Config/Modules.php** add the following array to the list of existing ones:
+
+```php
+'contacts' => array(
+    'namespace' => 'Contacts',
+    'enabled'   => true,
+    'order'     => 1001,
+),
+```
+
+This will enable the module and tell Nova about it's existance and the order to load it in.
+
+Now go to **/contacts** to see your view loaded! this is an extremely simple example but is the enough to have a module working, the next steps would be to have a model and use a database. From here all the steps are the same as with the main files are documented in these docs.
