@@ -3,6 +3,8 @@
 The native **Template Engine** responds to View files with the extension `.tpl`all views which will use the template syntax 
 should be have the extension .tpl view files with .php won't be able to use the template engine.
 
+> **Submime Text** users can install a highliter package to recognise the template syntax https://github.com/nova-framework/template-highlighter-sublime-text
+
 ## Control Structure
 
 ### Printing variables 
