@@ -100,6 +100,8 @@ Optionally using an include from a module, when specifying the module name the v
 @include('Welcome/Home', 'ModuleName')
 ```
 
+The reason why you not need to pass data on @include('Welcome/Home', 'ModuleName') is that ALL defined variables, local or pushed to View, are made available in the included TPL.
+
 ## Comments
 
 To add a php comment:
