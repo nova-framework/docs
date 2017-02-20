@@ -20,7 +20,7 @@ Will output:
 
 Assets have 2 methods CSS and js, they can take 2 params: 
 1. a single value or an array of values.
-2. true or false to return the tag false is set by default causing the tag to be echo'd instead of returned
+2. true or false to return the tag. False is set by default causing the tag to be echo'd instead of returned
 
 Example of loading a single js file:
 
