@@ -98,7 +98,7 @@ Adding `'files' => true` to the `open` method will allow the form to accept file
 ```php
 echo Form::open([
     'method' => 'POST',
-    'url' => site_url('admin/posts').
+    'url' => site_url('admin/posts'),
     'files' => true
 ]);
 ```
