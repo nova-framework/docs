@@ -97,8 +97,9 @@ To include other views into the existing view, specify the path starting from Ap
 Optionally using an include from a module, when specifying the module name the view path will be from the module/views path.
 
 ```php
-@include('Welcome/Home', 'ModuleName')
+@include('Welcome/Home', [], 'ModuleName')
 ```
+The 2nd param is an array to pass data to the view.
 
 The reason why you not need to pass data on @include('Welcome/Home', 'ModuleName') is that ALL defined variables, local or pushed to View, are made available in the included TPL.
 
