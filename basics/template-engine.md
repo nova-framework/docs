@@ -1,13 +1,13 @@
 # In 3.76.0 a new template engine was added.
 
-The native **Template Engine** responds to View files with the extension `.tpl`all views which will use the template syntax 
+The native **Template Engine** responds to View files with the extension `.tpl`all views which will use the template syntax
 should be have the extension .tpl view files with .php won't be able to use the template engine.
 
 > **Submime Text** users can install a highliter package to recognise the template syntax https://github.com/nova-framework/template-highlighter-sublime-text
 
 ## Control Structure
 
-### Printing variables 
+### Printing variables
 
 To display a variable it should be wrapped inside a set of `{{` and to close `}}`
 
@@ -15,7 +15,7 @@ To display a variable it should be wrapped inside a set of `{{` and to close `}}
 {{ $title }}
 ```
 
-Variables wrapped inside {{ }} are **Not** escaped on output. All data user generated should always be escaped. 
+Variables wrapped inside {{ }} are **Not** escaped on output. All data user generated should always be escaped.
 When using user generated variables use:
 
 ```php
@@ -24,7 +24,7 @@ When using user generated variables use:
 
 Using 3 curly braces **Will** escape and is safer to use.
 
-Variables passed inside the braces will be executed no need to open php and close it after, this keeps the view files 
+Variables passed inside the braces will be executed no need to open php and close it after, this keeps the view files
 clean and flexible.
 
 ### Printing a variable or using a default
@@ -74,12 +74,12 @@ This will result in $name being used if it exists otherwise the string 'no name 
 ```
 
 ### Switch statements
-```php 
+```php
 @switch ($item) {
     case '1':
         # code...
         break;
-    
+
     default:
         # code...
         break;
@@ -97,11 +97,9 @@ To include other views into the existing view, specify the path starting from Ap
 Optionally using an include from a module, when specifying the module name the view path will be from the module/views path.
 
 ```php
-@include('Welcome/Home', [], 'ModuleName')
+@include('Welcome/Home', array(), 'ModuleName')
 ```
-The 2nd param is an array to pass data to the view.
-
-The reason why you not need to pass data on @include('Welcome/Home', 'ModuleName') is that ALL defined variables, local or pushed to View, are made available in the included TPL.
+The 2nd param is an array to pass data to the view. The reason you don't need to specify the existing data on @include('Welcome/Home', 'ModuleName') is that ALL defined variables, local or pushed to View, are made available in the included TPL.
 
 ## Comments
 
@@ -153,11 +151,11 @@ For example a layout view:
           Sample content
         @show
     </div>
-    
+
     <div class='col-md-10'>
         @yield('content')
     </div>
-    
+
 </div>
 ```
 
@@ -168,7 +166,7 @@ An extended view:
 
 @section('sidebar')
     @parent
-    
+
     Some new sidebar content
 @stop
 ```
@@ -182,6 +180,3 @@ The @parent will append the content of sidebar instead of replacing it.
   @endforeach
 @stop
 ```
-    
-        
-  
