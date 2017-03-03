@@ -34,6 +34,11 @@ If a variable might not exist you can echo it and provide a default value:
 ```php
 {{ $name or 'no name provided' }}
 ```
+Using a Ternary:
+
+```php
+{{ isset($name) ? $name : 'no name provided' }}
+```
 
 This will result in $name being used if it exists otherwise the string 'no name provided' would be printed.
 
