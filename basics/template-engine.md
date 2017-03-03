@@ -32,7 +32,7 @@ clean and flexible.
 If a variable might not exist you can echo it and provide a default value:
 
 ```php
-{{ $name OR 'no name provided' }}
+{{ $name or 'no name provided' }}
 ```
 
 This will result in $name being used if it exists otherwise the string 'no name provided' would be printed.
