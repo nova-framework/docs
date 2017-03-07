@@ -5,7 +5,7 @@ To get the extension of a file call the getExtension method and pass the file na
 Create an alias
 
 ```php
-use Helpers\Document;
+use Nova\Helpers\Document;
 
 Document::getExtension('customfile.zip'); //returns zip
 ```
