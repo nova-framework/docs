@@ -23,7 +23,7 @@ There is also a utility script that has been introduced, called **scripts/makela
 
 To run this file and auto update all language files run this in terminal:
 
-```
+```php
 php scripts/makelangs.php
 ```
 
