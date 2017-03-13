@@ -21,4 +21,10 @@ Please note that the Domains are specified in **snake_case** transformation and 
 
 There is also a utility script that has been introduced, called **scripts/makelangs.php**, and it should be used to update the Framework's Language files, after introducing new translation strings in your application.
 
-The Language files used by this new Language System are called **messages.php** and will be found in the usual locations, i.e. **app/Language/En/messages.php** or **app/Modules/Users/Language/En/messages.php**
+To run this file and auto update all language files run this in terminal:
+
+```
+php scripts/makelangs.php
+```
+
+The Language files used by this new Language System are called **messages.php** and will be found in the usual locations, i.e. **app/Language/EN/messages.php** or **app/Modules/Users/Language/EN/messages.php**
