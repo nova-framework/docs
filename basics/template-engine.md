@@ -130,7 +130,7 @@ $total = 0;
 
 You can use any view inside another view so it makes sense that you can setup a master view for greater control over the layout of a set of views.
 
-> **Note** this is exclusivly for Views no theme layouts can be used with `@include` or `@extend` for layout specific changes go to the theme layouts.
+> **Note** this is exclusivly for Views no theme layouts can be used with `@include` or `@extend` for layout specific (As of system 3.77.14) you can use @partial() which will look at the current theme's Layouts folders this is used to include other layout files
 
 `@extends` should be used exclusively when you have a View skeleton, then populate with different variants.
 
