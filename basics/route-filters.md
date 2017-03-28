@@ -97,3 +97,16 @@ Route::get('logout', array(
 ));
 ```
 This results in only the guest users can access the contact and login page, while only the authenticated users can access the logout action.
+
+## Using a closure with a route filter
+
+Instead of calling a controller pass a closure to the end of the route call:
+
+```php
+Route::get('whoami', array('before' => 'auth', 'uses' => function()
+{
+    $user = Auth::user();
+
+    return Response::json($user);
+}));
+```
