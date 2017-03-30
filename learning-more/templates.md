@@ -1,167 +1,246 @@
-Templates are the site's markup, where images, js, and css files are located as well as the site html structure. The default template is called Default.
+- [Introduction](#introduction)
+- [Functions](#functions)
+- [Routing](#routing)
+    - [CSS](#css)
+    - [JS](#js)
+    - [Images](#images)
+- [Template Syntax](#template-syntax)
+- [Other Control Structures](#other-control-structures)
 
-A regular site would have multiple css files and a javascript folder containing js files, an image folder. The rest of the sites pages come from the views.
+<a name="introduction"></a>
+## Introduction
 
-The typical elements of a page includes the following. The title comes View::shares set in controllers, this lets the controllers set the page titles in an array that is passed to the template. The site title **Config::get('app.name', SITETITLE)** comes from app/Config/App.php 
+Templates are the site's markup, where `images`, `js`, and `css` files are located as well as the site's html structure. The default template is called `Default`.
 
-# Routing images / js / css files
-From within Templates your css, js and images must be in a Assets folder to be routed correctly. This applies to Modules as well, to have a css file from a Module the css file would be placed inside **app/Modules/ModuleName/Assets/css/file.css.** Additionally there is an Assets folder in the root of nova this is for storing resources outside of templates that can still be routed from above the document root.
+Templates are located in the `theme` folder.
 
-Routing CSS:
+A regular site would have multiple css files, a javascript folder containing js files and an image folder. The rest of the site's pages come from the views.
 
->**Note** Template folder names less then 4 characters should be in capital letters ie **Scf** should be **SCF** or resources will not be found. Folders such as Default are OK.
+Typical elements of a page include the following. The title comes `View::shares` set in controllers, this lets the controllers set the page titles in an array that is passed to the template. The site title `Config::get('app.name', SITETITLE)` comes from `app/Config/App.php`
 
-CSS files can be loaded by using Assets::css() and passing in an array of css paths.
-site_url() is used to determine the website url. Place paths to the files relative to the root.
-template_url() is used to load resources from the template. It accepts two params:
-1 - path to the css file relative to the theme's root.
-2 - the theme name to be used
+From within a template your css, js and images must be in an `Assets` folder to be routed correctly. This applies to Modules as well. To grab a css file from a Module, the css file must be placed inside `modules/ModuleName/Assets/css/file.css`. 
 
+Additionally, there is an Assets folder in the root of nova. This is for storing resources outside of templates which can still be routed from above the document root.
+
+> **Note** Template folder names less then 4 characters should be in capital letters ie **Scf** should be **SCF** or resources will not be found. Folders such as Default are OK.
+
+<a name="functions"></a>
+## Functions
+
+`vendor_url()` accepts two params:
+- path to the resource
+- the name of the dependency in the composer's `vendor` directory.
 ```php
-Assets::css([
-    //load from vendor
-    site_url('vendor/twbs/bootstrap/dist/css/bootstrap.min.css'),
-    site_url('vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css'),
-    //external
-    'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
-    //load from template
-    template_url('css/style.css', 'Default'),
-]);
+vendor_url('dist/css/bootstrap.min.css', 'twbs/bootstrap')
 ```
 
-To load JS is the same process only this time its Assets::js
-
-```php
-Assets::js([
-    //external
-    'https://code.jquery.com/jquery-1.12.4.min.js',
-    //vendor
-    site_url('vendor/twbs/bootstrap/dist/js/bootstrap.min.js'),
-]);
-```
-
-Loading images, since the images are above the document root they have to be served from Nova, this is done by either using template_url() for images in the theme or resource_url() for resources in the global assets folder or from a module.
-
-template_url() accepts two params:
-1 - path to the image file relative to the theme's root.
-2 - the theme name to be used
+`template_url()` accepts two params:
+- path to the image file relative to the theme's root.
+- the theme name to be used
 
 ```php
 <img src='<?= template_url('images/nova.png', 'Default'); ?>' alt='logo'>
 ```
 
-For images, js and css files located in /assets
-resource_url() accepts two params:
-1 - path to the resource
-2 - optionally the name of the module
+`resource_url()` accepts two params:
+- path to the resource
+- the name of the module (optional)
 
 ```php
 <img src='<?= resource_url('images/nova.png', 'Default'); ?>' alt='logo'>
 ```
 
+<a name="routing"></a>
+## Routing
 
-Page example:
+<a name="css"></a>
+#### CSS
+
+CSS files can be loaded by using `Assets::css()` and passing in an array of css paths.
 
 ```php
-<?php
-/**
- * Default Layout - a Layout similar with the classic Header and Footer files.
- */
-
-// Generate the Language Changer menu.
-$language = Language::code();
-
-$languages = Config::get('languages');
-
-//
-ob_start();
-
-foreach ($languages as $code => $info) {
-?>
-<li <?php if($language == $code) echo 'class="active"'; ?>>
-    <a href='<?= site_url('language/' .$code); ?>' title='<?= $info['info']; ?>'><?= $info['name']; ?></a>
-</li>
-<?php
-}
-
-$langMenuLinks = ob_get_clean();
-?>
-<!DOCTYPE html>
-<html lang="<?= $language; ?>">
-<head>
-    <meta charset="utf-8">
-    <title><?= $title .' - ' .Config::get('app.name', SITETITLE); ?></title>
-<?php
-echo isset($meta) ? $meta : ''; // Place to pass data / plugable hook zone
-
 Assets::css([
-    site_url('vendor/twbs/bootstrap/dist/css/bootstrap.min.css'),
-    site_url('vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css'),
-    'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css',
+    vendor_url('dist/css/bootstrap.min.css', 'twbs/bootstrap'),
+    vendor_url('dist/css/bootstrap-theme.min.css', 'twbs/bootstrap'),
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
     template_url('css/style.css', 'Default'),
 ]);
+```
 
-echo isset($css) ? $css : ''; // Place to pass data / plugable hook zone
-?>
-</head>
-<body style='padding-top: 28px;'>
+<a name="js"></a>
+#### JS
 
-<nav class="navbar navbar-default navbar-xs navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <?= $langMenuLinks; ?>
-            </ul>
-        </div>
-    </div>
-</nav>
+Loading JS is the same process as CSS, only this time its `Assets::js()`
 
-<?= isset($afterBody) ? $afterBody : ''; // Place to pass data / plugable hook zone ?>
-
-<div class="container">
-    <p>
-        <img src='<?= template_url('images/nova.png', 'Default'); ?>' alt='<?= Config::get('app.name', SITETITLE); ?>'>
-    </p>
-
-    <?= $content; ?>
-</div>
-
-<footer class="footer">
-    <div class="container-fluid">
-        <div class="row" style="margin: 15px 0 0;">
-            <div class="col-lg-4">
-                <p class="text-muted">Copyright &copy; <?php echo date('Y'); ?> <a href="http://www.novaframework.com/" target="_blank"><b>Nova Framework <?= VERSION; ?></b></a></p>
-            </div>
-            <div class="col-lg-8">
-                <p class="text-muted pull-right">
-                    <?php if(Config::get('app.debug')) { ?>
-                    <small><!-- DO NOT DELETE! - Profiler --></small>
-                    <?php } ?>
-                </p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<?php
+```php
 Assets::js([
     'https://code.jquery.com/jquery-1.12.4.min.js',
-    site_url('vendor/twbs/bootstrap/dist/js/bootstrap.min.js'),
+    vendor_url('dist/js/bootstrap.min.js', 'twbs/bootstrap'),
 ]);
+```
 
-echo isset($js) ? $js : ''; // Place to pass data / plugable hook zone
+<a name="images"></a>
+#### Images
 
-echo isset($footer) ? $footer : ''; // Place to pass data / plugable hook zone
-?>
+Since the images are above the document root, they have to be served from Nova. This is done by either using `template_url()` for images in the theme or `resource_url()` for resources in the global assets folder or from a module.
 
-<!-- DO NOT DELETE! - Forensics Profiler -->
+<a name="template-syntax"></a>
+## Template Syntax
 
-</body>
+As well as using standard html and php for your template's syntax, you can also use Nova's templating engine. To use this, your template files should use the `.tpl.php` extension.
+
+#### Defining A Layout
+
+```php
+<!-- Stored in themes/TemplateName/Layouts/Master.tpl.php -->
+
+<html>
+    <body>
+        @section('sidebar')
+            This is the master sidebar.
+        @show
+
+        <div class="container">
+            @yield('content')
+        </div>
+    </body>
 </html>
 ```
 
-The default template comes with multiple files to demonstrate different use cases. 
+#### Using A Layout
 
-default.php and custom.php are full page layouts whilst header.php and footer.php are partial layouts that can be mixed, the files ending with -rtl.php mean they are right to left formats.
+```php
+@extends('layouts.master')
 
-A theme can be as simple as a single layout file and an assets folder and message.php file.
+@section('sidebar')
+    @parent
+
+    <p>This is appended to the master sidebar.</p>
+@stop
+
+@section('content')
+    <p>This is my body content.</p>
+@stop
+```
+
+Note that views which `extend` a layout simply override sections from the layout. Content of the layout can be included in a child view using the `@parent` directive in a section, allowing you to append to the contents of a layout section such as a sidebar or footer.
+
+Sometimes, such as when you are not sure if a section has been defined, you may wish to pass a default value to the `@yield` directive. You may pass the default value as the second argument:
+
+```php
+@yield('section', 'Default Content')
+```
+
+<a name="other-control-structures"></a>
+## Other Control Structures
+
+#### Echoing Data
+
+```php
+Hello, {{{ $name }}}.
+The current UNIX timestamp is {{{ time() }}}.
+```
+
+#### Echoing Data After Checking For Existence
+
+Sometimes you may wish to echo a variable, but you aren't sure if the variable has been set. Basically, you want to do this:
+
+```php
+{{{ isset($name) ? $name : 'Default' }}}
+```
+
+However, instead of writing a ternary statement, Template allows you to use the following convenient short-cut:
+
+```php
+{{{ $name or 'Default' }}}
+```
+
+#### Displaying Raw Text With Curly Braces
+
+If you need to display a string that is wrapped in curly braces, you may escape the Template behavior by prefixing your text with an @ symbol:
+
+```php
+@{{ This will not be processed by Template }}
+```
+
+Of course, all user supplied data should be escaped or purified. To escape the output, you may use the triple curly brace syntax:
+
+```php
+Hello, {{{ $name }}}.
+```
+
+If you don't want the data to be escaped, you may use double curly-braces:
+
+```php
+Hello, {{ $name }}.
+```
+
+> Note: Be very careful when echoing content that is supplied by users of your application. Always use the triple curly brace syntax to escape any HTML entities in the content.
+
+#### If Statements
+
+```php
+@if (count($records) === 1)
+    I have one record!
+@elseif (count($records) > 1)
+    I have multiple records!
+@else
+    I don't have any records!
+@endif
+
+@unless (Auth::check())
+    You are not signed in.
+@endunless
+```
+
+#### Loops
+
+```php
+@for ($i = 0; $i < 10; $i++)
+    The current value is {{ $i }}
+@endfor
+
+@foreach ($users as $user)
+    <p>This is user {{ $user->id }}</p>
+@endforeach
+
+@forelse($users as $user)
+    <li>{{ $user->name }}</li>
+@empty
+    <p>No users</p>
+@endforelse
+
+@while (true)
+    <p>I'm looping forever.</p>
+@endwhile
+```
+
+#### Including Sub-Views
+
+```php
+@include('view.name')
+```
+
+You may also pass an array of data to the included view:
+
+```php
+@include('view.name', array('some'=>'data'))
+```
+
+#### Overwriting Sections
+
+To overwrite a section entirely, you may use the overwrite statement:
+
+```php
+@extends('list.item.container')
+
+@section('list.item.content')
+    <p>This is an item of type {{ $item->type }}</p>
+@overwrite
+```
+
+#### Comments
+
+```php
+{{-- This comment will not be in the rendered HTML --}}
+```
