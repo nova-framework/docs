@@ -9,6 +9,7 @@
 - Fileinfo (edit php.ini and uncomment php_fileinfo.dll or use php selector within cpanel if available.)
 - OpenSSL
 - INTL
+- MBString
 
 if encountering this error:
 
