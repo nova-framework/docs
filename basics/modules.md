@@ -31,23 +31,25 @@ Route::get('password/{password}', 'Demos@password');
 
 ### Files
 
-This is a secure filemanager using [elfFinder](https://studio-42.github.io/elFinder/), go access it you must first login by going to **/admin** which uses the system module (see below)
+This is a secure filemanager using [elfFinder](https://studio-42.github.io/elFinder/), to access it you must first login by going to **/admin** which uses the system module (see below)
 This module is a full featured file manager capable of working with local files as well as third party adapters such as FTP, AW3 or Dropbox
 
 All files are stored above the webroot making it very secure.
 
-### System
+###
+
+>Import the sql files from /scripts first.
 
 The system module offers an admin area out of the box by going to **/admin** and logging in with these details:
 
-username: admin
+username: admin<br>
 password: admin
 
-This demonstrates a way to have an backend area out of a module, it's recommended looking through these modules for greater understanding of their usage.
+This demonstrates a way to have a backend area out of a module, it's recommended looking through these modules for greater understanding of their usage.
 
 ### Users
 
-Nova comes with a groups of users, each user will have a role ie administrator, edit, user this module is offers CRUD functions for adding, editing and deleting users and their roles.
+Nova comes with a groups of users, each user will have a role ie administrator. This module offers CRUD functions for adding, editing and deleting users and their roles.
 
 # Creating a module
 
@@ -77,55 +79,33 @@ Additional folders can be created with classes inside as long as they use the co
 namespace App\Modules\Contacts\Lib;
 ```
 
-Each module should have a Routes.php to control what uri loads up a module controller.
+Each module should have a Routes.php to control what url loads up a module controller.
 
-Lets build a simple module, create a new folder inside app/Modules called Contacts create a Controllers and Views folder and Routes.php
 
-inside Routes.php enter:
+## To create a module
 
-```php
-Route::group(array('prefix' => 'contacts', 'namespace' => 'App\Modules\Contacts\Controllers'), function() {
-    Route::get('/', 'Contacts@index');
-});
-```
-
-This will create a route for the url **/contacts** which will then load **app/Modules/Contacts/Controllers/Contacts.php**
-
-Then create a class called **Contacts.php** in **/app/Modules/Contacts/Controllers:**
+it's recommended to use the terminal command:
 
 ```php
-<?php
-namespace App\Modules\Contacts\Controllers;
-
-use App\Core\Controller;
-
-class Contacts extends Controller
-{
-    public function index()
-    {
-        return $this->getView()->shares('title', 'Contacts');
-    }
-}
+php forge make:module NameOfModule
 ```
 
-This is the bare minimum, set the namespace import the core controller, extend from that and create an index method that loads a view.
+Then enter the name followed by the slug which should be lowercase with no spaces. The slug is a url friendly name of the module.
 
-Next create this path: **/app/Modules/Contacts/Views/Contacts/Index.php** and place some content inside:
+Further forge commands can be used to make a controller and view.
+
+## To create a module controller:
 
 ```php
-Hello from the Contacts Module.
+php forge make:module:controller modulename controllername
 ```
 
-Next the module needs to be active to run go to **app/Config/Modules.php** add the following array to the list of existing ones:
+change modulename to match the slug of the module ie `blog` and controllername should be the name of the controller wanted.
+
+## To create a module model:
 
 ```php
-'contacts' => array(
-    'namespace' => 'Contacts',
-    'enabled'   => true,
-    'order'     => 1001,
-),
+php forge make:module:model modulename modelname
 ```
 
-This will enable the module and tell Nova about it's existance and the order to load it in.
-
-Now go to **/contacts** to see your view loaded! this is an extremely simple example but is enough to have a module working, the next steps would be to have a model and use a database. From here all the steps are the same as with the main files are documented in these docs.
+change modulename to match the slug of the module ie `blog` and modelname should be the name of the model wanted.
