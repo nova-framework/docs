@@ -7,7 +7,7 @@ Facades provide a "static" interface to classes that are available in the applic
 Below you will find every facade and its underlying class. This is a useful tool for quickly digging into the API documentation for a given facade root. The service container binding key is also included where applicable.
 
 |Facade|Class|Service Container Binding|
----|---|---|---
+|---|---|---|
 |Auth|Auth\Guard|Auth|
 |Cookie|Cookie\CookieJar|Cookie|
 |Crypt|Crypt\Encrypter|Crypt|
