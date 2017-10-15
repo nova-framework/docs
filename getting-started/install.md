@@ -1,7 +1,7 @@
-[Recommended](#recommended)
-[XAMPP](#xampp)
-[Nginx configuration](#nginx-configuration)
-[IIS with URL Rewrite module installed](#iis-with-url-rewrite-module-installed)
+- [Recommended](#recommended)
+- [XAMPP](#xampp)
+- [Nginx configuration](#nginx-configuration)
+- [IIS with URL Rewrite module installed](#iis-with-url-rewrite-module-installed)
 
 <a name='recommended'></a>
 #### Recommended
