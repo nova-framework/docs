@@ -86,3 +86,119 @@ php nova make:key
 ```
 
 This will generate a 32 character alpha-numeric key.
+
+## Backup Database
+
+> added in 3.78.8
+
+```php
+forge db::backup
+```
+
+This generates a full sql backup in `App\Database\Backup`
+
+If you get the response:
+
+```php
+Database backup failed. sh: /usr/bin/mysqldump: No such file or directory
+```
+
+Update the mysql path in  `App\Config\Database.php` to include local:
+
+```php
+'mysql' => array(
+    'dumpCommandPath'    => '/usr/local/bin/mysqldump',
+    'restoreCommandPath' => '/usr/local/bin/mysql',
+),
+```
+
+To run this automatically via a cron job by calling:
+
+```php
+<full path to PHP> <full path to forge> db:backup
+```
+
+## Schedule:
+
+Setup a schedule in `app/Console.php`:
+
+```php
+Schedule::command('db:backup')->daily();
+```
+
+Then every day at 12am, your backup will be generated automatically.
+
+To call the cron
+
+```php
+ * * * * /path/to/php /path/to/forge schedule:run >> /dev/null 2>&1
+```
+
+>note the /dev/null is to stop any output being created on your server.
+
+see all commands at [system/Event.php](https://github.com/nova-framework/system/blob/3.0/src/Console/Scheduling/Event.php)
+
+Servers with `register_argc_argv` set to off will generate an error, to fix set `register_argc_argv` to on for the server in php.ini or pass it in directly and switch it on.
+
+```php
+php -d register_argc_argv=On nova/forge schedule:run
+```
+
+example way to call a controller method
+
+```php
+Schedule::call('App\Modules\Customers\Controllers\Admin\Customers@cron')->everyMinute();
+```
+
+## Mail Spooling
+There is the Mailer::send(), which is used to send emails now there is a new method `Mailer::queue()`, with the same syntax.
+
+This places the message in the Spool queue to be sent later  instead to send it directly.
+
+To send the messages stored in the Spool, can be done by a CRON command which call directly the forge:
+
+```php
+mailer:spool:send
+```
+
+OR in the default given setup of Nova applications, to use the Console Scheduling.
+
+The command by default is in `app/Console.php`
+
+```
+ //Schedule the Mailer Spool queue flushing.
+
+Schedule::command('mailer:spool:send')->everyMinute();
+```
+
+Then if you run
+
+```php
+forge schedule:run
+```
+
+It will be executed.
+
+### What advantages does Mailer Spool provide?
+
+Email sending could be slow, which can have a negative impact on the speed of receiving the next/response page.
+
+Using the Spool queuing to send messages is very fast, the site interface speed is not affected.
+
+Another advantage of using the Spool queuing, because of its precise cycling nature, allows to configure a limitation of the number of messages sent per minute, very useful on most hosted servers, which have a limitation of the number of messages sent.
+
+This is configured by spool.messageLimit on app/Config/Mail.php
+The value of 10 have the sense of sending max 10 messages per cycle (of one minute, usually)
+
+So, this is max 600 messages per hour.
+
+BUT, because the messages are queued, the process will continue until all messages from the Spool queue will be sent, but no more than 10 messages per minute.
+
+The disadvantage of this design is that there can appear delays on the emails sending.
+For example, imagine that 100 users ask for a password recovery in the same minute.
+
+Yet, depending on the real order of receiving the requests, can be up to 10 minutes until a email for password recovery will be sent to a particular user, who's unlucky to be the last one.
+
+`dump($item)`
+
+dump outputs the variable without exiting the application.
