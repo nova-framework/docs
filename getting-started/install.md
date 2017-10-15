@@ -1,14 +1,24 @@
-- [Recommended](#recommended)
-- [XAMPP](#xampp)
-- [Virtualhost](#virtualhost)
-- [Nginx configuration](#nginx-configuration)
-- [IIS with URL Rewrite module installed](#iis-with-url-rewrite-module-installed)
+[Recommended](#recommended)
+[XAMPP](#xampp)
+[Nginx configuration](#nginx-configuration)
+[IIS with URL Rewrite module installed](#iis-with-url-rewrite-module-installed)
 
 <a name='recommended'></a>
 #### Recommended
 This framework was designed and is strongly recommended to be installed above the document root directory, with it pointing to the webroot folder.
 
-Additionally, installing in a sub-directory, on a production server, will introduce severe security issues. If there is no choice still place the framework files above the document root and have only index.php and .htacess from the webroot folder in the sub folder and adjust the paths accordingly.
+Additionally, installing in a sub-directory, on a production server, will introduce severe security issues. If there is no choice still place the framework files above the document root and have only index.php and .htacess from the webroot folder in the sub folder and adjust the paths in index.php.
+
+```php
+//path to the root folder holding all files
+define('ROOTDIR', realpath(__DIR__.'/../') .DS);
+
+//path to the app directory
+define('APPDIR', realpath(__DIR__.'/../app/') .DS);
+
+//path to the webroot directory
+define('PUBLICDIR', realpath(__DIR__) .DS);
+```
 
 The framework is located on [Packagist](https://packagist.org/packages/nova-framework/framework).
 
@@ -20,29 +30,25 @@ composer create-project nova-framework/framework foldername 3.* -s dev
 
 The foldername is the desired folder to be created.
 
+> Notice the 3.* this mean install the latest version of the 3 range.
+
 ---
 <a name='xampp'></a>
 #### XAMPP
 
 Installing Nova-Framework 3 on xampp virtual server for Windows.
 
-- Download composer installer for windows and run Composer-Setup.exe as you well need this to install the Nova Framework package.
-- Open terminal and run composer and if it installed correctly you will see a list of composer commands displayed.
+The first way is under the `C:/XAMPP/htdocs` directory. (see further down on page for second way)
 
-You can install Nova two different ways.
-
-The first way is under the C:/XAMPP/htdocs directory. (see further down on page for second way)
-
-- Now in terminal go to the C:/XAMPP/htdocs directory.
-- Run the below command replacing foldername with the name of your project.
+Now in command prompt go to the zC:/XAMPP/htdocs` directory.
+Run the below command replacing foldername with the name of your project.
 
 ```php
 composer create-project nova-framework/framework foldername 3.* -s dev
 ```
 
-- Now go to the folder with the name of your project created under the htdocs folder.
-- Now lets create your virtualhost:
-- Open httpd-vhosts.conf file C:/XAMPP/apache/conf/extra/httpd-vhosts.conf Add following code.
+Now go to the folder with the name of your project created under the htdocs folder.
+Open httpd-vhosts.conf file `C:/XAMPP/apache/conf/extra/httpd-vhosts.conf` Add following code.
 
 ```php
 <Directory C:/XAMPP/htdocs>
@@ -66,130 +72,24 @@ composer create-project nova-framework/framework foldername 3.* -s dev
 
 change projectname to you're projects name.
 
-- Save the file and exit out of Xampp.
-- Open hosts file in C:\windows\system32\drivers\etc you need Administrator privilege to edit the file.
-- Add 127.0.0.1    projectname.dev at the end of the file, Save and close the file.  Again changing projectname to your's.
+Save the file and exit out of Xampp.
+Open hosts file in `C:\windows\system32\drivers\etc` you need Administrator privilege to edit the file.
+Add `127.0.0.1 projectname.dev` at the end of the file, Save and close the file. Again changing projectname to your's.
 
 ```php
 127.0.0.1       localhost
 127.0.0.1       projectname.dev
 ```
 
-- Restart Xampp and start apache server.
-- Go to your project folder and open app/Config/App.php and change to your URL.
+Restart Xampp and start apache server.
+Go to your project folder and open `app/Config/App.php` and change to your URL.
 
 ```php
-    /**
-     * The Website URL.
-     */
-    'url' => 'http://www.nova.dev/',
+    'url' => 'http://www.projectname.dev/',
 ```
 
-- now open browser and go to your url.  You should see the Nova startup screen.
+Now open browser and go to your url. You should see the Nova startup screen.
 
-**CONGRATS**, you're up and running.
-
-The second way is to create a new folder like C:/vhosts.
-
-- Now in terminal go to the C:/vhosts directory.
-- Run the below command replacing foldername with the name of your project.
-
-```php
-composer create-project nova-framework/framework foldername 3.* -s dev
-```
-
-- Now go to the folder with the name of your project created under the vhosts folder.
-- Now lets create your virtualhost:
-- Open httpd-vhosts.conf file C:/XAMPP/apache/conf/extra/httpd-vhosts.conf Add following code.
-
-```php
-<Directory C:/vhosts>
-    AllowOverride All
-    Require all granted
-</Directory>
-
-#this is the default address of XAMPP
-<VirtualHost *:80>
-    DocumentRoot "C:/XAMPP/htdocs/"
-    ServerName localhost
-</VirtualHost>
-
-#this is the vhost address in XAMPP
-<VirtualHost *:80>
-    DocumentRoot "C:/vhosts/projectname/webroot/"
-    ServerName projectname.dev
-    SetEnv NS_ENV variable_value
-</VirtualHost>
-```
-
-change projectname to you're projects name.
-
-- Save the file and exit out of Xampp.
-- Open hosts file in C:\windows\system32\drivers\etc you need Administrator privilege to edit the file.
-- Add 127.0.0.1 projectname.dev at the end of the file, Save and close the file.  Again changing projectname to your's.
-
-```php
-127.0.0.1       localhost
-127.0.0.1       projectname.dev
-```
-
-- Restart Xampp and start apache server.
-- Go to your project folder and open app/Config/App.php and change to your URL.
-
-```php
-    /**
-     * The Website URL.
-     */
-    'url' => 'http://www.nova.dev/',
-```
-
- - now open browser and go to your url.  You should see the Nova startup screen.
-
-**CONGRATS**, you're up and running.
-
----
-
-<a name='virtualhost'></a>
-## VirtualHost
-
-Navigate to:
-
-```php
-<path to your xampp installation>\apache\conf\extra\httpd-vhosts.conf
-```
-
-and uncomment:
-
-```php
-NameVirtualHost *:80
-```
-
-Then add your VirtualHost to the same file at the bottom:
-
-```php
-<VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    DocumentRoot "C:\xampp\testproject\webroot"
-    ServerName testproject.dev
-
-    <Directory "C:\xampp\testproject\webroot">
-        Options Indexes FollowSymLinks Includes ExecCGI
-        AllowOverride All
-        Order allow,deny
-        Allow from all
-    </Directory>
-</VirtualHost>
-```
-
-Finally, find your hosts file and add:
-
-```php
-127.0.0.1       testproject.dev
-```
-
-You should then have a virtual host setup, and in your web browser, you can navigate to testproject.dev to see what you are working on.
-
----
 
 <a name='nginx-configuration'></a>
 ## Nginx configuration
