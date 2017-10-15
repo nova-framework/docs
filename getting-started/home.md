@@ -5,6 +5,345 @@ To this end Nova does not come with lots of built in libraries / helpers or modu
 
 This has been tested with php 5.6 and php 7 please report any bugs.
 
+
+## 3.78.20
+
+Improve the Account page from Frontend + new Chat module
+
+## 3.78.19
+
+Improve the AdminLite theme in the Frontend side
+
+## 3.78.18
+
+Improve the ACL infrastructure
+
+Usually, the USER is considered the Creator/Root and get all permissions, by its particular ID.
+
+This release honors this unwritten rule and add overall improvements.
+
+
+## 3.78.17
+
+Fixed ACL on Roles and Users
+
+## 3.78.16
+
+Move the application infrastructure to an ACL style Role/Permission
+
+## 3.78.15
+
+Implementation of support for the Database Spool in the Mailer Service
+
+## 3.78.14
+
+Consolidate the Authorization System (ACL) and implement an example into Users module
+
+## 3.78.13
+
+Update the RTL support on Themes and compatibility with the Kernels beyond 3.78.14
+
+Continue the updates required by the usage of AdminLTE 2.4.0 and update the application for the latest 3.78.14 kernel (to be released).
+
+Long story short, inside the Kernel, the Nova\Module namespace was renamed as Nova\Modules.
+
+This require several Service Providers updates into `app/Config/App.php` and adjusting the ModuleServiceProvider from the shipped Modules, as:
+
+```php
+use Nova\Module\Support\Providers\ModuleServiceProvider as ServiceProvider;
+```
+
+should become:
+
+```php
+use Nova\Modules\Support\Providers\ModuleServiceProvider as ServiceProvider;
+```
+
+Those changes could be resolved also by a mass replace. To note: Nova\Module\ -> Nova\Modules\
+
+## 3.78.12
+
+Improve the Backend Layout into AdminLite theme
+
+## 3.78.11
+
+Update the AdminLite theme for AdminLTE 2.4.0
+
+## 3.78.10
+
+Improve the API support
+
+Improve the API support, and implements the Token-based Authentication infrastructure needed by APIs.
+
+Also, now after a positive check of the User authentication over a Guard, it is set as default for the further use by the auth Filter.
+
+Finally, was added an example of API Route:
+
+```php
+Route::get('api/user', array('before' => 'auth:api', function (Request $request)
+{
+    return $request->user();
+}));
+```
+
+## 3.78.9
+
+Add an example for the Forge's Closure based commands
+
+## 3.78.8
+
+Improve the Route Filters and the Authentication infrastructure
+
+Improve the Authentication infrastructure, including the associated Route Filters.
+
+Notable, the logout Route is moved to the usage of POST HTTP method, and the CSRF check is applied to it.
+
+Also, the auth.basic filter, used for basic HTTP authentication, now accepts an Authorization Guard parameter.
+
+## 3.78.7
+
+Implement the Mailer Spool queue and overall improvements
+
+## 3.78.6
+
+Implement on Shared the Database Backup support and a Router extension, update the Language files
+Implemented on the Shared namespace the Database Backup support and a Router extension, for the command `Route::controller()`, which works as usual.
+
+The Database Backup add two new Forge commands: db:backup and db:restore and save SQL dumps to the folder `app/Database/Backup`.
+
+## 3.78.5
+
+Improve the Modules and the Boot stage
+
+## 3.78.4
+
+Improve the Options handling, the Modules and implement the XL Layout on Bootstrap Theme
+Notable, implements a large (1480px) layout for the Bootstrap theme, beyond the standard 1200px one.
+
+## 3.78.3
+
+Improve the Exceptions handling on Options loading
+
+## 3.78.2
+
+Overall improvements
+Improved the Route Filters handling, and move the usage of Controllers side Filters to standard ones, on the example Backend.
+
+In the same, the Route Filter role is improved and now it is used by default by the Controllers interested to restrict the access to administration side.
+
+Also, the Roles checking is improved into `App\Models\User` Model.
+
+Finally, overall small improvements are introduced.
+
+## 3.78.1
+
+Overall improvements
+Introduced improvements on `App\Controllers\BaseController` and an improved options handling, which now are able to use the namespaced Config options, with activation by default of the Setting Page into example Backend.
+
+Basically, the new Options handling permit also the usage of the Settings Page(s) into Modules, which use the Namespaced Config Items for their Config(uration).
+
+Also, the improved `App\Controllers\BaseController` handle now entirely the (auto-)Theming, which permits to optimize the Nova\Routing\Controller for a better performance on the RESTful APIs.
+
+Finally, to note that on the `App\Controllers\BaseController` the method `before()` was renamed as `initialize()`, for a better description of its very own role: to initialize the Controller instance before execution of the requested Action.
+
+## 3.78.0
+
+Implementation of the Database Migrations and Seeding
+
+## 3.77.32
+
+Add the App\Events\Event class and the App\Listeners namespace
+
+## 3.77.31
+
+Renamed the base Controllers for consistency, as following:
+
+App\Core\Controller -> App\Controllers\BaseController
+App\Core\BackendController -> App\Modules\System\Controllers\BaseController
+
+Additionally, improvements are applied to App\Controllers\BaseController@getView
+
+## 3.77.30
+
+Code Cleanup
+
+## 3.77.29
+
+Remove the RainCaptcha support
+
+Remove the RainCaptcha support, as it became obsolete.
+
+To note that a small API change is introduced, but this is unavoidable, as the RainCaptcha reached its end of life.
+
+## 3.77.28
+
+Updated Danish and Russian translations
+
+## 3.77.27
+
+Update french translation
+
+## 3.77.26
+
+Adjust the reCaptcha config usage and language update
+
+## 3.77.25
+
+Improve the Layouts from Bootstrap Theme
+
+## 3.77.24
+
+Improve the Bootstrap Theme and move it to using the Template Engine
+
+## 3.77.23
+
+Improve the demo for Pagination
+
+## 3.77.22
+
+Improve App\Providers\ThemeServiceProvider
+
+## 3.77.21
+
+fixed modules demo and pagination in Demos module
+
+## 3.77.20
+
+Implement the Service Providers support for Themes
+
+## 3.77.19
+
+Overall improvements
+Introduced a public method called `validate()` into base Controllers, this means any protected method called `validate()` will need to be renamed.
+
+The suggested way of action is to rename those methods to `validator()`
+
+## 3.77.18
+
+Implementation of the Authorization Policies (ACL)
+
+## 3.77.17
+
+Update app/Boot/Start.php
+
+## 3.77.16
+
+Improve the Role-based Route Filter
+
+## 3.77.15
+
+Improve the Route Filters
+
+## 3.77.14
+
+Improve the Auth Filters
+
+## 3.77.13
+
+Update the App\Core\Controller
+
+## 3.77.12
+
+Improve the Route Filters
+
+## 3.77.11
+
+Improve the Route Filters and update the Auth configuration
+
+## 3.77.10
+
+Run 'forge module:optimize' on Composer install and update
+
+## 3.77.9
+
+Improve the Role-based Route Filter
+
+## 3.77.8
+
+Improve the Role-based Route Filter and update the Language files
+
+## 3.77.7
+
+Implementation of the Multi-Auth support
+
+## 3.77.6
+
+Update the composer.json to support 5.6+
+
+Ideally php 7 and up should be used but 5.6 is supported.
+
+## 3.77.4
+
+Update the App\Core\BackendController
+
+Renamed the method `setupLayout()` to `before()`
+
+## 3.77.1
+
+Module Improvements
+
+Introduced a small correction default/Default/ into App\Modules\System\Controllers\Registrar and update the Modules support for compatibility with Kernel 3.77.1 and superior.
+
+## 3.77.0
+
+Replaced nova cli with forge cli and advanced modules
+
+
+* Added a new file called app/Boot/Forge
+* Removed the nova script
+* Added forge script
+* Forge side Service Providers was added in app/Config/App.php
+* The Modules received a Config folder with associated files
+* In the ModuleServiceProvider from every Module was added the package() and was removed the loadConfigFrom part
+* Removed the nova cli and replaced with forge cli script to be similar to what 4 offers but note it does not h* all commands 4 has.
+* Implemented Forge commands for Auth, Cache and Session Services. Updated the Modules and
+* implement the Modules side Forge commands.
+
+Modules now require service providers recommended to use forge to make a module.
+
+```
+php forge
+```
+
+
+## 3.76.5
+
+Improve the Service Providers from Modules
+
+Introduced a better and more versatile handling of the Modules via a triplet of Service Providers.
+
+To note that this pull request require the Kernel 3.76.12, and it needs a fast merging and release.
+
+
+## 3.76.4
+
+Add support for Views Overrides in Themes and re-organize them
+
+Re-organize the Themes, moving the Layouts to the Layouts folder and implements the support for the Views Override, which permit to override any View from Application or Modules per Theme base.
+
+To note that now the Layouts should have the names capitalized/studly, for example: default.php -> Default.php
+
+Also, the RTL Layouts should stay in the folder Layouts/RTL while having the same name as the base ones.
+
+
+## 3.76.3
+
+Renamed the Langauge folders to be uppercase
+
+## 3.76.2
+
+Improve the `nova` script, setup and bring up the Nova Application in the Console Environment.
+
+## 3.76.1
+
+Upgraded Nova CLI you can use the following Facades: App, File and Config. Also, are available the following functions: base_path(), app_path()
+
+A new command have been added to clear out the view cache files:
+
+```php
+php nova clear:views
+```
+
 ## 3.76.0
 
 Introduce the native **Template Engine** which respond to View files with the extension `.tpl` or `.ntp and update the Views Service.
