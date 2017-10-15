@@ -9,6 +9,8 @@ Nova comes with a few sample modules, these are for showing examples of what can
 
 ### Demos
 
+> Note demo's module has been removed
+
 Demos's purpose is to demonstrate some of Nova's features, looking inside **app/Modules/Demos/Routes.php** are these routes:
 
 Each route is a different demo for instance going to **/demo/database** (requires a database being connected in **app/Confog/Database.php**)

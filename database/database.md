@@ -8,14 +8,18 @@
 - [Updates](#updates)
 - [Deletes](#deletes)
 - [Unions](#unions)
+- [Caching Queries](#caching-quiries)
 
 <a name='introduction'></a>
 ## Introduction
+
+>Note `Nova\Database\Model` has been removed
+
 An improved Database API was recently added, which includes a **QueryBuilder** and a simple but powerful Model. Everything regarding this API is living within the namespace **'\Database\'** for isolation reasons.
 
 To note that this new Database API doesn't replace any of the existing classes, the actual **Core\Model** and **Helpers\Database** remain untouched. The end-user can choose which Database API is used in their application, with the only condition to not use both of them simultaneously, which will duplicate the Database connections.
 
-From here on in only the new Database\Model will be covered, this is the recommended approach. 
+From here on in only the new Database\Model will be covered, this is the recommended approach.
 
 > **Please Note** in version 4 all legacy classes will be removed including the Database helper.
 
@@ -340,3 +344,14 @@ $first = DB::table('users')->whereNull('first_name');
 $users = DB::table('users')->whereNull('last_name')->union($first)->get();
 ```
 The `unionAll` method is also available, and has the same method signature as `union`.
+
+<a name='caching-quiries'></a>
+## Caching Quiries
+
+Queries can be cached for a time period by using the remember or rememberForever method:
+
+This will cache the query for 60 minutes, during this time the results will be stored in a cache and no database query will run.
+
+```php
+$posts = DB::table('posts')->remember(60)->get();
+```

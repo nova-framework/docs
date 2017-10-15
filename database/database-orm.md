@@ -84,7 +84,7 @@ $model = User::where('votes', '>', 100)->firstOrFail();
 To register the error handler, listen for the `ModelNotFoundException` add this to **app/Boot/Global.php**
 
 ```php
-use Database\ORM\ModelNotFoundException;
+use Nova\Database\ORM\ModelNotFoundException;
 
 App::error(function(ModelNotFoundException $e)
 {
@@ -152,7 +152,7 @@ To get started, set the `fillable` or `guarded` properties on your model.
 The `fillable` property specifies which attributes should be mass-assignable. This can be set at the class or instance level.
 
 ```php
-class User extends Model 
+class User extends Model
 {
     protected $fillable = array('first_name', 'last_name', 'email');
 }
@@ -165,10 +165,10 @@ In this example, only the three listed attributes will be mass-assignable.
 The inverse of `fillable` is `guarded`, and serves as a "black-list" instead of a "white-list":
 
 ```php
- class User extends Model 
+ class User extends Model
  {
     protected $guarded = array('id', 'password');
- }   
+ }
 ```
 
 > **Note:** When using `guarded`, you should still never pass `Input::get()` or any raw array of user controlled input into a `save` or `update` method, as any column that is not guarded may be updated.
@@ -207,7 +207,7 @@ $insertedId = $user->id;
 #### Setting The Guarded Attributes On The Model
 
 ```php
-class User extends Model 
+class User extends Model
 {
     protected $guarded = array('id', 'account_id');
 }
@@ -307,7 +307,7 @@ use Database\ORM\SoftDeletingTrait;
 class UsefulLink extends Model
 {
 	use SoftDeletingTrait;
-     
+
      //rest of code
 }
 ```
@@ -453,7 +453,7 @@ Of course, your database tables are probably related to one another. For example
 A one-to-one relationship is a very basic relation. For example, a `User` model might have one `Phone`. We can define this relation in ORM:
 
 ```php
-class User extends Model 
+class User extends Model
 {
     public function phone()
     {
@@ -488,7 +488,7 @@ return $this->hasOne('App\Models\Phone', 'foreign_key', 'local_key');
 To define the inverse of the relationship on the `Phone` model, we use the `belongsTo` method:
 
 ```php
-class Phone extends Model 
+class Phone extends Model
 {
     public function user()
     {
@@ -500,7 +500,7 @@ class Phone extends Model
 In the example above, ORM will look for a `user_id` column on the `phones` table. If you would like to define a different foreign key column, you may pass it as the second argument to the `belongsTo` method:
 
 ```php
-class Phone extends Model 
+class Phone extends Model
 {
     public function user()
     {
@@ -512,7 +512,7 @@ class Phone extends Model
 Additionally, you pass a third parameter which specifies the name of the associated column on the parent table:
 
 ```php
-class Phone extends Model 
+class Phone extends Model
 {
     public function user()
     {
@@ -527,7 +527,7 @@ class Phone extends Model
 An example of a one-to-many relation is a blog post that "has many" comments. We can model this relation like so:
 
 ```php
-class Post extends Model 
+class Post extends Model
 {
     public function comments()
     {
@@ -578,7 +578,7 @@ Many-to-many relations are a more complicated relationship type. An example of s
 We can define a many-to-many relation using the `belongsToMany` method:
 
 ```php
-class User extends Model 
+class User extends Model
 {
     public function roles()
     {
@@ -608,7 +608,7 @@ return $this->belongsToMany('App\Models\Role', 'user_roles', 'user_id', 'foo_id'
 Of course, you may also define the inverse of the relationship on the `Role` model:
 
 ```php
-class Role extends Model 
+class Role extends Model
 {
     public function users()
     {
@@ -641,7 +641,7 @@ The "has many through" relation provides a convenient short-cut for accessing di
 Even though the `posts` table does not contain a `country_id` column, the `hasManyThrough` relation will allow us to access a country's posts via `$country->posts`. Let's define the relationship:
 
 ```php
-class Country extends Model 
+class Country extends Model
 {
     public function posts()
     {
@@ -653,7 +653,7 @@ class Country extends Model
 If you would like to manually specify the keys of the relationship, you may pass them as the third and fourth arguments to the method:
 
 ```php
-class Country extends Model 
+class Country extends Model
 {
     public function posts()
     {
@@ -668,7 +668,7 @@ class Country extends Model
 Polymorphic relations allow a model to belong to more than one other model, on a single association. For example, you might have a photo model that belongs to either a staff model or an order model. We would define this relation like so:
 
 ```php
-class Photo extends Model 
+class Photo extends Model
 {
     public function imageable()
     {
@@ -676,7 +676,7 @@ class Photo extends Model
     }
 }
 
-class Staff extends Model 
+class Staff extends Model
 {
     public function photos()
     {
@@ -684,7 +684,7 @@ class Staff extends Model
     }
 }
 
-class Order extends Model 
+class Order extends Model
 {
     public function photos()
     {
@@ -769,7 +769,7 @@ In addition to traditional polymorphic relations, you may also specify many-to-m
 Next, we're ready to setup the relationships on the model. The `Post` and `Video` model will both have a `morphToMany` relationship via a `tags` method:
 
 ```php
-class Post extends Model 
+class Post extends Model
 {
     public function tags()
     {
@@ -781,7 +781,7 @@ class Post extends Model
 The `Tag` model may define a method for each of its relationships:
 
 ```php
-class Tag extends Model 
+class Tag extends Model
 {
     public function posts()
     {
@@ -792,7 +792,7 @@ class Tag extends Model
     {
         return $this->morphedByMany('App\Models\Video', 'taggable');
     }
-}    
+}
 ```
 
 <a name="querying-relations"></a>
@@ -827,7 +827,7 @@ $posts = Post::whereHas('comments', function($q)
 ORM allows you to access your relations via dynamic properties. ORM will automatically load the relationship for you, and is even smart enough to know whether to call the `get` (for one-to-many relationships) or `first` (for one-to-one relationships) method.  It will then be accessible via a dynamic property by the same name as the relation. For example, with the following model `$phone`:
 
 ```php
-class Phone extends Model 
+class Phone extends Model
 {
     public function user()
     {
@@ -859,7 +859,7 @@ echo $phone->user->email;
 Eager loading exists to alleviate the N + 1 query problem. For example, consider a `Book` model that is related to `Author`. The relationship is defined like so:
 
 ```php
-class Book extends Model 
+class Book extends Model
 {
     public function author()
     {
@@ -1028,7 +1028,7 @@ User::find(1)->roles()->save($role, array('expires' => $expires));
 When a model `belongsTo` another model, such as a `Comment` which belongs to a `Post`, it is often helpful to update the parent's timestamp when the child model is updated. For example, when a `Comment` model is updated, you may want to automatically touch the `updated_at` timestamp of the owning `Post`. ORM makes it easy. Just add a `touches` property containing the names of the relationships to the child model:
 
 ```php
-class Comment extends Model 
+class Comment extends Model
 {
     protected $touches = array('post');
 
@@ -1181,7 +1181,7 @@ $roles = $roles->sortBy('created_at');
 Sometimes, you may wish to return a custom Collection object with your own added methods. You may specify this on your ORM model by overriding the `newCollection` method:
 
 ```php
-class User extends Model 
+class User extends Model
 {
     public function newCollection(array $models = array())
     {
@@ -1198,7 +1198,7 @@ class User extends Model
 ORM provides a convenient way to transform your model attributes when getting or setting them. Simply define a `getFooAttribute` method on your model to declare an accessor. Keep in mind that the methods should follow camel-casing, even though your database columns are snake-case:
 
 ```php
-class User extends Model 
+class User extends Model
 {
     public function getFirstNameAttribute($value)
     {
@@ -1214,7 +1214,7 @@ In the example above, the `first_name` column has an accessor. Note that the val
 Mutators are declared in a similar fashion:
 
 ```php
-class User extends Model 
+class User extends Model
 {
     public function setFirstNameAttribute($value)
     {
@@ -1245,7 +1245,7 @@ To totally disable date mutations, simply return an empty array from the `getDat
 public function getDates()
 {
     return array();
-}   
+}
 ```
 
 #### Setting A Model Boot Method
@@ -1253,7 +1253,7 @@ public function getDates()
 ORM models also contain a static `boot` method, which may provide a convenient place to register your event bindings.
 
 ```php
-class User extends Model 
+class User extends Model
 {
     public static function boot()
     {
@@ -1286,7 +1286,7 @@ User::creating(function($user)
 ORM models also contain a static boot method, which may provide a convenient place to register your event bindings.
 
 ```php
-class User extends Model 
+class User extends Model
 {
     public static function boot()
     {
@@ -1304,7 +1304,7 @@ To consolidate the handling of model events, you may register a model observer. 
 So, for example, a model observer might look like this:
 
 ```php
-class UserObserver 
+class UserObserver
 {
     public function saving($model)
     {
@@ -1366,7 +1366,7 @@ Route::get('users', function()
 Sometimes you may wish to limit the attributes that are included in your model's array or JSON form, such as passwords. To do so, add a `hidden` property definition to your model:
 
 ```php
-class User extends Model 
+class User extends Model
 {
     protected $hidden = array('password');
 }
