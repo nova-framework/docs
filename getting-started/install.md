@@ -32,6 +32,27 @@ The foldername is the desired folder to be created.
 
 > Notice the 3.* this mean install the latest version of the 3 range.
 
+## Run using PHP's build in web server:
+
+There are 2 ways to run php's web server:
+
+1) Open terminal and navigate to the root of the project and type:
+
+```php
+php -S localhost:8000 -t webroot
+```
+
+This will start the server listening on port 8000.
+
+2) using Nova's CLI tool `Forge` Open terminal and navigate to the root of the project and type:
+
+```php
+php forge serve
+```
+
+This will start the server listening on port 8000.
+
+
 ---
 <a name='xampp'></a>
 #### XAMPP
@@ -40,7 +61,7 @@ Installing Nova-Framework 3 on xampp virtual server for Windows.
 
 The first way is under the `C:/XAMPP/htdocs` directory. (see further down on page for second way)
 
-Now in command prompt go to the zC:/XAMPP/htdocs` directory.
+Now in command prompt go to the 'C:/XAMPP/htdocs` directory.
 Run the below command replacing foldername with the name of your project.
 
 ```php
