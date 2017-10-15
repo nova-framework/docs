@@ -2,7 +2,9 @@
 
 This guide will point out the key points to be aware of when upgrading to version 3.
 
-All classes within the app directory have a new namespace of App, controllers and models/modules have the following namespaces for classes placed directly in those directories.
+All classes within the app directory have a new namespace of App.
+
+Controllers, Models and Modules have the following namespaces for classes placed directly in those directories.
 
 ## Controllers
 
@@ -22,31 +24,21 @@ namespace App\Models;
 namespace App\Controllers\ModuleName;
 ```
 
-## Instantiating a model
-
-Models are instantiated typically within a construct method, use the full namespace to call the class:
-
-```php
-public function __construct()
-{
-    parent::__construct();
-    $this->model = new \App\Models\ModelName();
-}
-```
-
 ## Views
 
 Views like classes should have filenames starting with a capital letter for both the directory and the file, for instance, welcome/index.php becomes Welcome/Index.php.
 
 ```php
-View::make('Welcome/Index', $data);
+View::make('Welcome/Index');
 ```
 
-## Loading Images, CSS, js, and assets
+## Loading images, css, js and assets
 
 Nova has been designed to live above the document root as such images and other assets cannot be called directly instead they need to be routed from Nova, this is done by calling `resource_url()`.
 
-By default, this will return the path to the assets folder, place general assets in there. For theme files place them inside the Theme/Assets directory and call them by using `theme_url()` this will load the path to the template.
+By default, this will return the path to the assets folder.
+
+For theme files place them inside the Theme/Assets directory and call them by using `theme_url()` this will load the path to the theme.
 
 Make use of the Assets helper to load the CSS files:
 
