@@ -44,21 +44,21 @@ View::make('Welcome/Index', $data);
 
 ## Loading Images, CSS, js, and assets
 
-Nova has been designed to live above the document root as such images and other assets cannot be called directly instead they need to be routed from Nova, this is done by calling resource_path().
+Nova has been designed to live above the document root as such images and other assets cannot be called directly instead they need to be routed from Nova, this is done by calling `resource_url()`.
 
-By default, this will return the path to the assets folder, place general assets in there. For theme files place them inside the Theme/Assets directory and call them by using template_path() this will load the path to the template.
+By default, this will return the path to the assets folder, place general assets in there. For theme files place them inside the Theme/Assets directory and call them by using `theme_url()` this will load the path to the template.
 
 Make use of the Assets helper to load the CSS files:
 
 ```php
 Assets::css([
     'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css',
-    template_path('css/style.css', 'Default')
+    theme_url('css/style.css', 'Bootstrap')
 ]);
 ```
 
-An example of loading an image from Default/Assets/images.
+An example of loading an image from Bootstrap/Assets/images.
 
 ```php
-<img src='<?=template_path('images/nova.png', 'Default');?>'>
+<img src='<?=theme_url('images/nova.png', 'Bootstrap');?>'>
 ```
