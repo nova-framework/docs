@@ -3,8 +3,9 @@ Nova Framework is a PHP 5.6+ MVC Framework. It's designed to be modular, allowin
 
 To this end Nova does not come with lots of built in libraries / helpers or modules instead, it's left to the user to decide what they want to implement, this allows freedom to design and build how you see fit. Having said that there are a limited number provided.
 
-This has been tested with php 5.6 and php 7 please report any bugs.
+This has been tested with php 5.6 and php 7. 
 
+Please report any bugs.
 
 ## 3.78.20
 
