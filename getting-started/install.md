@@ -4,7 +4,7 @@
 - [IIS with URL Rewrite module installed](#iis-with-url-rewrite-module-installed)
 
 <a name='recommended'></a>
-#### Recommended
+## Recommended
 This framework was designed and is strongly recommended to be installed above the document root directory, with it pointing to the webroot folder.
 
 Additionally, installing in a sub-directory, on a production server, will introduce severe security issues. If there is no choice still place the framework files above the document root and have only index.php and .htacess from the webroot folder in the sub folder and adjust the paths in index.php.
@@ -32,7 +32,7 @@ The foldername is the desired folder to be created.
 
 > Notice the 3.* this mean install the latest version of the 3 range.
 
-## Run using PHP's build in web server:
+### Run using PHP's build in web server:
 
 There are 2 ways to run php's web server:
 
@@ -55,7 +55,7 @@ This will start the server listening on port 8000.
 
 ---
 <a name='xampp'></a>
-#### XAMPP
+## XAMPP
 
 Installing Nova-Framework 3 on xampp virtual server for Windows.
 
