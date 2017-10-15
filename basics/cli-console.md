@@ -165,7 +165,7 @@ OR in the default given setup of Nova applications, to use the Console Schedulin
 
 The command by default is in `app/Console.php`
 
-```
+```php
  //Schedule the Mailer Spool queue flushing.
 
 Schedule::command('mailer:spool:send')->everyMinute();
@@ -187,18 +187,14 @@ Using the Spool queuing to send messages is very fast, the site interface speed 
 
 Another advantage of using the Spool queuing, because of its precise cycling nature, allows to configure a limitation of the number of messages sent per minute, very useful on most hosted servers, which have a limitation of the number of messages sent.
 
-This is configured by spool.messageLimit on app/Config/Mail.php
+This is configured by `spool.messageLimit` in `app/Config/Mail.php`
 The value of 10 have the sense of sending max 10 messages per cycle (of one minute, usually)
 
 So, this is max 600 messages per hour.
 
 BUT, because the messages are queued, the process will continue until all messages from the Spool queue will be sent, but no more than 10 messages per minute.
 
-The disadvantage of this design is that there can appear delays on the emails sending.
-For example, imagine that 100 users ask for a password recovery in the same minute.
+### The disadvantage of this design
+Email sending is delayed. For example, imagine that 100 users ask for a password recovery at the same time.
 
-Yet, depending on the real order of receiving the requests, can be up to 10 minutes until a email for password recovery will be sent to a particular user, who's unlucky to be the last one.
-
-`dump($item)`
-
-dump outputs the variable without exiting the application.
+Depending on the real order of receiving the requests, can be up to 10 minutes until a email for password recovery will be sent to a particular user, who's unlucky to be the last one.
