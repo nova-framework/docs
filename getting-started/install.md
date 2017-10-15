@@ -1,12 +1,11 @@
 - [Recommended](#recommended)
-- [Manual](#manual)
 - [XAMPP](#xampp)
 - [Virtualhost](#virtualhost)
 - [Nginx configuration](#nginx-configuration)
 - [IIS with URL Rewrite module installed](#iis-with-url-rewrite-module-installed)
 
+<a name='recommended'></a>
 #### Recommended
-
 This framework was designed and is strongly recommended to be installed above the document root directory, with it pointing to the webroot folder.
 
 Additionally, installing in a sub-directory, on a production server, will introduce severe security issues. If there is no choice still place the framework files above the document root and have only index.php and .htacess from the webroot folder in the sub folder and adjust the paths accordingly.
@@ -22,6 +21,7 @@ composer create-project nova-framework/framework foldername 3.* -s dev
 The foldername is the desired folder to be created.
 
 ---
+<a name='xampp'></a>
 #### XAMPP
 
 Installing Nova-Framework 3 on xampp virtual server for Windows.
@@ -135,7 +135,7 @@ change projectname to you're projects name.
 
 - Restart Xampp and start apache server.
 - Go to your project folder and open app/Config/App.php and change to your URL.
-  
+
 ```php
     /**
      * The Website URL.
@@ -149,9 +149,10 @@ change projectname to you're projects name.
 
 ---
 
+<a name='virtualhost'></a>
 ## VirtualHost
 
-Navigate to: 
+Navigate to:
 
 ```php
 <path to your xampp installation>\apache\conf\extra\httpd-vhosts.conf
@@ -190,6 +191,7 @@ You should then have a virtual host setup, and in your web browser, you can navi
 
 ---
 
+<a name='nginx-configuration'></a>
 ## Nginx configuration
 
 No special configuration, you only need to configure Nginx and PHP-FPM.
@@ -221,7 +223,7 @@ server {
 ```
 
 ---
-
+<a name='iis-with-url-rewrite-module-installed'></a>
 ## IIS with URL Rewrite module installed
 
 [http://www.iis.net/downloads/microsoft/url-rewrite](http://www.iis.net/downloads/microsoft/url-rewrite)
