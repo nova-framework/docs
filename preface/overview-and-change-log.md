@@ -8,6 +8,10 @@ This has been tested with php 5.6 and php 7.
 
 Please report any bugs.
 
+## 3.78.21
+
+Added missing labels to system links via `Events.php` and updated css/js resources.
+
 ## 3.78.20
 
 Improve the Account page from Frontend + new Chat module
