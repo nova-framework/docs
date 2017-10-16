@@ -10,7 +10,7 @@ Please report any bugs.
 
 ## 3.78.21
 
-Added missing labels to system links via `Events.php` and updated css/js resources.
+Added missing labels to system module links via `Events.php` and Updated css/js resources for AdminLite theme.
 
 ## 3.78.20
 
