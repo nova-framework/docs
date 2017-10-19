@@ -32,6 +32,26 @@ The foldername is the desired folder to be created.
 
 > Notice the 3.* this mean install the latest version of the 3 range.
 
+** Running the modules that come with nova-framework/framework **
+
+It's important to run the following cli commands before starting:
+
+Open your terminal and navigate to your nova directory and run these commands in order to create the database tables and populate them.
+
+** You'll need to enter your database credentials at `app/Config/Database.php` before running these commands.**
+
+```php
+php forge migrate:install
+
+php forge migrate
+
+php forge seed
+
+php forge module:migrate
+
+php forge module:seed
+```
+
 ### Run using PHP's build in web server:
 
 There are 2 ways to run php's web server:
