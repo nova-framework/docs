@@ -8,6 +8,28 @@ This has been tested with php 5.6 and php 7.
 
 Please report any bugs.
 
+## 3.78.22
+
+Backend is re-organized, with modules for Users, Roles, Permissions, Messages and the System module became Platform.
+
+Fixed files module constructor.
+
+This release needs a clean **install/database**
+
+To get setup run the migrations and seeds in this order:
+
+```php
+php forge migrate:install
+
+php forge migrate
+
+php forge seed
+
+php forge module:migrate
+
+php forge module:seed
+```
+
 ## 3.78.21
 
 Added missing labels to system module links via `Events.php` and Updated css/js resources for AdminLite theme.
