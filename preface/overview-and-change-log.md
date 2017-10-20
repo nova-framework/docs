@@ -8,6 +8,10 @@ This has been tested with php 5.6 and php 7.
 
 Please report any bugs.
 
+## 3.78.24
+
+Improved the Files module to include elFinder via composer.
+
 ## 3.78.23
 
 Updated permissions handling for the Modules
