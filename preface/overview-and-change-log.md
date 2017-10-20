@@ -8,6 +8,11 @@ This has been tested with php 5.6 and php 7.
 
 Please report any bugs.
 
+## 3.78.23
+
+Updated permissions handling for the Modules
+Swapped using `DeletePermissionsTrait` and `CreatePermissionsTrait` for `ManagePermissionsTrait`
+
 ## 3.78.22
 
 Backend is re-organized, with modules for Users, Roles, Permissions, Messages and the System module became Platform.
