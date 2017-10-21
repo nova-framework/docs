@@ -10,7 +10,7 @@ Please report any bugs.
 
 ## 3.78.25
 
-Improve the App\Modules\Files\Support\Connector
+Improved the App\Modules\Files\Support\Connector
 
 ## 3.78.24
 
