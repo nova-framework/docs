@@ -8,6 +8,10 @@ This has been tested with php 5.6 and php 7.
 
 Please report any bugs.
 
+## 3.78.25
+
+Improve the App\Modules\Files\Support\Connector
+
 ## 3.78.24
 
 Improved the Files module to include elFinder via composer.
