@@ -8,6 +8,10 @@ This has been tested with php 5.6 and php 7.
 
 Please report any bugs.
 
+## 3.78.26
+
+Update the migrations from the Messages, Platform, Roles and Users modules
+
 ## 3.78.25
 
 Improved the App\Modules\Files\Support\Connector
