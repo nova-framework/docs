@@ -93,6 +93,33 @@ Available commands:
  view
   view:clear                Clear all compiled View files
 ```
+## Down
+
+Put Nova into Maintenance mode:
+
+```php
+php forge down
+```
+
+This produced the output of 'Be right back!' instead of loading pages. This is useful for when making upgrades.
+
+To change what is displayed go to `app/Boot/Global.php`
+
+```php
+App::down(function ()
+{
+    return Response::make("Be right back!", 503);
+});
+```
+
+## Display Environment
+
+```php
+php forge env
+```
+
+Displayed the current environment `Current Application Environment: local`
+
 ## remove cache files
 To remove the files in storage/cache:
 
