@@ -120,6 +120,25 @@ php forge env
 
 Displayed the current environment `Current Application Environment: local`
 
+## migrations
+
+Migration (Covered further in the database/migrations section of the docs)
+
+Creates a migrations table and also all tables defined within migration files in `app/Database/Migrations`
+
+```php
+php forge migrate
+```
+
+## Optimize
+
+This command refreshed the system cache
+
+```php
+php forge optimize
+```
+
+
 ## remove cache files
 To remove the files in storage/cache:
 
