@@ -120,7 +120,7 @@ php forge env
 
 Displayed the current environment `Current Application Environment: local`
 
-## migrations
+## Migrations
 
 Migration (Covered further in the database/migrations section of the docs)
 
