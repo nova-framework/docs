@@ -1,14 +1,14 @@
-New to 3 is a command line utility aptly named **Nova** located in the root. It currently supports creating controllers and models from the command line.
+Nova comes with a command line utility called **Forge** located in the root. It supports creating controllers, models, modules and more from the command line.
 
-To use it navigate to the project in your command line/terminal then type **php nova** followed by the command.
+To use it navigate to the project in your command line/terminal then type **php forge** followed by the command.
 
-Typing just **'php nova'** will give this output:
+Typing just **'php forge'** will give this output:
 
 ```php
-Nova Framework Command Line Interface for v3.0 version 1.3.0
+Nova Framework version 3.78.20
 
 Usage:
-    command [options] [arguments]
+  command [options] [arguments]
 
 Options:
   -h, --help            Display this help message
@@ -17,54 +17,115 @@ Options:
       --ansi            Force ANSI output
       --no-ansi         Disable ANSI output
   -n, --no-interaction  Do not ask any interactive question
+      --env[=ENV]       The environment the command should run under.
   -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
 
 Available commands:
-  help               Displays help for a command
-  list               Lists commands
-  clear
-    clear:cache      Clears the cache folder
-    clear:logs       Clears the log files
-    clear:sessions   Clears the sessions folder
-    clear:views      Clears the view cache folder
-  make
-    make:controller  Create a controller
-    make:key         Generate an encryption key for the config file
-    make:model       Create a model
+  clear-compiled            Remove the compiled class file
+  down                      Put the Application into Maintenance Mode
+  env                       Display the current Framework Environment
+  hello                     Display a Hello World message
+  help                      Displays help for a command
+  list                      Lists commands
+  migrate                   Run the database migrations
+  optimize                  Optimize the Framework for better performance
+  routes                    List all registered routes
+  serve                     Serve the Application on the PHP development server
+  up                        Bring the Application out of Maintenance Mode
+ auth
+  auth:clear-reminders      Flush expired reminders.
+  auth:reminders-table      Create a migration for the password reminders table
+ cache
+  cache:clear               Flush the Application cache
+  cache:forget              Remove an item from the cache
+  cache:table               Create a migration for the Cache database table
+ db
+  db:backup                 Backup the default database to `app/Database/Backup`
+  db:restore                Restore a dump from `app/Database/Backup`
+  db:seed                   Seed the database with records
+ key
+  key:generate              Set the Application Key
+ mailer
+  mailer:spool:clear        Clear the Mailer Spool queue of the messages failed to be sent
+  mailer:spool:send         Send the messages queued in the Mailer Spool queue
+  mailer:spool:table        Create a migration for the Mailer Spool database table
+ make
+  make:console              Create a new Forge command
+  make:controller           Create a new Controller class
+  make:event                Create a new Event class
+  make:listener             Create a new Event Listener class
+  make:migration            Create a new migration file
+  make:model                Create a new ORM Model class
+  make:module               Create a new Application Module
+  make:module:console       Create a new Module Forge command
+  make:module:controller    Create a new Module Controller class
+  make:module:migration     Create a new Module Migration file
+  make:module:model         Create a new Module Model class
+  make:module:notification  Create a new Module Notification class
+  make:module:policy        Create a new Module Policy class
+  make:module:provider      Create a new Module Service Provider class
+  make:module:seeder        Create a new Module Seeder class
+  make:notification         Create a new Notification class
+  make:policy               Create a new Policy class
+  make:provider             Create a new Service Provider class
+  make:seeder               Create a new Database Seeder class
+ migrate
+  migrate:install           Create the migration repository
+  migrate:refresh           Reset and re-run all migrations
+  migrate:reset             Rollback all database migrations
+  migrate:rollback          Rollback the last database migration
+  migrate:status            Show the status of each migration
+ module
+  module:list               List all Application Modules
+  module:migrate            Run the database migrations for a specific or all modules
+  module:migrate:refresh    Reset and re-run all migrations for a specific or all modules
+  module:migrate:reset      Rollback all database migrations for a specific or all modules
+  module:migrate:rollback   Rollback the last database migrations for a specific or all modules
+  module:migrate:status     Show the status of each migration
+  module:optimize           Optimize the module cache for better performance
+  module:seed               Seed the database with records for a specific or all modules
+ notifications
+  notifications:table       Create a migration for the notifications table
+ schedule
+  schedule:run              Run the scheduled commands
+ session
+  session:table             Create a migration for the Session database table
+ view
+  view:clear                Clear all compiled View files
 ```
 ## remove cache files
 To remove the files in storage/cache:
 
 ```php
-php nova clear:cache
+php forge clear:cache
 ```
 
 ## remove the log files
 To remove the files in storage/logs:
 
 ```php
-php nova clear:logs
+php forge clear:logs
 ```
 
 ## remove the session files
 To remove the files in storage/sessions:
 
 ```php
-php nova clear:sessions
+php forge clear:sessions
 ```
 
 ## remove the view cache files
 To remove the files in storage/views:
 
 ```php
-php nova clear:views
+php forge clear:views
 ```
 
 ## Creating a controller
 To create a controller type make:controller followed by the names of the methods to be created:
 
 ```php
-php nova make:controller lists index add edit view delete
+php forge make:controller lists index add edit view delete
 ```
 
 This will create a controller called Lists with 5 methods, additionally a Lists folder will be created in the views folder along with 5 files, one for each method. The files will be empty.
@@ -73,7 +134,7 @@ This will create a controller called Lists with 5 methods, additionally a Lists 
 To create a model type model followed by the names of the methods to be created:
 
 ```php
-php nova make:model lists getAll add edit delete
+php forge make:model lists getAll add edit delete
 ```
 
 This will create a controller called Lists with 4 methods.
@@ -82,7 +143,7 @@ This will create a controller called Lists with 4 methods.
 To generate an encryption key for **app/Config/App.php**, type in the following:
 
 ```php
-php nova make:key
+php forge make:key
 ```
 
 This will generate a 32 character alpha-numeric key.
@@ -141,7 +202,7 @@ see all commands at [system/Event.php](https://github.com/nova-framework/system/
 Servers with `register_argc_argv` set to off will generate an error, to fix set `register_argc_argv` to on for the server in php.ini or pass it in directly and switch it on.
 
 ```php
-php -d register_argc_argv=On nova/forge schedule:run
+php -d register_argc_argv=On forge/forge schedule:run
 ```
 
 example way to call a controller method
