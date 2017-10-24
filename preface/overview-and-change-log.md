@@ -8,6 +8,22 @@ This has been tested with php 5.6 and php 7.
 
 Please report any bugs.
 
+## 3.78.27
+Improve the Route Filters and the AdminLite theme
+
+Improved the `auth` Route Filter, now it permitting to specify multiple Authentication Guards for checking.
+
+For example, for checking against either `web` or `students` guards:
+
+```php
+Route::get('attachments/{token}/{filename}', array(
+    'before' => 'auth:web,students',
+    'uses'   => 'Attachments@serve'
+));
+```
+This is specially useful when the application use multiple Authentication Guards, aka **Multi-Auth**.
+
+Also, some small changes into AdminLite theme are included.
 ## 3.78.26
 
 Update the migrations from the Messages, Platform, Roles and Users modules
