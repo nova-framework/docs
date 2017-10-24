@@ -40,13 +40,13 @@ for a demo application install `nova-framework/framework` instead
 composer create-project nova-framework/framework foldername 3.* -s dev
 ```
 
-** Running the modules that come with nova-framework/framework **
+**Running the modules that come with nova-framework/framework**
 
 It's important to run the following cli commands before starting:
 
 Open your terminal and navigate to your nova directory and run these commands in order to create the database tables and populate them.
 
-** You'll need to enter your database credentials at `app/Config/Database.php` before running these commands.**
+**You'll need to enter your database credentials at `app/Config/Database.php` before running these commands.**
 
 ```php
 php forge migrate:install
