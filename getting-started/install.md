@@ -1,7 +1,7 @@
 - [Recommended](#recommended)
-- [XAMPP](#xampp)
 - [Nginx configuration](#nginx-configuration)
 - [IIS with URL Rewrite module installed](#iis-with-url-rewrite-module-installed)
+- [XAMPP](#xampp)
 
 <a name='recommended'></a>
 ## Recommended
@@ -80,66 +80,6 @@ php forge serve
 
 This will start the server listening on port 8000.
 
-
----
-<a name='xampp'></a>
-## XAMPP
-
-Installing Nova-Framework 3 on xampp virtual server for Windows.
-
-The first way is under the `C:/XAMPP/htdocs` directory. (see further down on page for second way)
-
-Now in command prompt go to the 'C:/XAMPP/htdocs` directory.
-Run the below command replacing foldername with the name of your project.
-
-```php
-composer create-project nova-framework/framework foldername 3.* -s dev
-```
-
-Now go to the folder with the name of your project created under the htdocs folder.
-Open httpd-vhosts.conf file `C:/XAMPP/apache/conf/extra/httpd-vhosts.conf` Add following code.
-
-```php
-<Directory C:/XAMPP/htdocs>
-    AllowOverride All
-    Require all granted
-</Directory>
-
-#this is the default address of XAMPP
-<VirtualHost *:80>
-    DocumentRoot "C:/XAMPP/htdocs/"
-    ServerName localhost
-</VirtualHost>
-
-#this is the vhost address in XAMPP
-<VirtualHost *:80>
-    DocumentRoot "C:/XAMPP/htdocs/projectname/webroot/"
-    ServerName projectname.dev
-    SetEnv NS_ENV variable_value
-</VirtualHost>
-```
-
-change projectname to you're projects name.
-
-Save the file and exit out of Xampp.
-Open hosts file in `C:\windows\system32\drivers\etc` you need Administrator privilege to edit the file.
-Add `127.0.0.1 projectname.dev` at the end of the file, Save and close the file. Again changing projectname to your's.
-
-```php
-127.0.0.1       localhost
-127.0.0.1       projectname.dev
-```
-
-Restart Xampp and start apache server.
-Go to your project folder and open `app/Config/App.php` and change to your URL.
-
-```php
-    'url' => 'http://www.projectname.dev/',
-```
-
-Now open browser and go to your url. You should see the Nova startup screen.
-
-
 <a name='nginx-configuration'></a>
 ## Nginx configuration
 
@@ -198,3 +138,61 @@ For IIS the htaccess needs to be converted to web.config:
     </system.webserver>
 </configuration>
 ```
+
+---
+<a name='xampp'></a>
+## XAMPP
+
+Installing Nova-Framework 3 on xampp virtual server for Windows.
+
+The first way is under the `C:/XAMPP/htdocs` directory. (see further down on page for second way)
+
+Now in command prompt go to the 'C:/XAMPP/htdocs` directory.
+Run the below command replacing foldername with the name of your project.
+
+```php
+composer create-project nova-framework/framework foldername 3.* -s dev
+```
+
+Now go to the folder with the name of your project created under the htdocs folder.
+Open httpd-vhosts.conf file `C:/XAMPP/apache/conf/extra/httpd-vhosts.conf` Add following code.
+
+```php
+<Directory C:/XAMPP/htdocs>
+    AllowOverride All
+    Require all granted
+</Directory>
+
+#this is the default address of XAMPP
+<VirtualHost *:80>
+    DocumentRoot "C:/XAMPP/htdocs/"
+    ServerName localhost
+</VirtualHost>
+
+#this is the vhost address in XAMPP
+<VirtualHost *:80>
+    DocumentRoot "C:/XAMPP/htdocs/projectname/webroot/"
+    ServerName projectname.dev
+    SetEnv NS_ENV variable_value
+</VirtualHost>
+```
+
+change projectname to you're projects name.
+
+Save the file and exit out of Xampp.
+Open hosts file in `C:\windows\system32\drivers\etc` you need Administrator privilege to edit the file.
+Add `127.0.0.1 projectname.dev` at the end of the file, Save and close the file. Again changing projectname to your's.
+
+```php
+127.0.0.1       localhost
+127.0.0.1       projectname.dev
+```
+
+Restart Xampp and start apache server.
+Go to your project folder and open `app/Config/App.php` and change to your URL.
+
+```php
+    'url' => 'http://www.projectname.dev/',
+```
+
+Now open browser and go to your url. You should see the Nova startup screen.
