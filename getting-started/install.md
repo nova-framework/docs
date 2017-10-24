@@ -20,17 +20,25 @@ define('APPDIR', realpath(__DIR__.'/../app/') .DS);
 define('PUBLICDIR', realpath(__DIR__) .DS);
 ```
 
-The framework is located on [Packagist](https://packagist.org/packages/nova-framework/framework).
+The framework is located on [Packagist](https://packagist.org/packages/nova-framework/app).
 
 You can install the framework from a terminal by using:
 
 ```php
-composer create-project nova-framework/framework foldername 3.* -s dev
+composer create-project nova-framework/app foldername 3.* -s dev
 ```
 
 The foldername is the desired folder to be created.
 
 > Notice the 3.* this mean install the latest version of the 3 range.
+
+## Demo Application
+
+for a demo application install `nova-framework/framework` instead
+
+```php
+composer create-project nova-framework/framework foldername 3.* -s dev
+```
 
 ** Running the modules that come with nova-framework/framework **
 
