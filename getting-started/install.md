@@ -32,7 +32,7 @@ The foldername is the desired folder to be created.
 
 > Notice the 3.* this mean install the latest version of the 3 range.
 
-## Demo Application
+### Demo Application
 
 for a demo application install `nova-framework/framework` instead
 
