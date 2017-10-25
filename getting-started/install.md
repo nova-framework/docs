@@ -117,25 +117,31 @@ server {
 
 [http://www.iis.net/downloads/microsoft/url-rewrite](http://www.iis.net/downloads/microsoft/url-rewrite)
 
-For IIS the htaccess needs to be converted to web.config:
+For IIS the htaccess needs to be converted to web.config, Nova provides a web.config file located in `webroot/web.config`
 
 ```php
 <configuration>
-    <system.webserver>
-        <directorybrowse enabled="true"/>
-        <rewrite>
-            <rules>
-                <rule name="rule 1p" stopprocessing="true">
-                    <match url="^(.+)/$"/>
-                    <action type="Rewrite" url="/{R:1}"/>
-                </rule>
-                <rule name="rule 2p" stopprocessing="true">
-                    <match url="^(.*)$"/
-                    <action type="Rewrite" url="/index.php?{R:1}" appendquerystring="true"/>
-                </rule>
-            </rules>
-        </rewrite>
-    </system.webserver>
+  <system.webServer>
+    <rewrite>
+      <rules>
+        <rule name="Imported Rule 1" stopProcessing="true">
+          <match url="^(.*)/$" ignoreCase="false" />
+          <conditions>
+            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" ignoreCase="false" negate="true" />
+          </conditions>
+          <action type="Redirect" redirectType="Permanent" url="/{R:1}" />
+        </rule>
+        <rule name="Imported Rule 2" stopProcessing="true">
+          <match url="^" ignoreCase="false" />
+          <conditions>
+            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" ignoreCase="false" negate="true" />
+            <add input="{REQUEST_FILENAME}" matchType="IsFile" ignoreCase="false" negate="true" />
+          </conditions>
+          <action type="Rewrite" url="index.php" />
+        </rule>
+      </rules>
+    </rewrite>
+  </system.webServer>
 </configuration>
 ```
 
