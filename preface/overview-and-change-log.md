@@ -8,6 +8,65 @@ This has been tested with php 5.6 and php 7.
 
 Please report any bugs.
 
+## 3.79.1
+
+Handle the Nova\Auth\AuthenticationException
+
+## 3.79.0
+
+### Routes
+
+Instead of `app/Routes.php` you have a folder `app/Routes` where lives two files: `Api.php` and `Web.php` The last one is the equivalent of the previous `app/Routes.php` for WEB
+
+### Middleware
+
+There is a new namespace `App\Middleware`
+
+### Filters
+Filters.phphas been removed in `app` and `app/modules` in favor of middleware
+
+### Config
+New options on `app/Config/App.php`
+
+```php
+    /**
+     * The Application's Middleware stack.
+     */
+    'middleware' => array(
+        'Nova\Foundation\Http\Middleware\CheckForMaintenanceMode',
+        'Nova\Routing\Middleware\DispatchAssetFiles',
+    ),
+
+    /**
+     * The Application's route Middleware Groups.
+     */
+    'middlewareGroups' => array(
+        'web' => array(
+            'App\Middleware\EncryptCookies',
+            'Nova\Cookie\Middleware\AddQueuedCookiesToResponse',
+            'Nova\Session\Middleware\StartSession',
+            'Nova\Foundation\Http\Middleware\SetupLanguage',
+            'Nova\View\Middleware\ShareErrorsFromSession',
+            'App\Middleware\VerifyCsrfToken',
+        ),
+        'api' => array(
+            'throttle:60,1',
+        )
+    ),
+
+    /**
+     * The Application's route Middleware.
+     */
+    'routeMiddleware' => array(
+        'auth'     => 'Nova\Auth\Middleware\Authenticate',
+        'guest'    => 'App\Middleware\RedirectIfAuthenticated',
+        'throttle' => 'Nova\Routing\Middleware\ThrottleRequests',
+    ),
+```
+
+This controls the Middlewares.
+
+
 ## 3.78.27
 Improve the Route Filters and the AdminLite theme
 
