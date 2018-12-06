@@ -53,7 +53,7 @@ php forge migrate:install
 
 php forge migrate
 
-php forge seed
+php forge db:seed
 
 php forge module:migrate
 
