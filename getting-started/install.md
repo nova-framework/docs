@@ -5,19 +5,19 @@
 
 <a name='recommended'></a>
 ## Recommended
-This framework was designed and is strongly recommended to be installed above the document root directory, with it pointing to the webroot folder.
+This framework was designed to be installed above the document root directory, with the document root being the webroot (commonly this is a known as public_html/public/htdocs folder) folder.
 
 Additionally, installing in a sub-directory, on a production server, will introduce severe security issues. If there is no choice still place the framework files above the document root and have only index.php and .htacess from the webroot folder in the sub folder and adjust the paths in index.php.
 
 ```php
 //path to the root folder holding all files
-define('ROOTDIR', realpath(__DIR__.'/../') .DS);
+define('BASEPATH', realpath(__DIR__.'/../') .DS);
 
 //path to the app directory
-define('APPDIR', realpath(__DIR__.'/../app/') .DS);
+define('APPPATH', realpath(__DIR__.'/../app/') .DS);
 
 //path to the webroot directory
-define('PUBLICDIR', realpath(__DIR__) .DS);
+define('WEBPATH', realpath(__DIR__) .DS);
 ```
 
 The framework is located on [Packagist](https://packagist.org/packages/nova-framework/app).
@@ -25,40 +25,21 @@ The framework is located on [Packagist](https://packagist.org/packages/nova-fram
 You can install the framework from a terminal by using:
 
 ```php
-composer create-project nova-framework/app foldername 3.* -s dev
+composer create-project nova-framework/app foldername
 ```
 
 The foldername is the desired folder to be created.
 
-> Notice the 3.* this mean install the latest version of the 3 range.
+> This will install the latest release of Nova.
 
 ### Demo Application
 
 for a demo application install `nova-framework/framework` instead
 
 ```php
-composer create-project nova-framework/framework foldername 3.* -s dev
+composer create-project nova-framework/framework foldername
 ```
 
-**Running the modules that come with nova-framework/framework**
-
-It's important to run the following cli commands before starting:
-
-Open your terminal and navigate to your nova directory and run these commands in order to create the database tables and populate them.
-
-**You'll need to enter your database credentials at `app/Config/Database.php` before running these commands.**
-
-```php
-php forge migrate:install
-
-php forge migrate
-
-php forge db:seed
-
-php forge module:migrate
-
-php forge module:seed
-```
 
 ### Run using PHP's build in web server:
 
@@ -103,7 +84,7 @@ server {
   }
 
   location ~ \.php$ {
-    fastcgi_pass unix:/var/run/php5-fpm.sock;
+    fastcgi_pass unix:/var/run/php7-fpm.sock;
     fastcgi_split_path_info ^(.+\.php)(/.+)$;
     fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     include fastcgi_params;
@@ -149,7 +130,7 @@ For IIS the htaccess needs to be converted to web.config, Nova provides a web.co
 <a name='xampp'></a>
 ## XAMPP
 
-Installing Nova-Framework 3 on xampp virtual server for Windows.
+Installing Nova-Framework on xampp virtual server for Windows.
 
 The first way is under the `C:/XAMPP/htdocs` directory. (see further down on page for second way)
 
@@ -157,7 +138,7 @@ Now in command prompt go to the 'C:/XAMPP/htdocs` directory.
 Run the below command replacing foldername with the name of your project.
 
 ```php
-composer create-project nova-framework/framework foldername 3.* -s dev
+composer create-project nova-framework/framework foldername
 ```
 
 Now go to the folder with the name of your project created under the htdocs folder.
