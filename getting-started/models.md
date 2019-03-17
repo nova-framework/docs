@@ -15,25 +15,6 @@ class Contacts extends Model
 }
 ```
 
-The parent model is very simple, it's the only role is to create an instance of the database class once set the instance is available to all child models that extend the parent model.
-
-```php 
-namespace Core;
-
-use Database\Model;
-
-class Users extends Model
-{
-    protected $table = 'users';
-
-    protected $primaryKey = 'id';
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
-}
-```
 Models can be placed in the root of the models folder. The namespace used in the model should reflect its file path. Classes directly in the models folder will have a namespace of models or if in a folder: namespace **App\Models\Classname**;
 
 Methods inside a model are used for getting data and returning data back to the controller, a method should never echo data only return it, it's the controller that decides what is done with the data once it's returned.
