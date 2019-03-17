@@ -35,7 +35,7 @@ Route::get('simple', function() {
 Controllers and models can also be used in a closure by instantiating the root controller.
 
 ```php
-$c = new App\Core\Controller();
+$c = new App\Controllers\BaseController();
 $m = new App\Models\Users(); 
 
 $m->getUsers();
@@ -69,7 +69,7 @@ This means the posted data should also contain a valid $csrfToken ie:
 To use a post route:
 
 ```php
-Route::post('blog', array('before' => 'csrf', 'uses' => 'Blog@store'));
+Route::post('blog', 'Blog@store'));
 ```
 
 ## Groups
@@ -98,12 +98,13 @@ Router::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
     Route::match('get',               'users',               'Users@index');
     Route::match('get',               'users/create',        'Users@create');
     Route::match('post',              'users',               'Users@store');
-    Route::match('get',               'users/(:any)',        'Users@show');
-    Route::match('get',               'users/(:any)/edit',   'Users@edit');
-    Route::match(['put', 'patch'],    'users/(:any)',        'Users@update');
-    Route::match('delete',            'users/(:any)',        'Users@destroy');
+    Route::match('get',               'users/(id)',        'Users@show');
+    Route::match('get',               'users/(id)/edit',   'Users@edit');
+    Route::match(['put', 'patch'],    'users/(id)',        'Users@update');
+    Route::match('delete',            'users/(id)',        'Users@destroy');
 });
 ```
+
 Where the prefix **admin** will turn the route **users/create** into **admin/users/create** and the namespace **Admin** will prepend onto **Users@create**, turning into **App\Controllers\Admin\Users@create**
 
 ### Route::resource()
@@ -112,76 +113,27 @@ The **Route::resource()** method introduces the ability to write the group of re
 
 |HTTP Method|Route|Controller Method|
 |---|---|---|
-|GET|/photo|index|
-|GET|/photo/create|create|
-|POST|/photo|store|
-|GET|/photo/{id}|show|
-|GET|/photo/{id}/edit|edit|
-|PUT/PATCH|/photo/{id}|update|
-|DELETE|/photo/{id}|destroy|
+|GET|/posts|index|
+|GET|/posts/create|create|
+|POST|/posts|store|
+|GET|/posts/{id}|show|
+|GET|/posts/{id}/edit|edit|
+|PUT/PATCH|/posts/{id}|update|
+|DELETE|/posts/{id}|destroy|
 
 The previous code snippet can now be written as:
 
 ```php
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function() {
-    Route::resource('users', 'Users');
-    Route::resource('categories', 'Categories');
-    Route::resource('articles', 'Articles');
+    Route::resource('posts', 'Posts');
 });
 ```
 
 OR
 
 ```php
-Route::resource('admin/users', 'Admin\Users');
-Route::resource('admin/categories', 'Admin\Categories');
-Route::resource('admin/articles', 'Admin\Articles');
+Route::resource('admin/posts', 'Admin\Posts');
 ```
-
-## Implicit Controllers
-
-An Implicit Controller allows you to easily define a single route to handle every action in a controller. 
-
-First, define the route using the Route::controller method:
-
-```php
-Route::controller('users', 'Users');
-```
-
-The `Route::controller()` method accepts two arguments. The first is the base URI the controller handles, while the second is the class name of the Controller. Next, just add methods to your Controller, prefixed with the HTTP verb they respond to: (get / post) 
-
-```php
-namespace App\Controllers;
-
-use App\Core\Controller;
-
-class Users extends Controller 
-{
-    public function getIndex()
-    {
-        //
-    }
-
-    public function postProfile()
-    {
-        //
-    }
-
-}
-```
-
-The index methods will respond to the root URI handled by the Controller, which, in this case, is users.
-
-If your controller action contains multiple words, you may access the action using hyphen - syntax in the URI. For example, the following controller method in **App\Controllers\Users** would respond to the users/admin-profile URI:
-
-```php
-public function getAdminProfile()
-{
-
-}
-```
-
-Methods can take up to 7 params, if more are needed create a specific route in Routes.php
 
 ## Named Parameters
 
@@ -190,7 +142,7 @@ Route parameters are always encased within `{}` braces and should consist of alp
 Occasionally, you may need to specify a route parameter, but make the presence of that route parameter optional. You may do so by placing a `?` mark after the parameter name.
 
 ```php
-Route::get('request/{param1}/{param2?}', 'Demos@request');
+Route::get('request/{id?}', 'Demos@request');
 ```
 
 You may also use Regular Expression Route Constraints, the below constraint will only allow numerical values for the id, using regex.
@@ -227,19 +179,4 @@ Route::get('request/{id}/{name?}', 'Demos@request')
         'id' => 0,
         'name' => NULL
     ]);
-```
-
-### Route Pattern
-
-As from **3.73.0** instead of doing:
-
-```php
-->where('slug', '(.*)’); 
-```
-
-On every Route definition which need that, you can setup a pattern with this parameter name a (regex) pattern, and it will be applied to any parameter with this name, aka {slug}.
-Logically, the patterns **should** be defined before the Routes definition.
-
-```php
-Route::pattern('slug', '(.*)’);
 ```
