@@ -6,35 +6,35 @@ Controllers can be placed in subfolders relative to the root of the Controllers 
 
 Controllers are created inside the **app/Controllers** folder. To create a controller, create a new file, the convention is to **StudlyCaps** without any special characters or spaces. Each word of the filename should start with a capital letter. For instance: **AddOns.php**.
 
-Controllers will always use a namespace of **App\Controllers**, if the file is directly located inside the controllers folder. If the file is in another folder that folder name should be part of the name space.
+Controllers will always use a namespace of **App\Controllers**, if the file is directly located inside the controllers folder. If the file is in another folder that folder name should be part of the namespace.
 
 For instance, a controller called Blog located in **app/Controllers/Blog** would have a namespace of **App\Controllers\Blog**
 
-Controllers should extends from the base controller located in **app/Core/Controller.php**  the syntax is:
+Controllers can extend from the base controller located in **app/Controllers/BaseController.php**  the syntax is:
 
 ```php
 namespace App\Controllers;
 
-use App\Core\Controller;
+use App\Controllers\BaseController;
 
-class Welcome extends Controller 
+class Posts extends BaseController 
 {
 
 }
 ```
 
-Also, the view class is needed to include view files, you can either call the namespace then the view:
+Also, the view class is needed to include view files, you can call the namespace then the view:
 
 Create an alias:
 
 ```php
-use View;
+use Nova\Support\Facades\View;
 ```
 
 Then to use:
 
 ```php
-return View::make('path)->shares('title', 'Welcome');
+return View::make('path')->shares('title', 'Welcome');
 ```
 
 **Example**
@@ -43,71 +43,53 @@ return View::make('path)->shares('title', 'Welcome');
 
 namespace App\Controllers;
 
-use App\Core\Controller;
-use View;
+use App\Controllers\BaseController;
+use Nova\Support\Facades\View;
 
-class Welcome extends Controller
+class Posts extends BaseController
 {
     public function index()
     {   
-        return View::make('Welcome/Welcome')->shares('title', 'Welcome');
+        return View::make('Posts/Index')->shares('title', 'Posts');
     }
 }
 ```
 
 
-Both models and helpers can be used in a constructor and added to a property then becoming available to all methods. The model or helper will need to use its namespace while being called
+Models can be used in a constructor and added to a property then becoming available to all methods. The model will need to use its namespace while being called
 
 ```php
 namespace App\Controllers;
 
-use App\Core\Controller;
-use App\Models\Blog as BlogModel;
+use App\Controllers\BaseController;
+use App\Models\Post;
+use Nova\Support\Facades\View;
 
-use View;
-
-class Blog extends Controller 
+class Posts extends BaseController 
 {
-    private $blog;
+    private $post;
 
     public function __construct()
     {
         parent::__construct();
-        $this->blog = new BlogModel();
+        $this->post = new Post();
     }
 
-    public function blog()
+    public function index()
     {
-        $posts = $this->blog->getPosts();
+        $posts = $this->post->getPosts();
         View::make('Blog/Posts')->shares('title', 'Blog')->with('posts', $posts);
     }
 }
 ```
-
-An alternative way to load a view is to call **$this->getView()** this acts in the same way as View::make() only without the passed params, the path is worked out internally. 
-
-To use getView the view path should follow the controller and method name ie:
-
-```php
-class Users extends Controller
-{
-    public function index()
-    {
-      return $this->getView()->shares('title', 'The Title');
-    }
-}
-
-```
-
-Will match to app/Views/Users/Index.php
 
 ### Methods
 
 A controller can have many methods, a method can call another method, all standard OOP behaviour is honoured. Data can be passed from a controller to a view by passing an array to the view. The array can be made up from keys. Each key can hold a single value or another array. The array must be passed to the method for it to be used inside the view page or in a template (covered in the templates section)
 
 ```php
-$content = 'The contact for the page';
+$content = 'The contacts for the page';
 $users = array('Dave', 'Kerry', 'John');
 
-return $this->getView()->with('content', $content)->with('users', $users);
+return View::make('Contacts', compact('content', 'users');
 ```
