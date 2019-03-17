@@ -12,6 +12,42 @@ $request = new Request();
 $request->path();
 ```
 
+#### GET/POST array of query params
+
+```php
+public function index(Request $request)
+{
+    return $request->all();
+}
+```
+
+#### read specific param
+
+```php
+public function index(Request $request)
+{
+    return $request->input('item');
+}
+```
+
+#### Get user's IP address
+
+```php
+public function index(Request $request)
+{
+    return $request->ip();
+}
+```
+
+#### Determine if the request contains a given input item key
+
+```php
+public function index(Request $request)
+{
+    return $request->exists('item');
+}
+```
+
 #### Retrieving The Request Method
 
 ```php
@@ -35,6 +71,16 @@ if ($request->is('admin/*'))
 #### Get The Request URL
 ```php
 $url = $request->url();
+```
+
+#### Get The Full Request URL
+```php
+$url = $request->fullUrl();
+```
+
+#### Get the current path info for the request
+```php
+$url = $request->path();
 ```
 
 #### Retrieve A Request URI Segment
