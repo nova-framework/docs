@@ -1,10 +1,10 @@
 # Overview and Change Log
 
-Nova Framework is a PHP 5.6+ MVC Framework. It's designed to be modular, allowing developers to build better and easy to maintain code with PHP.
+Nova Framework is a PHP 7.1.3+ MVC Framework. It's designed to be modular, allowing developers to build better and easy to maintain code with PHP.
 
 To this end Nova does not come with lots of built in libraries / helpers or modules instead, it's left to the user to decide what they want to implement, this allows freedom to design and build how you see fit. Having said that there are a limited number provided.
 
-This has been tested with php 5.6 and php 7.
+This has been tested with php 7.
 
 Please report any bugs.
 
@@ -23,7 +23,7 @@ Instead of `app/Routes.php` you have a folder `app/Routes` where lives two files
 There is a new namespace `App\Middleware`
 
 ### Filters
-Filters.phphas been removed in `app` and `app/modules` in favor of middleware
+Filters.php has been removed in `app` in favor of middleware
 
 ### Config
 New options on `app/Config/App.php`
