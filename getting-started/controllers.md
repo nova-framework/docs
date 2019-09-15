@@ -15,6 +15,8 @@ Controllers can extend from the base controller located in **app/Controllers/Bas
 ```php
 namespace App\Controllers;
 
+use Nova\Http\Request;
+
 use App\Controllers\BaseController;
 
 class Posts extends BaseController 
@@ -25,7 +27,6 @@ class Posts extends BaseController
 
 Also, the view class is needed to include view files, you can call the namespace then the view:
 
-Create an alias:
 
 ```php
 use Nova\Support\Facades\View;
@@ -78,9 +79,29 @@ class Posts extends BaseController
     public function index()
     {
         $posts = $this->post->getPosts();
-        View::make('Blog/Posts')->shares('title', 'Blog')->with('posts', $posts);
+        View::make('Blog/Posts', compact('posts'))->shares('title', 'Blog');
     }
 }
+```
+
+Controllers that extend the basecontroller can make use of the `$layout` property. When used all methods will use the specified layout file for the views to use. 
+```php
+/**
+    * The currently used Layout.
+    *
+    * @var string
+    */
+protected $layout = 'Static';
+```
+
+Additionally `$theme` can also be used to specify them theme to be used.
+```php
+/**
+    * The currently used Theme.
+    *
+    * @var string
+    */
+protected $theme = false; // Disable the support for Themes.
 ```
 
 ### Methods
@@ -91,5 +112,5 @@ A controller can have many methods, a method can call another method, all standa
 $content = 'The contacts for the page';
 $users = array('Dave', 'Kerry', 'John');
 
-return View::make('Contacts', compact('content', 'users');
+return View::make('Contacts', compact('content', 'users'))->shares('title', 'Contacts');
 ```
