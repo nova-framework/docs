@@ -52,7 +52,7 @@ Assign the admin's email.
 Assign the site name
 
 ```php
-'name' => 'Nova 4.1',
+'name' => 'Nova 4.2',
 ```
 
 The name of default Theme or false for disabling the usage of Themes.
@@ -163,10 +163,13 @@ Password Reminder Settings
 | they have less time to be guessed. You may change this as needed.
 |
 */
-'reminder' => array(
-    'email'  => 'Emails/Auth/Reminder',
-    'table'  => 'password_reminders',
-    'expire' => 60,
+'reminders' => array(
+    'users' => array(
+        'provider' => 'users',
+        'email'    => 'Emails/Auth/Reminder',
+        'table'    => 'password_reminders',
+        'expire'   => 60,
+    ),
 )
 ```
 
@@ -407,16 +410,7 @@ return array(
         //          ^____________________^____^____________________Those are the parts of path which are validated.
         //
         'paths' => array(
-
-            // AdminLTE
-            'almasaeed2010/adminlte' => array(
-                'bower_components',
-                'dist',
-                'plugins'
-            ),
-
-            // Bootstrap
-            'twbs/bootstrap' => 'dist',
+            
         ),
     ),
 );
