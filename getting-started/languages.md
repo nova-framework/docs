@@ -1,4 +1,4 @@
-The language system uses two framework-wide functions for string translation, the first one being **__()**, which is designed to be used in the App folder and the second being **__d()**, designed to be used on Language Domains; those Language Domains are the Modules, Packages and  Themes.
+The language system uses two framework-wide functions for string translation, the first one being **__()**, which is designed to be used in the App folder and the second being **__d()**, designed to be used on Language Domains; those Language Domains are the Modules, Packages and Themes.
 
 **IMPORTANT:** When a specified domain matches both a Module and Theme name, the Module will take precedence. In other words, there should not be a Module and a Theme with the same name, for the language system to work properly.
 

@@ -5,7 +5,7 @@ The Request class provides many methods for examining the HTTP request for your 
 #### Retrieving The Request URI
 
 ```php
-use use Nova\Http\Request;
+use Nova\Http\Request;
 
 $request = new Request();
 

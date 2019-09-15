@@ -36,7 +36,7 @@ Views can use either .php for normal php files or .tpl should be used for views 
 
 Views are normal PHP files / template files (.tpl), they can contain PHP and HTML, as such any PHP logic can be used inside a view though it's recommended to use only simple logic inside a view anything more complex is better suited inside a controller.
 
-views with .tpl should not contain any way php use .php files or that or wrap them inside:
+views with .tpl should not contain large php blocks but for small items you can wrap the code around @php and @endphp blocks:
 
 ```php
 @php
@@ -49,12 +49,11 @@ An example of a view; looping through an array and outputting its contents:
 
 ```php
  <p>Contacts List</p>
- <?php 
- if ($contacts) {
-    foreach ($contacts as $row) {
-        echo $row.'<br />';
-    }
- }
+ @if ($contacts) 
+    @foreach ($contacts as $contact) 
+        {{{ $contact.'<br />' }}};
+    @endforeach
+@endif
 ```
 
 To return a view and store its contents use View::fetch, fetch takes 2 params:
@@ -62,7 +61,7 @@ To return a view and store its contents use View::fetch, fetch takes 2 params:
 2. The data being passed must be an array
 
 ```php
-$content = View::fetch('Page/Show', ['content' => $content]);
+$content = View::fetch('Page/Show', compact('content'));
 
 echo $content;
 ```
@@ -71,10 +70,9 @@ Alternative **View/Layout** options:
 
 ### Basic Commands
 
-While the actual **View\View** methods are static and they should call independently, the API works with View instances, then we should build them. We have two methods for standard Views and Themes files. A combined usage example is presented below:
+While the actual **View\View** methods are static and they should be called independently, the API works with View instances. We have two methods for standard Views and Themes files. A combined usage example is presented below:
 
 ```php
-return View::make('Welcome/SubPage')
-    ->shares('title', $title)
-    ->with('data', $data);
+return View::make('Welcome/SubPage', compact('data'))
+    ->shares('title', $title);
 ```
