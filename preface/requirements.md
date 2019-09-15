@@ -1,6 +1,6 @@
 # The framework requirements are limited
 
-- PHP 7.1.3 or greater.
+- PHP 7.1.8 or greater.
 - Apache Web Server or equivalent with mod rewrite support.
 - For IIS: URL Rewrite module installed - [http://www.iis.net/downloads/microsoft/url-rewrite](http://www.iis.net/downloads/microsoft/url-rewrite)
 
