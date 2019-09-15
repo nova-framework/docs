@@ -1,9 +1,9 @@
 ## Issue Tracker
-You can find outstanding issues on the [GitHub Issue Tracker](https://github.com/nova-framework/framework/issues).
+You can find outstanding issues on the [GitHub Issue Tracker](https://github.com/nova-framework/app/issues).
 
 ## Pull Requests
 * Each pull request should contain only one new feature or improvement.
-* Pull requests should be submitted to the correct version branch ie [master](https://github.com/nova-framework/framework/tree/master)
+* Pull requests should be submitted to the correct version branch ie [master](https://github.com/nova-framework/app/tree/master)
 
 ## Code Style
 All pull requests must use the PSR-2 code style.
