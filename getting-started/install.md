@@ -41,19 +41,9 @@ composer create-project nova-framework/framework foldername
 ```
 
 
-### Run using PHP's build in web server:
+### Run using PHP's built in web server:
 
-There are 2 ways to run php's web server:
-
-1) Open terminal and navigate to the root of the project and type:
-
-```php
-php -S localhost:8000 -t webroot
-```
-
-This will start the server listening on port 8000.
-
-2) using Nova's CLI tool `Forge` Open terminal and navigate to the root of the project and type:
+Using Nova's CLI tool `Forge` Open terminal and navigate to the root of the project and type:
 
 ```php
 php forge serve
