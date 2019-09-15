@@ -1,11 +1,11 @@
-Nova comes with a command line utility called **Forge** located in the root. It supports creating controllers, models, modules, packages, themes and more from the command line.
+Nova comes with a command line utility called **Forge** located in the root. Forge supports creating controllers, models, packages and more from the command line.
 
 To use it navigate to the project in your command line/terminal then type **php forge** followed by the command.
 
 Typing just **'php forge'** will give this output:
 
 ```php
-Nova Framework 4.1.2
+Nova Framework 4.2.4
 
 Usage:
   command [options] [arguments]
